@@ -42,4 +42,3 @@ Professional information comes from Khoa's supplied CV, academic documents and p
 Photos and project images belong to their respective rights holders and are included for this personal portfolio; no blanket reuse license is granted. Anton is distributed under the SIL Open Font License included at `dist/assets/fonts/OFL.txt`.
 
 This repository is a portable export of the portfolio. It does not contain hosting credentials, internal research notes, or the original hosting service's configuration.
-
