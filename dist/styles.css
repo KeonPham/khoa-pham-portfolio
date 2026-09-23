@@ -349,3 +349,20 @@ details[open] .disclosure-icon::after { transform:rotate(0); }
  .identity { white-space:normal; }
 }
 @media (prefers-reduced-motion:reduce) { .header-socials a { transition:none; } }
+
+/* Original organization marks retain their colors and proportions. */
+.brand-logo { display:flex; align-items:center; justify-content:flex-start; height:64px; margin:0 0 20px; }
+.brand-logo img { display:block; width:auto; height:auto; max-width:160px; max-height:38px; object-fit:contain; }
+.brand-logo-vng img { max-width:90px; max-height:48px; }
+.brand-logo-school { height:76px; max-width:260px; margin-bottom:26px; }
+.brand-logo-school img { max-width:100%; max-height:70px; }
+.brand-logo-ait { padding:14px 16px; background:#174d3c; border-radius:6px; }
+.brand-logo-ait img { max-height:48px; }
+.bachelors .brand-logo-school { padding:12px 16px; background:#123d79; border-radius:6px; }
+.provider-heading { display:flex; align-items:center; gap:12px; margin-bottom:20px; font-weight:600; font-size:1.125rem; }
+.udacity-symbol { display:grid; place-items:center; width:46px; height:46px; border-radius:8px; background:#121418; }
+.udacity-symbol img { width:30px; height:30px; }
+.brand-logo-provider { height:42px; margin-bottom:12px; }
+.brand-logo-provider img { max-width:153px; max-height:28px; }
+.brand-logo-atoha img { max-height:39px; }
+@media (max-width:600px) { .brand-logo-school { max-width:240px; } }
