@@ -28,6 +28,11 @@ for(const p of projects) {
   assert(p.sources.length,'Every project has source attribution');
   assert(p.sources.every(s=>/^https:\/\//.test(s.url)),'Sources are HTTPS URLs');
   if(p.thumbnail)await localAsset(p.thumbnail);
+  if(p.demo){
+    assert(p.demo.title&&p.demo.caption&&p.demo.duration,'Demo has title, context and duration');
+    assert(/\.mp4$/i.test(p.demo.src),'Demo uses a local MP4');
+    await localAsset(p.demo.src);await localAsset(p.demo.poster);
+  }
   for(const m of p.media){assert(m.alt&&m.caption,'Images have descriptive alternatives and captions');await localAsset(m.src);}
   if(p.dashboard){
     assert(p.dashboard.pages.length>0&&p.dashboard.description,'Dashboard has context and preview pages');

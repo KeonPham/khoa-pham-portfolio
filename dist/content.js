@@ -260,10 +260,21 @@ window.PORTFOLIO_PROJECTS = [
       {
         "label": "Hackathon project",
         "url": "https://claw-a-thon.greennode.ai/project/ai-assisted-interviewer"
+      },
+      {
+        "label": "Personal demo on Facebook",
+        "url": "https://www.facebook.com/reel/1677589213355288/"
       }
     ],
     "thumbnail": "assets/projects/thumbnails/hr-interview-agent.webp",
-    "thumbnailAlt": "AI Interviewer — Autonomous AI Interviewer — the team’s original hackathon product poster"
+    "thumbnailAlt": "AI Interviewer — Autonomous AI Interviewer — the team’s original hackathon product poster",
+    "demo": {
+      "title": "See the interview agent in action.",
+      "src": "assets/projects/interview-demo/ai-interviewer-demo.mp4",
+      "poster": "assets/projects/interview-demo/ai-interviewer-poster.jpg",
+      "duration": "12:03",
+      "caption": "My recorded demo of the AI Interviewer prototype, with voice conversation and technical follow-up questions."
+    }
   },
   {
     "id": "research-radar",
