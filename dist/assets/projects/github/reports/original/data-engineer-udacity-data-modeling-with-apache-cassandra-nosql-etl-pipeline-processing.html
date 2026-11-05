@@ -1,0 +1,321 @@
+<!doctype html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Data Modeling with Apache Cassandra (NoSQL)/ETL Pipeline Processing.ipynb</title><style>body{margin:0;background:#fff;color:#1f2933;font:16px/1.65 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:40px 24px}h1{font-size:34px;line-height:1.2}h2{margin-top:38px}header{border-bottom:1px solid #d9e0e5;padding-bottom:24px;margin-bottom:32px}.notice{background:#f0f4f7;border-left:4px solid #526c81;padding:16px;font-size:14px}.cell{margin:24px 0}.label{font:12px/1.4 system-ui;color:#667b8a;margin-bottom:6px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7f9;padding:16px;border:1px solid #e1e6ea;border-radius:6px;font:13px/1.6 ui-monospace,Consolas,monospace}.output pre{background:#fff}img{display:block;max-width:100%;height:auto;margin:20px auto}table{border-collapse:collapse;display:block;overflow:auto;max-width:100%;font-size:13px}th,td{border:1px solid #d9e0e5;padding:6px 10px;text-align:left}blockquote{border-left:3px solid #d9e0e5;margin:20px 0;padding-left:18px;color:#51616b}.footer{margin-top:48px;border-top:1px solid #d9e0e5;padding-top:18px;font-size:13px;color:#51616b}</style></head><body><main><header><p>Original notebook / assignment archive</p><h1>Data Modeling with Apache Cassandra (NoSQL)/ETL Pipeline Processing</h1><p>Udacity Data Engineering Nanodegree project collection.</p><div class="notice">Read-only export of the author’s original public notebook. Every original markdown and code cell is retained; safe saved static outputs are included. Code was not executed and results were not revalidated. Original course instructions, unfinished sections and errors may remain. Interactive widgets and external resource loads are disabled. Credential-like strings and account identifiers are redacted if detected.</div></header><section class="cell markdown"><h1>Part I. ETL Pipeline for Pre-Processing the Files</h1>
+</section>
+<section class="cell markdown"><h2>PLEASE RUN THE FOLLOWING CODE FOR PRE-PROCESSING THE FILES</h2>
+</section>
+<section class="cell markdown"><h4>Import Python packages</h4>
+</section>
+<section class="cell code"><div class="label">Code cell 4 · saved execution 2</div><pre><code># Import Python packages 
+import pandas as pd
+import cassandra
+import re
+import os
+import glob
+import numpy as np
+import json
+import csv</code></pre></section>
+<section class="cell markdown"><h4>Creating list of filepaths to process original event csv data files</h4>
+</section>
+<section class="cell code"><div class="label">Code cell 6 · saved execution 3</div><pre><code># checking your current working directory
+print(os.getcwd())
+
+# Get your current folder and subfolder event data
+filepath = os.getcwd() + '/event_data'
+
+# Create a for loop to create a list of files and collect each filepath
+for root, dirs, files in os.walk(filepath):
+    
+# join the file path and roots with the subdirectories using glob
+    file_path_list = glob.glob(os.path.join(root,'*'))
+    #print(file_path_list)</code></pre><div class="output"><pre>/home/workspace
+</pre></div></section>
+<section class="cell markdown"><h4>Processing the files to create the data file csv that will be used for Apache Casssandra tables</h4>
+</section>
+<section class="cell code"><div class="label">Code cell 8 · saved execution 4</div><pre><code># initiating an empty list of rows that will be generated from each file
+full_data_rows_list = [] 
+    
+# for every filepath in the file path list 
+for f in file_path_list:
+
+# reading csv file 
+    with open(f, 'r', encoding = 'utf8', newline='') as csvfile: 
+        # creating a csv reader object 
+        csvreader = csv.reader(csvfile) 
+        next(csvreader)
+        
+ # extracting each data row one by one and append it        
+        for line in csvreader:
+            #print(line)
+            full_data_rows_list.append(line) 
+            
+# uncomment the code below if you would like to get total number of rows 
+#print(len(full_data_rows_list))
+# uncomment the code below if you would like to check to see what the list of event data rows will look like
+#print(full_data_rows_list)
+
+# creating a smaller event data csv file called event_datafile_full csv that will be used to insert data into the \
+# Apache Cassandra tables
+csv.register_dialect('myDialect', quoting=csv.QUOTE_ALL, skipinitialspace=True)
+
+with open('event_datafile_new.csv', 'w', encoding = 'utf8', newline='') as f:
+    writer = csv.writer(f, dialect='myDialect')
+    writer.writerow(['artist','firstName','gender','itemInSession','lastName','length',\
+                'level','location','sessionId','song','userId'])
+    for row in full_data_rows_list:
+        if (row[0] == ''):
+            continue
+        writer.writerow((row[0], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[12], row[13], row[16]))
+</code></pre></section>
+<section class="cell code"><div class="label">Code cell 9 · saved execution 5</div><pre><code># check the number of rows in your csv file
+with open('event_datafile_new.csv', 'r', encoding = 'utf8') as f:
+    print(sum(1 for line in f))</code></pre><div class="output"><pre>6821
+</pre></div></section>
+<section class="cell markdown"><h1>Part II. Complete the Apache Cassandra coding portion of your project.</h1>
+<h2>Now you are ready to work with the CSV file titled event_datafile_new.csv, located within the Workspace directory.  The event_datafile_new.csv contains the following columns:</h2>
+<ul>
+<li>artist </li>
+<li>firstName of user</li>
+<li>gender of user</li>
+<li>item number in session</li>
+<li>last name of user</li>
+<li>length of the song</li>
+<li>level (paid or free song)</li>
+<li>location of the user</li>
+<li>sessionId</li>
+<li>song title</li>
+<li>userId</li>
+</ul>
+<p>The image below is a screenshot of what the denormalized data should appear like in the <strong>event_datafile_new.csv</strong> after the code above is run:<br></p>
+</section>
+<section class="cell markdown"><h2>Begin writing your Apache Cassandra code in the cells below</h2>
+</section>
+<section class="cell markdown"><h4>Creating a Cluster</h4>
+</section>
+<section class="cell code"><div class="label">Code cell 13 · saved execution 6</div><pre><code># This should make a connection to a Cassandra instance your local machine 
+#(127.0.0.1)
+
+from cassandra.cluster import Cluster
+cluster = Cluster(['127.0.0.1'])
+
+# To establish connection and begin executing queries, need a session
+session = cluster.connect()</code></pre></section>
+<section class="cell markdown"><h4>Create Keyspace</h4>
+</section>
+<section class="cell code"><div class="label">Code cell 15 · saved execution 7</div><pre><code>try:
+    session.execute(&quot;&quot;&quot;
+    CREATE KEYSPACE IF NOT EXISTS udacity_1
+    WITH REPLICATION =
+    { 'class' : 'SimpleStrategy', 'replication_factor' : 1 } &quot;&quot;&quot;
+)
+except Exception as e:
+    print(e)</code></pre></section>
+<section class="cell markdown"><h4>Set Keyspace</h4>
+</section>
+<section class="cell code"><div class="label">Code cell 17 · saved execution 8</div><pre><code>
+try:
+    session.set_keyspace('udacity_1')
+except Exception as e:
+    print(e)</code></pre></section>
+<section class="cell markdown"><h3>Now we need to create tables to run the following queries. Remember, with Apache Cassandra you model the database tables on the queries you want to run.</h3>
+</section>
+<section class="cell markdown"><h2>Create queries to ask the following three questions of the data</h2>
+<h3>1. Give me the artist, song title and song&#39;s length in the music app history that was heard during  sessionId = 338, and itemInSession  = 4</h3>
+<h3>2. Give me only the following: name of artist, song (sorted by itemInSession) and user (first and last name) for userid = 10, sessionid = 182</h3>
+<h3>3. Give me every user name (first and last) in my music app history who listened to the song &#39;All Hands Against His Own&#39;</h3>
+</section>
+<section class="cell code"><div class="label">Code cell 20 · saved execution 11</div><pre><code>#The table **song_session_info**, the **sessionId** column is used as a PARTITION KEY to filter the result by this column.
+#We have used **itemInSession** column as clustering columns to sort the result.
+#Both partition key &amp; clustering key make the composite PRIMARY KEY
+session.execute(&quot;DROP TABLE IF EXISTS song_session_info;&quot;)
+query = &quot;CREATE TABLE IF NOT EXISTS song_session_info&quot;
+query = query + &quot;(session_id int, item_in_session int, artist text, song text, song_length float, PRIMARY KEY(session_id, item_in_session))&quot;
+try:
+    session.execute(query)
+except Exception as e:
+    print(e)</code></pre></section>
+<section class="cell code"><div class="label">Code cell 21 · saved execution 12</div><pre><code># We have provided part of the code to set up the CSV file. Please complete the Apache Cassandra code below#
+file = 'event_datafile_new.csv'
+
+with open(file, encoding = 'utf8') as f:
+    csvreader = csv.reader(f)
+    next(csvreader) # skip header
+    for line in csvreader:
+        query = &quot;INSERT INTO song_session_info (session_id, item_in_session, artist, song, song_length)&quot;
+        query = query + &quot;VALUES (%s, %s, %s, %s, %s)&quot;
+        session.execute(query, (int(line[8]), int(line[3]), str(line[0]), str(line[9]), float(line[5])))</code></pre></section>
+<section class="cell markdown"><h4>Do a SELECT to verify that the data have been inserted into each table</h4>
+</section>
+<section class="cell code"><div class="label">Code cell 23 · saved execution 13</div><pre><code>query = &quot;Select artist, song, song_length FROM song_session_info WHERE session_id=338 AND item_in_session = 4&quot;
+try:
+    rows = session.execute(query)
+except Exception as e:
+    print(e)</code></pre></section>
+<section class="cell code"><div class="label">Code cell 24 · saved execution 14</div><pre><code>#Validate data through pandas dataframe
+df1 = pd.DataFrame(list(session.execute(query)))
+df1</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>artist</th>
+      <th>song</th>
+      <th>song_length</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Faithless</td>
+      <td>Music Matters (Mark Knight Dub)</td>
+      <td>495.307312</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell markdown"><h3>COPY AND REPEAT THE ABOVE THREE CELLS FOR EACH OF THE THREE QUESTIONS</h3>
+</section>
+<section class="cell code"><div class="label">Code cell 26 · saved execution 15</div><pre><code>#The table **user_session_info**, the **userId** &amp; sessionID columns are used as a PARTITION KEY to filter the result by these columns.
+#We have used **itemInSession** column as clustering columns to sort the result.
+#Both partition keys &amp; clustering key make the composite PRIMARY KEY
+session.execute(&quot;DROP TABLE IF EXISTS user_session_info;&quot;)
+query_2 = &quot;CREATE TABLE IF NOT EXISTS user_session_info&quot;
+query_2 = query_2 + &quot;(user_id int, session_id int, item_in_session int, artist text, song text, last_name text, first_name text, PRIMARY KEY((user_id, session_id), item_in_session))&quot;
+try:
+    session.execute(query_2)
+except Exception as e:
+    print(e)</code></pre></section>
+<section class="cell code"><div class="label">Code cell 27 · saved execution 16</div><pre><code># We have provided part of the code to set up the CSV file. Please complete the Apache Cassandra code below#
+file = 'event_datafile_new.csv'
+
+with open(file, encoding = 'utf8') as f:
+    csvreader = csv.reader(f)
+    next(csvreader) # skip header
+    for line in csvreader:
+        query_2 = &quot;INSERT INTO user_session_info (user_id, session_id, item_in_session, artist, song, first_name, last_name)&quot;
+        query_2 = query_2 + &quot;VALUES (%s, %s, %s, %s, %s, %s, %s)&quot;
+        session.execute(query_2, (int(line[10]), int(line[8]),  int(line[3]), str(line[0]), str(line[9]), str(line[1]), str(line[4])))</code></pre></section>
+<section class="cell code"><div class="label">Code cell 28 · saved execution 17</div><pre><code>query_2 = &quot;Select artist, song, first_name, last_name FROM user_session_info WHERE user_id = 10 AND session_id = 182&quot;
+try:
+    rows = session.execute(query_2)
+except Exception as e:
+    print(e)</code></pre></section>
+<section class="cell code"><div class="label">Code cell 29 · saved execution 18</div><pre><code>#Validate data through pandas dataframe
+df2 = pd.DataFrame(list(session.execute(query_2)))
+df2</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>artist</th>
+      <th>song</th>
+      <th>first_name</th>
+      <th>last_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Down To The Bone</td>
+      <td>Keep On Keepin' On</td>
+      <td>Sylvie</td>
+      <td>Cruz</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Three Drives</td>
+      <td>Greece 2000</td>
+      <td>Sylvie</td>
+      <td>Cruz</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Sebastien Tellier</td>
+      <td>Kilometer</td>
+      <td>Sylvie</td>
+      <td>Cruz</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Lonnie Gordon</td>
+      <td>Catch You Baby (Steve Pitron &amp; Max Sanna Radio...</td>
+      <td>Sylvie</td>
+      <td>Cruz</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell code"><div class="label">Code cell 30 · saved execution 19</div><pre><code>#The table **user_name**, the **song** column is used as a PARTITION KEY to filter the result by this column.
+#We have used **user_id** column as clustering columns to sort the result.
+#Both partition key &amp; clustering key make the composite PRIMARY KEY
+session.execute(&quot;DROP TABLE IF EXISTS user_name;&quot;)
+query_3 = &quot;CREATE TABLE IF NOT EXISTS user_name&quot;
+query_3 = query_3 + &quot;(song text, user_id int, first_name text, last_name text, PRIMARY KEY(song, user_id))&quot;
+try:
+    session.execute(query_3)
+except Exception as e:
+    print(e)                 </code></pre></section>
+<section class="cell code"><div class="label">Code cell 31 · saved execution 20</div><pre><code># We have provided part of the code to set up the CSV file. Please complete the Apache Cassandra code below#
+file = 'event_datafile_new.csv'
+
+with open(file, encoding = 'utf8') as f:
+    csvreader = csv.reader(f)
+    next(csvreader) # skip header
+    for line in csvreader:
+        query_3 = &quot;INSERT INTO user_name (song, user_id, first_name, last_name)&quot;
+        query_3 = query_3 + &quot;VALUES (%s, %s, %s, %s)&quot;
+        session.execute(query_3, (str(line[9]), int(line[10]), str(line[1]), str(line[4])))</code></pre></section>
+<section class="cell code"><div class="label">Code cell 32 · saved execution 21</div><pre><code>query_3 = &quot;SELECT first_name, last_name, song FROM user_name WHERE song ='All Hands Against His Own'&quot;
+try:
+    rows = session.execute(query_3)
+except Exception as e:
+    print(e)</code></pre></section>
+<section class="cell code"><div class="label">Code cell 33 · saved execution 22</div><pre><code>#Validate data through pandas dataframe
+df3 = pd.DataFrame(list(session.execute(query_3)))
+df3</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>song</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Jacqueline</td>
+      <td>Lynch</td>
+      <td>All Hands Against His Own</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Tegan</td>
+      <td>Levine</td>
+      <td>All Hands Against His Own</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Sara</td>
+      <td>Johnson</td>
+      <td>All Hands Against His Own</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell markdown"><h3>Drop the tables before closing out the sessions</h3>
+</section>
+<section class="cell code"><div class="label">Code cell 35 · saved execution 23</div><pre><code>try:
+    session.execute(&quot;DROP TABLE IF EXISTS song_session_info&quot;)
+    session.execute(&quot;DROP TABLE IF EXISTS user_session_info&quot;)
+    session.execute(&quot;DROP TABLE IF EXISTS user_name&quot;)
+except Exception as error:
+    print(error)  </code></pre></section>
+<section class="cell markdown"><h3>Close the session and cluster connection¶</h3>
+</section>
+<section class="cell code"><div class="label">Code cell 37 · saved execution 24</div><pre><code>session.shutdown()
+cluster.shutdown()</code></pre></section>
+<section class="cell code"><div class="label">Code cell 38</div><pre><code></code></pre></section>
+<section class="cell code"><div class="label">Code cell 39</div><pre><code></code></pre></section><div class="footer">Archived from https://raw.githubusercontent.com/KeonPham/Data-Engineer_Udacity/main/Data%20Modeling%20with%20Apache%20Cassandra%20(NoSQL)/ETL%20Pipeline%20Processing.ipynb<br>Original cells: 39 · Static output blocks: 5 · Images: 0</div></main></body></html>

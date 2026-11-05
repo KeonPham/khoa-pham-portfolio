@@ -13,3 +13,15 @@ Original marks downloaded from the organizations' official websites on 23 Septem
 - heineken.svg: https://www.theheinekencompany.com/sites/heineken-corp/files/heineken-corp/HeinekenLogo.svg
 
 The FPT source is delivered as WebP and is stored with the matching extension. Udacity is the provider of the listed Nanodegree programs; the page does not imply AWS-issued certifications.
+
+## Project library refresh — 5 November 2026
+
+`dist/assets/projects/drive/` contains the supplied project decks/reports, selected genuine page renders, a small research demo and sanitized degree excerpts. Source folder: https://drive.google.com/drive/folders/1uIO7JkhAnPlDVXs09VHMO7KIp6jw0Syz . Each case in `dist/content.js` records its individual source URLs.
+
+`dist/assets/projects/github/` contains approved output images, diagrams, curated reading pages and full static notebook archives from Khoa's public original repositories. Forks are excluded. Related analyses and app repositories are grouped into one case where their relationship is established. The full notebook archives preserve saved cells and static outputs; no analysis was rerun. Curated notes are labeled separately from original assignments.
+
+`dist/assets/projects/thumbnails/` contains resized WebP copies of the genuine gallery images. No synthetic project screenshots or certificate artwork is used. Provider names appear as text when an authentic logo is not available.
+
+Public copies remove unnecessary personal/cloud identifiers. Original degree/transcript files, raw notebooks, signed download URLs, internal inspection sheets and staging manifests are not published. The A/B assignment retains its historical text with an explicit note about the original interpretation error. Research demonstrations are not presented as clinically validated products.
+
+The large HR demo remains in a deferred Drive player; its original 1.65 GB file is not bundled or loaded on entry. The rest of the project library's galleries and reading documents are hosted with the website. LinkedIn images already in `dist/assets/` come from the professional posts reviewed on 21 September 2026.

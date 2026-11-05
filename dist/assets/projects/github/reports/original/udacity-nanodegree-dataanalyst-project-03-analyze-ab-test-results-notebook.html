@@ -1,0 +1,1148 @@
+<!doctype html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Analyze_ab_test_results_notebook.ipynb</title><style>body{margin:0;background:#fff;color:#1f2933;font:16px/1.65 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:40px 24px}h1{font-size:34px;line-height:1.2}h2{margin-top:38px}header{border-bottom:1px solid #d9e0e5;padding-bottom:24px;margin-bottom:32px}.notice{background:#f0f4f7;border-left:4px solid #526c81;padding:16px;font-size:14px}.cell{margin:24px 0}.label{font:12px/1.4 system-ui;color:#667b8a;margin-bottom:6px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7f9;padding:16px;border:1px solid #e1e6ea;border-radius:6px;font:13px/1.6 ui-monospace,Consolas,monospace}.output pre{background:#fff}img{display:block;max-width:100%;height:auto;margin:20px auto}table{border-collapse:collapse;display:block;overflow:auto;max-width:100%;font-size:13px}th,td{border:1px solid #d9e0e5;padding:6px 10px;text-align:left}blockquote{border-left:3px solid #d9e0e5;margin:20px 0;padding-left:18px;color:#51616b}.footer{margin-top:48px;border-top:1px solid #d9e0e5;padding-top:18px;font-size:13px;color:#51616b}</style></head><body><main><header><p>Original notebook / assignment archive</p><h1>Analyze_ab_test_results_notebook</h1><p>Udacity Data Analyst A/B-testing project.</p><div class="notice">Read-only export of the author’s original public notebook. Every original markdown and code cell is retained; safe saved static outputs are included. Code was not executed and results were not revalidated. Original course instructions, unfinished sections and errors may remain. Interactive widgets and external resource loads are disabled. Credential-like strings and account identifiers are redacted if detected. This original assignment contains a contradictory interpretation of a p-value in one paragraph; it is retained as an uncorrected learning archive, not endorsed as a validated statistical conclusion.</div></header><section class="cell markdown"><h1>Analyze A/B Test Results</h1>
+<p>This project will assure you have mastered the subjects covered in the statistics lessons. We have organized the current notebook into the following sections: </p>
+<ul>
+<li>Introduction</li>
+<li>Part I - Probability</li>
+<li>Part II - A/B Test</li>
+<li>Part III - Regression</li>
+<li>Final Check</li>
+<li>Submission</li>
+</ul>
+<p>Specific programming tasks are marked with a <strong>ToDo</strong> tag. </p>
+<p></p>
+<h2>Introduction</h2>
+<p>A/B tests are very commonly performed by data analysts and data scientists. For this project, you will be working to understand the results of an A/B test run by an e-commerce website.  Your goal is to work through this notebook to help the company understand if they should:</p>
+<ul>
+<li>Implement the new webpage, </li>
+<li>Keep the old webpage, or </li>
+<li>Perhaps run the experiment longer to make their decision.</li>
+</ul>
+<p>Each <strong>ToDo</strong> task below has an associated quiz present in the classroom.  Though the classroom quizzes are <strong>not necessary</strong> to complete the project, they help ensure you are on the right track as you work through the project, and you can feel more confident in your final submission meeting the rubric specification. </p>
+<blockquote>
+<p><strong>Tip</strong>: Though it&#39;s not a mandate, students can attempt the classroom quizzes to ensure statistical numeric values are calculated correctly in many cases.</p>
+</blockquote>
+<p></p>
+<h2>Part I - Probability</h2>
+<p>To get started, let&#39;s import our libraries.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 2 · saved execution 44</div><pre><code>import pandas as pd
+import numpy as np
+import random
+import matplotlib.pyplot as plt
+%matplotlib inline
+#We are setting the seed to assure you get the same answers on quizzes as we set up
+random.seed(42)</code></pre></section>
+<section class="cell markdown"><h3>ToDo 1.1</h3>
+<p>Now, read in the <code>ab_data.csv</code> data. Store it in <code>df</code>. Below is the description of the data, there are a total of 5 columns:</p>
+
+
+<table>
+<thead>
+<tr>
+<th>Data columns</th>
+<th>Purpose</th>
+<th>Valid values</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>Unique ID</td>
+<td>Int64 values</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>Time stamp when the user visited the webpage</td>
+<td>-</td>
+</tr>
+<tr>
+<td>group</td>
+<td>In the current A/B experiment, the users are categorized into two broad groups. <br>The <code>control</code> group users are expected to be served with <code>old_page</code>; and <code>treatment</code> group users are matched with the <code>new_page</code>. <br>However, <strong>some inaccurate rows</strong> are present in the initial data, such as a <code>control</code> group user is matched with a <code>new_page</code>.</td>
+<td><code>[&#39;control&#39;, &#39;treatment&#39;]</code></td>
+</tr>
+<tr>
+<td>landing_page</td>
+<td>It denotes whether the user visited the old or new webpage.</td>
+<td><code>[&#39;old_page&#39;, &#39;new_page&#39;]</code></td>
+</tr>
+<tr>
+<td>converted</td>
+<td>It denotes whether the user decided to pay for the company&#39;s product. Here, <code>1</code> means yes, the user bought the product.</td>
+<td><code>[0, 1]</code></td>
+</tr>
+</tbody></table>
+
+Use your dataframe to answer the questions in Quiz 1 of the classroom.
+
+
+<blockquote>
+<p><strong>Tip</strong>: Please save your work regularly.</p>
+</blockquote>
+<p><strong>a.</strong> Read in the dataset from the <code>ab_data.csv</code> file and take a look at the top few rows here:</p>
+</section>
+<section class="cell code"><div class="label">Code cell 4 · saved execution 45</div><pre><code>df = pd.read_csv('ab_data.csv')
+df.head()</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>user_id</th>
+      <th>timestamp</th>
+      <th>group</th>
+      <th>landing_page</th>
+      <th>converted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>851104</td>
+      <td>2017-01-21 22:11:48.556739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>804228</td>
+      <td>2017-01-12 08:01:45.159739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>661590</td>
+      <td>2017-01-11 16:55:06.154213</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>853541</td>
+      <td>2017-01-08 18:28:03.143765</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>864975</td>
+      <td>2017-01-21 01:52:26.210827</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell markdown"><p><strong>b.</strong> Use the cell below to find the number of rows in the dataset.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 6 · saved execution 46</div><pre><code>print(f'Number of rows in the dataset is: {df.shape[0]} rows')</code></pre><div class="output"><pre>Number of rows in the dataset is: 294478 rows
+</pre></div></section>
+<section class="cell markdown"><p><strong>c.</strong> The number of unique users in the dataset.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 8 · saved execution 47</div><pre><code>df['user_id'].nunique()</code></pre><div class="output"><pre>290584</pre></div></section>
+<section class="cell markdown"><p><strong>d.</strong> The proportion of users converted.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 10 · saved execution 48</div><pre><code>df['converted'].mean()*100</code></pre><div class="output"><pre>11.96591935560551</pre></div></section>
+<section class="cell markdown"><p><strong>e.</strong> The number of times when the &quot;group&quot; is <code>treatment</code> but &quot;landing_page&quot; is not a <code>new_page</code>.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 12 · saved execution 49</div><pre><code>(len(df[(df.group ==&quot;treatment&quot;) &amp; (df.landing_page ==&quot;old_page&quot;)]) + 
+len(df[(df.group ==&quot;control&quot;) &amp; (df.landing_page ==&quot;new_page&quot;)]))</code></pre><div class="output"><pre>3893</pre></div></section>
+<section class="cell markdown"><p><strong>f.</strong> Do any of the rows have missing values?</p>
+</section>
+<section class="cell code"><div class="label">Code cell 14 · saved execution 50</div><pre><code>df.isna().sum()</code></pre><div class="output"><pre>user_id         0
+timestamp       0
+group           0
+landing_page    0
+converted       0
+dtype: int64</pre></div></section>
+<section class="cell markdown"><h3>ToDo 1.2</h3>
+<p>In a particular row, the <strong>group</strong> and <strong>landing_page</strong> columns should have either of the following acceptable values:</p>
+<table>
+<thead>
+<tr>
+<th>user_id</th>
+<th>timestamp</th>
+<th>group</th>
+<th>landing_page</th>
+<th>converted</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>XXXX</td>
+<td>XXXX</td>
+<td><code>control</code></td>
+<td><code>old_page</code></td>
+<td>X</td>
+</tr>
+<tr>
+<td>XXXX</td>
+<td>XXXX</td>
+<td><code>treatment</code></td>
+<td><code>new_page</code></td>
+<td>X</td>
+</tr>
+</tbody></table>
+<p>It means, the <code>control</code> group users should match with <code>old_page</code>; and <code>treatment</code> group users should matched with the <code>new_page</code>. </p>
+<p>However, for the rows where <code>treatment</code> does not match with <code>new_page</code> or <code>control</code> does not match with <code>old_page</code>, we cannot be sure if such rows truly received the new or old wepage.  </p>
+<p>Use <strong>Quiz 2</strong> in the classroom to figure out how should we handle the rows where the group and landing_page columns don&#39;t match?</p>
+<p><strong>a.</strong> Now use the answer to the quiz to create a new dataset that meets the specifications from the quiz.  Store your new dataframe in <strong>df2</strong>.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 16 · saved execution 51</div><pre><code># Remove the inaccurate rows, and store the result in a new dataframe df2
+df2 = df.query('(group == &quot;control&quot; &amp; landing_page == &quot;old_page&quot;) | (group == &quot;treatment&quot; &amp; landing_page == &quot;new_page&quot;)')</code></pre></section>
+<section class="cell code"><div class="label">Code cell 17 · saved execution 52</div><pre><code># Double Check all of the incorrect rows were removed from df2 - 
+# Output of the statement below should be 0
+df2[((df2['group'] == 'treatment') == (df2['landing_page'] == 'new_page')) == False].shape[0]</code></pre><div class="output"><pre>0</pre></div></section>
+<section class="cell code"><div class="label">Code cell 18 · saved execution 53</div><pre><code>df2.shape</code></pre><div class="output"><pre>(290585, 5)</pre></div></section>
+<section class="cell markdown"><h3>ToDo 1.3</h3>
+<p>Use <strong>df2</strong> and the cells below to answer questions for <strong>Quiz 3</strong> in the classroom.</p>
+</section>
+<section class="cell markdown"><p><strong>a.</strong> How many unique <strong>user_id</strong>s are in <strong>df2</strong>?</p>
+</section>
+<section class="cell code"><div class="label">Code cell 21 · saved execution 54</div><pre><code>df2['user_id'].nunique()</code></pre><div class="output"><pre>290584</pre></div></section>
+<section class="cell markdown"><p><strong>b.</strong> There is one <strong>user_id</strong> repeated in <strong>df2</strong>.  What is it?</p>
+</section>
+<section class="cell code"><div class="label">Code cell 23 · saved execution 55</div><pre><code>repeated_user = df2['user_id'][df2['user_id'].duplicated() == True]</code></pre></section>
+<section class="cell markdown"><p><strong>c.</strong> Display the rows for the duplicate <strong>user_id</strong>? </p>
+</section>
+<section class="cell code"><div class="label">Code cell 25 · saved execution 56</div><pre><code>df2[df2['user_id'].isin(repeated_user)]</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>user_id</th>
+      <th>timestamp</th>
+      <th>group</th>
+      <th>landing_page</th>
+      <th>converted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1899</th>
+      <td>773192</td>
+      <td>2017-01-09 05:37:58.781806</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2893</th>
+      <td>773192</td>
+      <td>2017-01-14 02:55:59.590927</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell markdown"><p><strong>d.</strong> Remove <strong>one</strong> of the rows with a duplicate <strong>user_id</strong>, from the <strong>df2</strong> dataframe.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 27 · saved execution 57</div><pre><code># Remove one of the rows with a duplicate user_id..
+# Hint: The dataframe.drop_duplicates() may not work in this case because the rows with duplicate user_id are not entirely identical. 
+df2.drop([1899], inplace=True)
+df2.reset_index()</code></pre><div class="output"><pre>C:\Users\pntkh\anaconda3\lib\site-packages\pandas\core\frame.py:4308: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  return super().drop(
+</pre></div><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>index</th>
+      <th>user_id</th>
+      <th>timestamp</th>
+      <th>group</th>
+      <th>landing_page</th>
+      <th>converted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>851104</td>
+      <td>2017-01-21 22:11:48.556739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>804228</td>
+      <td>2017-01-12 08:01:45.159739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>661590</td>
+      <td>2017-01-11 16:55:06.154213</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>853541</td>
+      <td>2017-01-08 18:28:03.143765</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>864975</td>
+      <td>2017-01-21 01:52:26.210827</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>290579</th>
+      <td>294473</td>
+      <td>751197</td>
+      <td>2017-01-03 22:28:38.630509</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>290580</th>
+      <td>294474</td>
+      <td>945152</td>
+      <td>2017-01-12 00:51:57.078372</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>290581</th>
+      <td>294475</td>
+      <td>734608</td>
+      <td>2017-01-22 11:45:03.439544</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>290582</th>
+      <td>294476</td>
+      <td>697314</td>
+      <td>2017-01-15 01:20:28.957438</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>290583</th>
+      <td>294477</td>
+      <td>715931</td>
+      <td>2017-01-16 12:40:24.467417</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>290584 rows × 6 columns</p>
+</div></section>
+<section class="cell code"><div class="label">Code cell 28 · saved execution 58</div><pre><code># Check again if the row with a duplicate user_id is deleted or not
+df2[df2['user_id'].isin(repeated_user)]</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>user_id</th>
+      <th>timestamp</th>
+      <th>group</th>
+      <th>landing_page</th>
+      <th>converted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2893</th>
+      <td>773192</td>
+      <td>2017-01-14 02:55:59.590927</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell markdown"><h3>ToDo 1.4</h3>
+<p>Use <strong>df2</strong> in the cells below to answer the quiz questions related to <strong>Quiz 4</strong> in the classroom.</p>
+<p><strong>a.</strong> What is the probability of an individual converting regardless of the page they receive?<br><br></p>
+<blockquote>
+<p><strong>Tip</strong>: The probability  you&#39;ll compute represents the overall &quot;converted&quot; success rate in the population and you may call it $p_{population}$.</p>
+</blockquote>
+</section>
+<section class="cell code"><div class="label">Code cell 30 · saved execution 15</div><pre><code>p_pop = df2.converted.mean()
+p_pop</code></pre><div class="output"><pre>0.11959708724499628</pre></div></section>
+<section class="cell markdown"><p><strong>b.</strong> Given that an individual was in the <code>control</code> group, what is the probability they converted?</p>
+</section>
+<section class="cell code"><div class="label">Code cell 32 · saved execution 16</div><pre><code>p_control = df2[df2['group'] == &quot;control&quot;]['converted'].mean()
+p_control</code></pre><div class="output"><pre>0.1203863045004612</pre></div></section>
+<section class="cell markdown"><p><strong>c.</strong> Given that an individual was in the <code>treatment</code> group, what is the probability they converted?</p>
+</section>
+<section class="cell code"><div class="label">Code cell 34 · saved execution 17</div><pre><code>p_treatment = df2[df2['group'] == &quot;treatment&quot;]['converted'].mean()
+p_treatment</code></pre><div class="output"><pre>0.11880806551510564</pre></div></section>
+<section class="cell markdown"><blockquote>
+<p><strong>Tip</strong>: The probabilities you&#39;ve computed in the points (b). and (c). above can also be treated as conversion rate. 
+Calculate the actual difference  (<code>obs_diff</code>) between the conversion rates for the two groups. You will need that later.  </p>
+</blockquote>
+</section>
+<section class="cell code"><div class="label">Code cell 36 · saved execution 18</div><pre><code># Calculate the actual difference (obs_diff) between the conversion rates for the two groups.
+obs_diff =  p_treatment - p_control
+obs_diff</code></pre><div class="output"><pre>-0.0015782389853555567</pre></div></section>
+<section class="cell markdown"><p><strong>d.</strong> What is the probability that an individual received the new page?</p>
+</section>
+<section class="cell code"><div class="label">Code cell 38 · saved execution 19</div><pre><code>df2['landing_page'].value_counts(normalize=True)</code></pre><div class="output"><pre>new_page    0.500062
+old_page    0.499938
+Name: landing_page, dtype: float64</pre></div></section>
+<section class="cell markdown"><p><strong>e.</strong> Consider your results from parts (a) through (d) above, and explain below whether the new <code>treatment</code> group users lead to more conversions.</p>
+</section>
+<section class="cell markdown"><p>Based on the propability between the <code>control</code> group &amp; <code>treatment</code> group, we can state that there is no such a big difference in the conversion rate (CR) between two of them. </p>
+<ul>
+<li>Overally, the conversion rate is approximately 11.95%.</li>
+<li>The control group is 12.03%, the treatment group is 11.88%. This would consider a small drop in the CR. However, the number of time in which user was landed on new page is a bit higher compared to the former one. </li>
+<li>As a result, we can draw a initial conclusion is that there is no imporvement in CR from the new-landing-page-user.</li>
+</ul>
+</section>
+<section class="cell markdown"><p></p>
+<h2>Part II - A/B Test</h2>
+<p>Since a timestamp is associated with each event, you could run a hypothesis test continuously as long as you observe the events. </p>
+<p>However, then the hard questions would be: </p>
+<ul>
+<li>Do you stop as soon as one page is considered significantly better than another or does it need to happen consistently for a certain amount of time?  </li>
+<li>How long do you run to render a decision that neither page is better than another?</li>
+</ul>
+<p>These questions are the difficult parts associated with A/B tests in general.  </p>
+<h3>ToDo 2.1</h3>
+<p>For now, consider you need to make the decision just based on all the data provided.  </p>
+<blockquote>
+<p>Recall that you just calculated that the &quot;converted&quot; probability (or rate) for the old page is <em>slightly</em> higher than that of the new page (ToDo 1.4.c). </p>
+</blockquote>
+<p>If you want to assume that the old page is better unless the new page proves to be definitely better at a Type I error rate of 5%, what should be your null and alternative hypotheses (<strong>$H_0$</strong> and <strong>$H_1$</strong>)?  </p>
+<p>You can state your hypothesis in terms of words or in terms of <strong>$p_{old}$</strong> and <strong>$p_{new}$</strong>, which are the &quot;converted&quot; probability (or rate) for the old and new pages respectively.</p>
+</section>
+<section class="cell markdown"><p><strong>$H_0$</strong> : <strong>$p_{new}$</strong> ≤ <strong>$p_{old}$</strong></p>
+<p><strong>$H_1$</strong> : <strong>$p_{new}$</strong> &gt; <strong>$p_{old}$</strong></p>
+</section>
+<section class="cell markdown"><h3>ToDo 2.2 - Null Hypothesis $H_0$ Testing</h3>
+<p>Under the null hypothesis $H_0$, assume that $p_{new}$ and $p_{old}$ are equal. Furthermore, assume that $p_{new}$ and $p_{old}$ both are equal to the <strong>converted</strong> success rate in the <code>df2</code> data regardless of the page. So, our assumption is: <br><br></p>
+<p>$p_{new}$ = $p_{old}$ = $p_{population}$</p>
+
+
+<p>In this section, you will: </p>
+<ul>
+<li><p>Simulate (bootstrap) sample data set for both groups, and compute the  &quot;converted&quot; probability $p$ for those samples. </p>
+</li>
+<li><p>Use a sample size for each group equal to the ones in the <code>df2</code> data.</p>
+</li>
+<li><p>Compute the difference in the &quot;converted&quot; probability for the two samples above. </p>
+</li>
+<li><p>Perform the sampling distribution for the &quot;difference in the converted probability&quot; between the two simulated-samples over 10,000 iterations; and calculate an estimate.</p>
+</li>
+</ul>
+<p>Use the cells below to provide the necessary parts of this simulation.  You can use <strong>Quiz 5</strong> in the classroom to make sure you are on the right track.</p>
+</section>
+<section class="cell markdown"><p><strong>a.</strong> What is the <strong>conversion rate</strong> for $p_{new}$ under the null hypothesis? </p>
+</section>
+<section class="cell code"><div class="label">Code cell 45 · saved execution 20</div><pre><code>p_new = df2.converted.mean()
+p_new</code></pre><div class="output"><pre>0.11959708724499628</pre></div></section>
+<section class="cell markdown"><p><strong>b.</strong> What is the <strong>conversion rate</strong> for $p_{old}$ under the null hypothesis? </p>
+</section>
+<section class="cell code"><div class="label">Code cell 47 · saved execution 21</div><pre><code>p_old = df2.converted.mean()
+p_old</code></pre><div class="output"><pre>0.11959708724499628</pre></div></section>
+<section class="cell markdown"><p><strong>c.</strong> What is $n_{new}$, the number of individuals in the treatment group? <br><br>
+<em>Hint</em>: The treatment group users are shown the new page.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 49 · saved execution 22</div><pre><code>n_new = df2[df2['group'] == &quot;treatment&quot;].shape[0]
+n_new</code></pre><div class="output"><pre>145310</pre></div></section>
+<section class="cell markdown"><p><strong>d.</strong> What is $n_{old}$, the number of individuals in the control group?</p>
+</section>
+<section class="cell code"><div class="label">Code cell 51 · saved execution 23</div><pre><code>n_old = df2[df2['group'] == &quot;control&quot;].shape[0]
+n_old</code></pre><div class="output"><pre>145274</pre></div></section>
+<section class="cell markdown"><p><strong>e. Simulate Sample for the <code>treatment</code> Group</strong><br> 
+Simulate $n_{new}$ transactions with a conversion rate of $p_{new}$ under the null hypothesis.  <br><br>
+<em>Hint</em>: Use <code>numpy.random.choice()</code> method to randomly generate $n_{new}$ number of values. <br>
+Store these $n_{new}$ 1&#39;s and 0&#39;s in the <code>new_page_converted</code> numpy array.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 53 · saved execution 24</div><pre><code># Simulate a Sample for the treatment Group
+new_page_converted = np.random.choice([0, 1], n_new, p =[(1-p_new), p_new])</code></pre></section>
+<section class="cell markdown"><p><strong>f. Simulate Sample for the <code>control</code> Group</strong> <br>
+Simulate $n_{old}$ transactions with a conversion rate of $p_{old}$ under the null hypothesis. <br> Store these $n_{old}$ 1&#39;s and 0&#39;s in the <code>old_page_converted</code> numpy array.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 55 · saved execution 25</div><pre><code># Simulate a Sample for the control Group
+old_page_converted = np.random.choice([0, 1], n_old, p =[(1-p_old), p_old])</code></pre></section>
+<section class="cell markdown"><p><strong>g.</strong> Find the difference in the &quot;converted&quot; probability $(p{&#39;}<em>{new}$ - $p{&#39;}</em>{old})$ for your simulated samples from the parts (e) and (f) above. </p>
+</section>
+<section class="cell code"><div class="label">Code cell 57 · saved execution 26</div><pre><code>obs_p_diff = new_page_converted.mean() - old_page_converted.mean()
+obs_p_diff</code></pre><div class="output"><pre>0.000451987031931389</pre></div></section>
+<section class="cell markdown"><p><strong>h. Sampling distribution</strong> <br>
+Re-create <code>new_page_converted</code> and <code>old_page_converted</code> and find the $(p{&#39;}<em>{new}$ - $p{&#39;}</em>{old})$ value 10,000 times using the same simulation process you used in parts (a) through (g) above. </p>
+<p>Store all  $(p{&#39;}<em>{new}$ - $p{&#39;}</em>{old})$  values in a NumPy array called <code>p_diffs</code>.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 59 · saved execution 27</div><pre><code>p_diffs = []
+for i in range(10000):
+    new_page_converted = np.random.choice([0, 1], size=n_new, p=[p_new, 1- p_new])
+    old_page_converted = np.random.choice([0, 1], size=n_old, p=[p_old, 1- p_old])
+    diff = new_page_converted.mean() - old_page_converted.mean()
+    p_diffs.append(diff)
+p_diffs = np.array(p_diffs)
+</code></pre></section>
+<section class="cell markdown"><p><strong>i. Histogram</strong><br> 
+Plot a histogram of the <strong>p_diffs</strong>.  Does this plot look like what you expected?  Use the matching problem in the classroom to assure you fully understand what was computed here.<br><br></p>
+<p>Also, use <code>plt.axvline()</code> method to mark the actual difference observed  in the <code>df2</code> data (recall <code>obs_diff</code>), in the chart.  </p>
+<blockquote>
+<p><strong>Tip</strong>: Display title, x-label, and y-label in the chart.</p>
+</blockquote>
+</section>
+<section class="cell code"><div class="label">Code cell 61 · saved execution 28</div><pre><code>plt.hist(p_diffs, bins=100);
+plt.xlabel(&quot;p_diffs value&quot;)
+plt.ylabel(&quot;Count&quot;)
+plt.title(&quot;Distribution of 10k &quot;)
+plt.axvline(obs_diff, c='red')</code></pre><div class="output"><pre>&lt;matplotlib.lines.Line2D at 0x27c2a255d60&gt;</pre></div><div class="output"><img src="data:image/png;base64,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" alt="Original notebook output from cell 61" loading="lazy"></div></section>
+<section class="cell markdown"><p><strong>j.</strong> What proportion of the <strong>p_diffs</strong> are greater than the actual difference observed in the <code>df2</code> data?</p>
+</section>
+<section class="cell code"><div class="label">Code cell 63 · saved execution 29</div><pre><code>pval = (p_diffs &gt; obs_diff).mean()
+pval</code></pre><div class="output"><pre>0.9028</pre></div></section>
+<section class="cell markdown"><p><strong>k.</strong> Please explain in words what you have just computed in part <strong>j</strong> above.  </p>
+<ul>
+<li>What is this value called in scientific studies?  </li>
+<li>What does this value signify in terms of whether or not there is a difference between the new and old pages? <em>Hint</em>: Compare the value above with the &quot;Type I error rate (0.05)&quot;.</li>
+</ul>
+</section>
+<section class="cell markdown"><blockquote>
+<p><strong>Answer:</strong></p>
+</blockquote>
+<ul>
+<li>The result computed in part j so-called &quot;P-value&quot;. P-value is the probability of observing your statistic (or one more extreme in favor of the alternative) if the null hypothesis is true.</li>
+<li>The p-value 0.9081 is higher than 0.05 (Type I error rate), therefore it is not statistically significant and indicates strong evidence for the null hypothesis (fail to reject the null hypothesis). It means we accept the old page version is better converted user than the new page. We keep the old page version.</li>
+</ul>
+</section>
+<section class="cell markdown"><p><strong>l. Using Built-in Methods for Hypothesis Testing</strong><br>
+We could also use a built-in to achieve similar results.  Though using the built-in might be easier to code, the above portions are a walkthrough of the ideas that are critical to correctly thinking about statistical significance. </p>
+<p>Fill in the statements below to calculate the:</p>
+<ul>
+<li><code>convert_old</code>: number of conversions with the old_page</li>
+<li><code>convert_new</code>: number of conversions with the new_page</li>
+<li><code>n_old</code>: number of individuals who were shown the old_page</li>
+<li><code>n_new</code>: number of individuals who were shown the new_page</li>
+</ul>
+</section>
+<section class="cell code"><div class="label">Code cell 67 · saved execution 30</div><pre><code>import statsmodels.api as sm
+
+# number of conversions with the old_page
+convert_old = df2[(df2['landing_page'] == &quot;old_page&quot;) &amp; (df2['converted'] == 1)].shape[0]
+
+# number of conversions with the new_page
+convert_new = df2[(df2['landing_page'] == &quot;new_page&quot;) &amp; (df2['converted'] == 1)].shape[0]
+
+# number of individuals who were shown the old_page
+n_old = df2[df2['landing_page'] == &quot;old_page&quot;].shape[0]
+
+# number of individuals who received new_page
+n_new = df2[df2['landing_page'] == &quot;new_page&quot;].shape[0]
+
+print(f'convert_old: {convert_old}')
+print(f'convert_new: {convert_new}')
+print(f'n_old: {n_old}')
+print(f'n_new: {n_new}')</code></pre><div class="output"><pre>convert_old: 17489
+convert_new: 17264
+n_old: 145274
+n_new: 145310
+</pre></div></section>
+<section class="cell markdown"><p><strong>m.</strong> Now use <code>sm.stats.proportions_ztest()</code> to compute your test statistic and p-value.  Here is a helpful link on using the built in.</p>
+<p>The syntax is: </p>
+<pre><code>proportions_ztest(count_array, nobs_array, alternative=&#39;larger&#39;)
+</code></pre>
+<p>where, </p>
+<ul>
+<li><code>count_array</code> = represents the number of &quot;converted&quot; for each group</li>
+<li><code>nobs_array</code> = represents the total number of observations (rows) in each group</li>
+<li><code>alternative</code> = choose one of the values from <code>[‘two-sided’, ‘smaller’, ‘larger’]</code> depending upon two-tailed, left-tailed, or right-tailed respectively.</li>
+</ul>
+<blockquote>
+<p><strong>Hint</strong>: <br>
+It&#39;s a two-tailed if you defined $H_1$ as $(p_{new} = p_{old})$. <br>
+It&#39;s a left-tailed if you defined $H_1$ as $(p_{new} &lt; p_{old})$. <br>
+It&#39;s a right-tailed if you defined $H_1$ as $(p_{new} &gt; p_{old})$. </p>
+</blockquote>
+<p>The built-in function above will return the z_score, p_value. </p>
+<hr>
+<h3>About the two-sample z-test</h3>
+<p>Recall that you have plotted a distribution <code>p_diffs</code> representing the
+difference in the &quot;converted&quot; probability  $(p{&#39;}<em>{new}-p{&#39;}</em>{old})$  for your two simulated samples 10,000 times. </p>
+<p>Another way for comparing the mean of two independent and normal distribution is a <strong>two-sample z-test</strong>. You can perform the Z-test to calculate the Z_score, as shown in the equation below:</p>
+<p>$$
+Z_{score} = \frac{ (p{&#39;}<em>{new}-p{&#39;}</em>{old}) - (p_{new}  -  p_{old})}{ \sqrt{ \frac{\sigma^{2}<em>{new} }{n</em>{new}} + \frac{\sigma^{2}<em>{old} }{n</em>{old}}  } }
+$$</p>
+<p>where,</p>
+<ul>
+<li>$p{&#39;}$ is the &quot;converted&quot; success rate in the sample</li>
+<li>$p_{new}$ and $p_{old}$ are the &quot;converted&quot; success rate for the two groups in the population. </li>
+<li>$\sigma_{new}$ and $\sigma_{new}$ are the standard deviation for the two groups in the population. </li>
+<li>$n_{new}$ and $n_{old}$ represent the size of the two groups or samples (it&#39;s same in our case)</li>
+</ul>
+<blockquote>
+<p>Z-test is performed when the sample size is large, and the population variance is known. The z-score represents the distance between the two &quot;converted&quot; success rates in terms of the standard error. </p>
+</blockquote>
+<p>Next step is to make a decision to reject or fail to reject the null hypothesis based on comparing these two values: </p>
+<ul>
+<li>$Z_{score}$</li>
+<li>$Z_{\alpha}$ or $Z_{0.05}$, also known as critical value at 95% confidence interval.  $Z_{0.05}$ is 1.645 for one-tailed tests,  and 1.960 for two-tailed test. You can determine the $Z_{\alpha}$ from the z-table manually.</li>
+</ul>
+<p>Decide if your hypothesis is either a two-tailed, left-tailed, or right-tailed test. Accordingly, reject OR fail to reject the  null based on the comparison between $Z_{score}$ and $Z_{\alpha}$. </p>
+<blockquote>
+<p>Hint:<br>
+For a right-tailed test, reject null if $Z_{score}$ &gt; $Z_{\alpha}$. <br>
+For a left-tailed test, reject null if $Z_{score}$ &lt; $Z_{\alpha}$. </p>
+</blockquote>
+<p>In other words, we determine whether or not the $Z_{score}$ lies in the &quot;rejection region&quot; in the distribution. A &quot;rejection region&quot; is an interval where the null hypothesis is rejected iff the $Z_{score}$ lies in that region.</p>
+<p>Reference: </p>
+<ul>
+<li>Example 9.1.2 on this page, courtesy www.stats.libretexts.org</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Tip</strong>: You don&#39;t have to dive deeper into z-test for this exercise. <strong>Try having an overview of what does z-score signify in general.</strong> </p>
+</blockquote>
+</section>
+<section class="cell code"><div class="label">Code cell 69 · saved execution 31</div><pre><code>import statsmodels.api as sm
+# ToDo: Complete the sm.stats.proportions_ztest() method arguments
+z_score, p_value = sm.stats.proportions_ztest(count=[convert_new, convert_old], nobs=[n_new, n_old], alternative='larger')
+print(f'z_score: {z_score}')
+print(f'p_value: {p_value}')</code></pre><div class="output"><pre>z_score: -1.3109241984234394
+p_value: 0.9050583127590245
+</pre></div></section>
+<section class="cell markdown"><p><strong>n.</strong> What do the z-score and p-value you computed in the previous question mean for the conversion rates of the old and new pages?  Do they agree with the findings in parts <strong>j.</strong> and <strong>k.</strong>?<br><br></p>
+<blockquote>
+<p><strong>Tip</strong>: Notice whether the p-value is similar to the one computed earlier. Accordingly, can you reject/fail to reject the null hypothesis? It is important to correctly interpret the test statistic and p-value.</p>
+</blockquote>
+</section>
+<section class="cell markdown"><blockquote>
+<p><strong>Answer:</strong></p>
+</blockquote>
+<ul>
+<li>The P_value found in part k (0.905) is approximately similar to part j (0.908). It is higher than the alpha which is 0.05. </li>
+<li>As a result, the stats model libarary approach gives the same result which is the data has enough evidence for the null hypothesis to be true. That means the old page version is better than the new one.</li>
+</ul>
+</section>
+<section class="cell markdown"><p></p>
+<h3>Part III - A regression approach</h3>
+<h3>ToDo 3.1</h3>
+<p>In this final part, you will see that the result you achieved in the A/B test in Part II above can also be achieved by performing regression.<br><br> </p>
+<p><strong>a.</strong> Since each row in the <code>df2</code> data is either a conversion or no conversion, what type of regression should you be performing in this case?</p>
+</section>
+<section class="cell markdown"><blockquote>
+<p><strong>Answer:</strong></p>
+</blockquote>
+<ul>
+<li>Since the user data was classified by encoding into 2 groups which are converted (1) or not-to-be-converted (0). Therefore the <b>logistic regresiion</b> should be performed in this case</li>
+</ul>
+</section>
+<section class="cell markdown"><p><strong>b.</strong> The goal is to use <strong>statsmodels</strong> library to fit the regression model you specified in part <strong>a.</strong> above to see if there is a significant difference in conversion based on the page-type a customer receives. However, you first need to create the following two columns in the <code>df2</code> dataframe:</p>
+<ol>
+<li><code>intercept</code> - It should be <code>1</code> in the entire column. </li>
+<li><code>ab_page</code> - It&#39;s a dummy variable column, having a value <code>1</code> when an individual receives the <strong>treatment</strong>, otherwise <code>0</code>.</li>
+</ol>
+</section>
+<section class="cell code"><div class="label">Code cell 75 · saved execution 32</div><pre><code>df2['intercept'] = 1
+df2['ab_page'] = pd.get_dummies(df2['group'])['treatment']
+df2.head()</code></pre><div class="output"><pre>&lt;ipython-input-32-1be1e17ffb19&gt;:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df2['intercept'] = 1
+&lt;ipython-input-32-1be1e17ffb19&gt;:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df2['ab_page'] = pd.get_dummies(df2['group'])['treatment']
+</pre></div><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>user_id</th>
+      <th>timestamp</th>
+      <th>group</th>
+      <th>landing_page</th>
+      <th>converted</th>
+      <th>intercept</th>
+      <th>ab_page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>851104</td>
+      <td>2017-01-21 22:11:48.556739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>804228</td>
+      <td>2017-01-12 08:01:45.159739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>661590</td>
+      <td>2017-01-11 16:55:06.154213</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>853541</td>
+      <td>2017-01-08 18:28:03.143765</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>864975</td>
+      <td>2017-01-21 01:52:26.210827</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell markdown"><p><strong>c.</strong> Use <strong>statsmodels</strong> to instantiate your regression model on the two columns you created in part (b). above, then fit the model to predict whether or not an individual converts. </p>
+</section>
+<section class="cell code"><div class="label">Code cell 77 · saved execution 33</div><pre><code>log_mod = sm.Logit(df2['converted'], df2[['intercept', 'ab_page']])
+results = log_mod.fit()</code></pre><div class="output"><pre>Optimization terminated successfully.
+         Current function value: 0.366118
+         Iterations 6
+</pre></div></section>
+<section class="cell markdown"><p><strong>d.</strong> Provide the summary of your model below, and use it as necessary to answer the following questions.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 79 · saved execution 34</div><pre><code>print(results.summary2())</code></pre><div class="output"><pre>                          Results: Logit
+==================================================================
+Model:              Logit            Pseudo R-squared: 0.000      
+Dependent Variable: converted        AIC:              212780.3502
+Date:               2022-04-19 22:24 BIC:              212801.5095
+No. Observations:   290584           Log-Likelihood:   -1.0639e+05
+Df Model:           1                LL-Null:          -1.0639e+05
+Df Residuals:       290582           LLR p-value:      0.18988    
+Converged:          1.0000           Scale:            1.0000     
+No. Iterations:     6.0000                                        
+-------------------------------------------------------------------
+              Coef.   Std.Err.      z      P&gt;|z|    [0.025   0.975]
+-------------------------------------------------------------------
+intercept    -1.9888    0.0081  -246.6690  0.0000  -2.0046  -1.9730
+ab_page      -0.0150    0.0114    -1.3109  0.1899  -0.0374   0.0074
+==================================================================
+
+</pre></div></section>
+<section class="cell code"><div class="label">Code cell 80 · saved execution 35</div><pre><code># Conduct the hypotesting again using two-tailed test
+z_score, p_value = sm.stats.proportions_ztest(count=[convert_new, convert_old], nobs=[n_new, n_old], alternative='two-sided')
+print(f'z_score_two-tailed test: {z_score}')
+print(f'p_value_two-tailed test: {p_value}')</code></pre><div class="output"><pre>z_score_two-tailed test: -1.3109241984234394
+p_value_two-tailed test: 0.18988337448195103
+</pre></div></section>
+<section class="cell markdown"><p><strong>e.</strong> What is the p-value associated with <strong>ab_page</strong>? Why does it differ from the value you found in <strong>Part II</strong>?<br><br>  </p>
+<p><strong>Hints</strong>: </p>
+<ul>
+<li>What are the null and alternative hypotheses associated with your regression model, and how do they compare to the null and alternative hypotheses in <strong>Part II</strong>? </li>
+<li>You may comment on if these hypothesis (Part II vs. Part III) are one-sided or two-sided. </li>
+<li>You may also compare the current p-value with the Type I error rate (0.05).</li>
+</ul>
+</section>
+<section class="cell markdown"><blockquote>
+<p><strong>Put your answer here.</strong></p>
+</blockquote>
+<ul>
+<li><p>The P-value from logistic regression model (0.189) is lower than the one found in Part II (0.905).</p>
+</li>
+<li><p>We conduct a test again with stats model approach, the p-value for a two-tailed test (0.189) is equal to the p-value from logistic regression model computed (0.189). In conclusion, the logistic regression is test only for the two-tailed testing not for one tail either left or right test. </p>
+</li>
+<li><p>With the two-tailed test, the hypothesis would be following:</p>
+<p>  <strong>$H_0$</strong> : <strong>$p_{new}$</strong> = <strong>$p_{old}$</strong></p>
+<p>  <strong>$H_1$</strong> : <strong>$p_{new}$</strong> ≠ <strong>$p_{old}$</strong></p>
+</li>
+<li><p>Based on this construction of the null &amp; alternative hypothesis, and the accquired p-value for the two-tailed test from the logistic regression model, it states that we can reject the null hypothesis because the P-Value (0.189) is higher than 0.05. </p>
+</li>
+<li><p>It means we accept the alternative hypothesis, in the other word, there is a difference between two version in conversion rate. However, this conclusion is unable to bring any improvment in value for the business in comparision the return of value among two versions. Therefore, it is better either using left-tailed or right-tailed test for a better business value conclusion.</p>
+</li>
+</ul>
+</section>
+<section class="cell markdown"><p><strong>f.</strong> Now, you are considering other things that might influence whether or not an individual converts.  Discuss why it is a good idea to consider other factors to add into your regression model.  Are there any disadvantages to adding additional terms into your regression model?</p>
+</section>
+<section class="cell markdown"><blockquote>
+<p><strong>Put your answer here.</strong></p>
+</blockquote>
+<ul>
+<li>As put into more relevant factors into regression model, it could improve the accuracy of its. However, there are disadvantages that we could consider a is called &quot;Multicollinearity&quot;. It is the x-variables to be related to the response, but not to be related one another.
+The drawbacks are:</li>
+<li>we expect the explanatory variables and the responese (based on bivariate relationships plotted on scatter plot or heatmap correlation) are in positive correlation, but in the regession case, it could become negative. </li>
+<li>The result from hypothesis testing may be unreliable. By having more correlated explanatory variables, it could cause the coefficient estimates are unstable. In consequence, a specific variable would be beneficial for the response&#39;s prediction, but due to being relating among other x-variables, the association will not be presented.</li>
+</ul>
+</section>
+<section class="cell markdown"><p><strong>g. Adding countries</strong><br> 
+Now along with testing if the conversion rate changes for different pages, also add an effect based on which country a user lives in. </p>
+<ol>
+<li><p>You will need to read in the <strong>countries.csv</strong> dataset and merge together your <code>df2</code> datasets on the appropriate rows. You call the resulting dataframe <code>df_merged</code>. Here are the docs for joining tables. </p>
+</li>
+<li><p>Does it appear that country had an impact on conversion?  To answer this question, consider the three unique values, <code>[&#39;UK&#39;, &#39;US&#39;, &#39;CA&#39;]</code>, in the <code>country</code> column. Create dummy variables for these country columns.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Hint:</strong> Use <code>pandas.get_dummies()</code> to create dummy variables. <strong>You will utilize two columns for the three dummy variables.</strong> </p>
+</blockquote>
+<p> Provide the statistical output as well as a written response to answer this question.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 86 · saved execution 36</div><pre><code># import countries dataset
+country_df = pd.read_csv('countries.csv')
+country_df.head()</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>user_id</th>
+      <th>country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>834778</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>928468</td>
+      <td>US</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>822059</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>711597</td>
+      <td>UK</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>710616</td>
+      <td>UK</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell code"><div class="label">Code cell 87 · saved execution 37</div><pre><code># Join with the df2 dataframe
+df_merged = df2.merge(country_df, on='user_id', how='inner')
+df_merged.head()</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>user_id</th>
+      <th>timestamp</th>
+      <th>group</th>
+      <th>landing_page</th>
+      <th>converted</th>
+      <th>intercept</th>
+      <th>ab_page</th>
+      <th>country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>851104</td>
+      <td>2017-01-21 22:11:48.556739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>US</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>804228</td>
+      <td>2017-01-12 08:01:45.159739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>US</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>661590</td>
+      <td>2017-01-11 16:55:06.154213</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>US</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>853541</td>
+      <td>2017-01-08 18:28:03.143765</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>US</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>864975</td>
+      <td>2017-01-21 01:52:26.210827</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>US</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell code"><div class="label">Code cell 88 · saved execution 38</div><pre><code># Create the necessary dummy variables
+df_merged_dummies = pd.get_dummies(df_merged['country'])
+df_new = df_merged.join(df_merged_dummies)
+df_new.head()</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>user_id</th>
+      <th>timestamp</th>
+      <th>group</th>
+      <th>landing_page</th>
+      <th>converted</th>
+      <th>intercept</th>
+      <th>ab_page</th>
+      <th>country</th>
+      <th>CA</th>
+      <th>UK</th>
+      <th>US</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>851104</td>
+      <td>2017-01-21 22:11:48.556739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>US</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>804228</td>
+      <td>2017-01-12 08:01:45.159739</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>US</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>661590</td>
+      <td>2017-01-11 16:55:06.154213</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>US</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>853541</td>
+      <td>2017-01-08 18:28:03.143765</td>
+      <td>treatment</td>
+      <td>new_page</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>US</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>864975</td>
+      <td>2017-01-21 01:52:26.210827</td>
+      <td>control</td>
+      <td>old_page</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>US</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell code"><div class="label">Code cell 89 · saved execution 39</div><pre><code># Fit your model, and summarize the results
+logit_mod  = sm.Logit(df_new['converted'], df_new[['intercept', 'CA', 'US', 'ab_page']])
+results2 = logit_mod.fit(disp=False)
+print(results2.summary2())</code></pre><div class="output"><pre>                          Results: Logit
+==================================================================
+Model:              Logit            Pseudo R-squared: 0.000      
+Dependent Variable: converted        AIC:              212781.1253
+Date:               2022-04-19 22:24 BIC:              212823.4439
+No. Observations:   290584           Log-Likelihood:   -1.0639e+05
+Df Model:           3                LL-Null:          -1.0639e+05
+Df Residuals:       290580           LLR p-value:      0.17599    
+Converged:          1.0000           Scale:            1.0000     
+No. Iterations:     6.0000                                        
+-------------------------------------------------------------------
+              Coef.   Std.Err.      z      P&gt;|z|    [0.025   0.975]
+-------------------------------------------------------------------
+intercept    -1.9794    0.0127  -155.4145  0.0000  -2.0044  -1.9544
+CA           -0.0506    0.0284    -1.7835  0.0745  -0.1063   0.0050
+US           -0.0099    0.0133    -0.7433  0.4573  -0.0359   0.0162
+ab_page      -0.0149    0.0114    -1.3069  0.1912  -0.0374   0.0075
+==================================================================
+
+</pre></div></section>
+<section class="cell markdown"><p><strong>h. Fit your model and obtain the results</strong><br> 
+Though you have now looked at the individual factors of country and page on conversion, we would now like to look at an interaction between page and country to see if are there significant effects on conversion.  <strong>Create the necessary additional columns, and fit the new model.</strong> </p>
+<p>Provide the summary results (statistical output), and your conclusions (written response) based on the results. </p>
+<blockquote>
+<p><strong>Tip</strong>: Conclusions should include both statistical reasoning, and practical reasoning for the situation. </p>
+</blockquote>
+<blockquote>
+<p><strong>Hints</strong>: </p>
+</blockquote>
+<ul>
+<li>Look at all of p-values in the summary, and compare against the Type I error rate (0.05). </li>
+<li>Can you reject/fail to reject the null hypotheses (regression model)?</li>
+<li>Comment on the effect of page and country to predict the conversion.</li>
+</ul>
+</section>
+<section class="cell code"><div class="label">Code cell 91 · saved execution 40</div><pre><code>df_new['ab_CA'] = df_new['ab_page'] * df_new['CA']
+df_new['ab_US'] = df_new['ab_page'] * df_new['US']
+lm3 = sm.Logit(df_new['converted'], df_new[['intercept', 'ab_page', 'UK' , 'US', 'ab_CA', 'ab_US']])
+results3 = lm3.fit(disp=False)
+print(results3.summary2())</code></pre><div class="output"><pre>                          Results: Logit
+==================================================================
+Model:              Logit            Pseudo R-squared: 0.000      
+Dependent Variable: converted        AIC:              212782.6602
+Date:               2022-04-19 22:24 BIC:              212846.1381
+No. Observations:   290584           Log-Likelihood:   -1.0639e+05
+Df Model:           5                LL-Null:          -1.0639e+05
+Df Residuals:       290578           LLR p-value:      0.19199    
+Converged:          1.0000           Scale:            1.0000     
+No. Iterations:     6.0000                                        
+-------------------------------------------------------------------
+               Coef.   Std.Err.     z      P&gt;|z|    [0.025   0.975]
+-------------------------------------------------------------------
+intercept     -2.0040    0.0364  -55.0077  0.0000  -2.0754  -1.9326
+ab_page        0.0108    0.0228    0.4749  0.6349  -0.0339   0.0555
+UK             0.0118    0.0398    0.2957  0.7674  -0.0663   0.0899
+US             0.0175    0.0377    0.4652  0.6418  -0.0563   0.0914
+ab_CA         -0.0783    0.0568   -1.3783  0.1681  -0.1896   0.0330
+ab_US         -0.0314    0.0266   -1.1807  0.2377  -0.0835   0.0207
+==================================================================
+
+</pre></div></section>
+<section class="cell markdown"><blockquote>
+<p><strong>Put your conclusion answer here.</strong></p>
+</blockquote>
+<ul>
+<li>The country factors are added to the model. But once again, all the P-value from our model confirm again there is no statiscally significant to reject the Null Hypothesis. It means the company should keep the old version rather than lauching the new one.</li>
+</ul>
+</section>
+<section class="cell markdown"><p></p>
+<h2>Final Check!</h2>
+<p>Congratulations!  You have reached the end of the A/B Test Results project!  You should be very proud of all you have accomplished!</p>
+<blockquote>
+<p><strong>Tip</strong>: Once you are satisfied with your work here, check over your notebook to make sure that it satisfies all the specifications mentioned in the rubric. You should also probably remove all of the &quot;Hints&quot; and &quot;Tips&quot; like this one so that the presentation is as polished as possible.</p>
+</blockquote>
+<p></p>
+<h2>Submission</h2>
+<p>You may either submit your notebook through the &quot;SUBMIT PROJECT&quot; button at the bottom of this workspace, or you may work from your local machine and submit on  the last page of this project lesson.  </p>
+<ol>
+<li><p>Before you submit your project, you need to create a .html or .pdf version of this notebook in the workspace here. To do that, run the code cell below. If it worked correctly, you should get a return code of 0, and you should see the generated .html file in the workspace directory (click on the orange Jupyter icon in the upper left).</p>
+</li>
+<li><p>Alternatively, you can download this report as .html via the <strong>File</strong> &gt; <strong>Download as</strong> submenu, and then manually upload it into the workspace directory by clicking on the orange Jupyter icon in the upper left, then using the Upload button.</p>
+</li>
+<li><p>Once you&#39;ve done this, you can submit your project by clicking on the &quot;Submit Project&quot; button in the lower right here. This will create and submit a zip file with this .ipynb doc and the .html or .pdf version you created. Congratulations!</p>
+</li>
+</ol>
+</section>
+<section class="cell code"><div class="label">Code cell 94 · saved execution 41</div><pre><code>from subprocess import call
+call(['python', '-m', 'nbconvert', 'Analyze_ab_test_results_notebook.ipynb'])</code></pre><div class="output"><pre>1</pre></div></section><div class="footer">Archived from https://raw.githubusercontent.com/KeonPham/Udacity_NanoDegree_DataAnalyst_Project_03/main/Analyze_ab_test_results_notebook.ipynb<br>Original cells: 94 · Static output blocks: 39 · Images: 1</div></main></body></html>

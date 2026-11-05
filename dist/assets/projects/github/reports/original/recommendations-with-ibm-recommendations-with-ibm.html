@@ -1,0 +1,1138 @@
+<!doctype html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recommendations_with_IBM.ipynb</title><style>body{margin:0;background:#fff;color:#1f2933;font:16px/1.65 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:40px 24px}h1{font-size:34px;line-height:1.2}h2{margin-top:38px}header{border-bottom:1px solid #d9e0e5;padding-bottom:24px;margin-bottom:32px}.notice{background:#f0f4f7;border-left:4px solid #526c81;padding:16px;font-size:14px}.cell{margin:24px 0}.label{font:12px/1.4 system-ui;color:#667b8a;margin-bottom:6px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7f9;padding:16px;border:1px solid #e1e6ea;border-radius:6px;font:13px/1.6 ui-monospace,Consolas,monospace}.output pre{background:#fff}img{display:block;max-width:100%;height:auto;margin:20px auto}table{border-collapse:collapse;display:block;overflow:auto;max-width:100%;font-size:13px}th,td{border:1px solid #d9e0e5;padding:6px 10px;text-align:left}blockquote{border-left:3px solid #d9e0e5;margin:20px 0;padding-left:18px;color:#51616b}.footer{margin-top:48px;border-top:1px solid #d9e0e5;padding-top:18px;font-size:13px;color:#51616b}</style></head><body><main><header><p>Original notebook / assignment archive</p><h1>Recommendations_with_IBM</h1><p>Udacity Recommendations with IBM learning project.</p><div class="notice">Read-only export of the author’s original public notebook. Every original markdown and code cell is retained; safe saved static outputs are included. Code was not executed and results were not revalidated. Original course instructions, unfinished sections and errors may remain. Interactive widgets and external resource loads are disabled. Credential-like strings and account identifiers are redacted if detected.</div></header><section class="cell markdown"><h1>Recommendations with IBM</h1>
+<p>In this notebook, you will be putting your recommendation skills to use on real data from the IBM Watson Studio platform. </p>
+<p>You may either submit your notebook through the workspace here, or you may work from your local machine and submit through the next page.  Either way assure that your code passes the project RUBRIC.  <strong>Please save regularly.</strong></p>
+<p>By following the table of contents, you will build out a number of different methods for making recommendations that can be used for different situations. </p>
+<h2>Table of Contents</h2>
+<p>I. Exploratory Data Analysis<br>
+II. Rank Based Recommendations<br>
+III. User-User Based Collaborative Filtering<br>
+IV. Content Based Recommendations (EXTRA - NOT REQUIRED)<br>
+V. Matrix Factorization<br>
+VI. Extras & Concluding</p>
+<p>At the end of the notebook, you will find directions for how to submit your work.  Let&#39;s get started by importing the necessary libraries and reading in the data.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 2 · saved execution 1</div><pre><code>import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import project_tests as t
+import pickle
+
+%matplotlib inline
+
+df = pd.read_csv('data/user-item-interactions.csv')
+df_content = pd.read_csv('data/articles_community.csv')
+del df['Unnamed: 0']
+del df_content['Unnamed: 0']
+
+# Show df to get an idea of the data
+df.head()</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>article_id</th>
+      <th>title</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1430.0</td>
+      <td>using pixiedust for fast, flexible, and easier...</td>
+      <td>ef5f11f77ba020cd36e1105a00ab868bbdbf7fe7</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1314.0</td>
+      <td>healthcare python streaming application demo</td>
+      <td>083cbdfa93c8444beaa4c5f5e0f5f9198e4f9e0b</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1429.0</td>
+      <td>use deep learning for image classification</td>
+      <td>b96a4f2e92d8572034b1e9b28f9ac673765cd074</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1338.0</td>
+      <td>ml optimization using cognitive assistant</td>
+      <td>06485706b34a5c9bf2a0ecdac41daf7e7654ceb7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1276.0</td>
+      <td>deploy your python model as a restful api</td>
+      <td>f01220c46fc92c6e6b161b1849de11faacd7ccb2</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell code"><div class="label">Code cell 3 · saved execution 2</div><pre><code># Show df_content to get an idea of the data
+df_content.head()</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>doc_body</th>
+      <th>doc_description</th>
+      <th>doc_full_name</th>
+      <th>doc_status</th>
+      <th>article_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Skip navigation Sign in SearchLoading...\r\n\r...</td>
+      <td>Detect bad readings in real time using Python ...</td>
+      <td>Detect Malfunctioning IoT Sensors with Streami...</td>
+      <td>Live</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>No Free Hunch Navigation * kaggle.com\r\n\r\n ...</td>
+      <td>See the forest, see the trees. Here lies the c...</td>
+      <td>Communicating data science: A guide to present...</td>
+      <td>Live</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>☰ * Login\r\n * Sign Up\r\n\r\n * Learning Pat...</td>
+      <td>Here’s this week’s news in Data Science and Bi...</td>
+      <td>This Week in Data Science (April 18, 2017)</td>
+      <td>Live</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>DATALAYER: HIGH THROUGHPUT, LOW LATENCY AT SCA...</td>
+      <td>Learn how distributed DBs solve the problem of...</td>
+      <td>DataLayer Conference: Boost the performance of...</td>
+      <td>Live</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Skip navigation Sign in SearchLoading...\r\n\r...</td>
+      <td>This video demonstrates the power of IBM DataS...</td>
+      <td>Analyze NY Restaurant data using Spark in DSX</td>
+      <td>Live</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell markdown"><h3>Part I : Exploratory Data Analysis</h3>
+<p>Use the dictionary and cells below to provide some insight into the descriptive statistics of the data.</p>
+<p><code>1.</code> What is the distribution of how many articles a user interacts with in the dataset?  Provide a visual and descriptive statistics to assist with giving a look at the number of times each user interacts with an article.  </p>
+</section>
+<section class="cell code"><div class="label">Code cell 5 · saved execution 3</div><pre><code>user_article_interactions = df[['email','article_id']].groupby('email').count()
+user_article_interactions.describe()</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>article_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5148.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>8.930847</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>16.802267</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>9.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>364.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell code"><div class="label">Code cell 6 · saved execution 4</div><pre><code>plt.hist(user_article_interactions.article_id, bins=50, log=True)
+plt.title('Distribution of how many articles a user interacts with')
+plt.xlabel('Count of articles per user interacts')
+plt.ylabel('Count of user (log_scale)')
+plt.show()</code></pre><div class="output"><img src="data:image/png;base64,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" alt="Original notebook output from cell 6" loading="lazy"></div></section>
+<section class="cell code"><div class="label">Code cell 7 · saved execution 5</div><pre><code># Fill in the median and maximum number of user_article interactios below
+
+median_val = 3 # 50% of individuals interact with ____ number of articles or fewer.
+max_views_by_user = 364 # The maximum number of user-article interactions by any 1 user is ______.</code></pre></section>
+<section class="cell markdown"><p><code>2.</code> Explore and remove duplicate articles from the <strong>df_content</strong> dataframe.  </p>
+</section>
+<section class="cell code"><div class="label">Code cell 9 · saved execution 6</div><pre><code># Find and explore duplicate articles
+df_content.article_id.duplicated().sum() </code></pre><div class="output"><pre>5</pre></div></section>
+<section class="cell code"><div class="label">Code cell 10 · saved execution 7</div><pre><code># display duplicated articles
+df_content[df_content['article_id'].duplicated()]</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>doc_body</th>
+      <th>doc_description</th>
+      <th>doc_full_name</th>
+      <th>doc_status</th>
+      <th>article_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>365</th>
+      <td>Follow Sign in / Sign up Home About Insight Da...</td>
+      <td>During the seven-week Insight Data Engineering...</td>
+      <td>Graph-based machine learning</td>
+      <td>Live</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>692</th>
+      <td>Homepage Follow Sign in / Sign up Homepage * H...</td>
+      <td>One of the earliest documented catalogs was co...</td>
+      <td>How smart catalogs can turn the big data flood...</td>
+      <td>Live</td>
+      <td>221</td>
+    </tr>
+    <tr>
+      <th>761</th>
+      <td>Homepage Follow Sign in Get started Homepage *...</td>
+      <td>Today’s world of data science leverages data f...</td>
+      <td>Using Apache Spark as a parallel processing fr...</td>
+      <td>Live</td>
+      <td>398</td>
+    </tr>
+    <tr>
+      <th>970</th>
+      <td>This video shows you how to construct queries ...</td>
+      <td>This video shows you how to construct queries ...</td>
+      <td>Use the Primary Index</td>
+      <td>Live</td>
+      <td>577</td>
+    </tr>
+    <tr>
+      <th>971</th>
+      <td>Homepage Follow Sign in Get started * Home\r\n...</td>
+      <td>If you are like most data scientists, you are ...</td>
+      <td>Self-service data preparation with IBM Data Re...</td>
+      <td>Live</td>
+      <td>232</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell code"><div class="label">Code cell 11 · saved execution 8</div><pre><code># Remove any rows that have the same article_id - only keep the first
+df_content.drop_duplicates(subset='article_id', inplace=True)</code></pre></section>
+<section class="cell code"><div class="label">Code cell 12 · saved execution 9</div><pre><code># Check duplicate articles again
+df_content.article_id.duplicated().sum() </code></pre><div class="output"><pre>0</pre></div></section>
+<section class="cell markdown"><p><code>3.</code> Use the cells below to find:</p>
+<p><strong>a.</strong> The number of unique articles that have an interaction with a user.<br><strong>b.</strong> The number of unique articles in the dataset (whether they have any interactions or not).<br>
+<strong>c.</strong> The number of unique users in the dataset. (excluding null values) <br>
+<strong>d.</strong> The number of user-article interactions in the dataset.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 14 · saved execution 10</div><pre><code>df.article_id.nunique()</code></pre><div class="output"><pre>714</pre></div></section>
+<section class="cell code"><div class="label">Code cell 15 · saved execution 11</div><pre><code>df_content.shape[0]</code></pre><div class="output"><pre>1051</pre></div></section>
+<section class="cell code"><div class="label">Code cell 16 · saved execution 12</div><pre><code>df.email.nunique()</code></pre><div class="output"><pre>5148</pre></div></section>
+<section class="cell code"><div class="label">Code cell 17 · saved execution 13</div><pre><code>df.shape[0]</code></pre><div class="output"><pre>45993</pre></div></section>
+<section class="cell code"><div class="label">Code cell 18 · saved execution 14</div><pre><code>unique_articles = 714 # The number of unique articles that have at least one interaction
+total_articles = 1051 # The number of unique articles on the IBM platform
+unique_users = 5148 # The number of unique users
+user_article_interactions = 45993 # The number of user-article interactions</code></pre></section>
+<section class="cell markdown"><p><code>4.</code> Use the cells below to find the most viewed <strong>article_id</strong>, as well as how often it was viewed.  After talking to the company leaders, the <code>email_mapper</code> function was deemed a reasonable way to map users to ids.  There were a small number of null values, and it was found that all of these null values likely belonged to a single user (which is how they are stored using the function below).</p>
+</section>
+<section class="cell code"><div class="label">Code cell 20 · saved execution 15</div><pre><code>df.groupby([&quot;article_id&quot;])[&quot;email&quot;].count().sort_values(ascending=False).head(1)</code></pre><div class="output"><pre>article_id
+1429.0    937
+Name: email, dtype: int64</pre></div></section>
+<section class="cell code"><div class="label">Code cell 21 · saved execution 16</div><pre><code>most_viewed_article_id = '1429.0' # The most viewed article in the dataset as a string with one value following the decimal 
+max_views = 937  # The most viewed article in the dataset was viewed how many times?</code></pre></section>
+<section class="cell code"><div class="label">Code cell 22 · saved execution 17</div><pre><code>## No need to change the code here - this will be helpful for later parts of the notebook
+# Run this cell to map the user email to a user_id column and remove the email column
+
+def email_mapper():
+    coded_dict = dict()
+    cter = 1
+    email_encoded = []
+    
+    for val in df['email']:
+        if val not in coded_dict:
+            coded_dict[val] = cter
+            cter+=1
+        
+        email_encoded.append(coded_dict[val])
+    return email_encoded
+
+email_encoded = email_mapper()
+del df['email']
+df['user_id'] = email_encoded
+
+# show header
+df.head()</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>article_id</th>
+      <th>title</th>
+      <th>user_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1430.0</td>
+      <td>using pixiedust for fast, flexible, and easier...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1314.0</td>
+      <td>healthcare python streaming application demo</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1429.0</td>
+      <td>use deep learning for image classification</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1338.0</td>
+      <td>ml optimization using cognitive assistant</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1276.0</td>
+      <td>deploy your python model as a restful api</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></section>
+<section class="cell code"><div class="label">Code cell 23 · saved execution 18</div><pre><code>## If you stored all your results in the variable names above, 
+## you shouldn't need to change anything in this cell
+
+sol_1_dict = {
+    '`50% of individuals have _____ or fewer interactions.`': median_val,
+    '`The total number of user-article interactions in the dataset is ______.`': user_article_interactions,
+    '`The maximum number of user-article interactions by any 1 user is ______.`': max_views_by_user,
+    '`The most viewed article in the dataset was viewed _____ times.`': max_views,
+    '`The article_id of the most viewed article is ______.`': most_viewed_article_id,
+    '`The number of unique articles that have at least 1 rating ______.`': unique_articles,
+    '`The number of unique users in the dataset is ______`': unique_users,
+    '`The number of unique articles on the IBM platform`': total_articles
+}
+
+# Test your dictionary against the solution
+t.sol_1_test(sol_1_dict)</code></pre><div class="output"><pre>It looks like you have everything right here! Nice job!
+</pre></div></section>
+<section class="cell markdown"><h3>Part II: Rank-Based Recommendations</h3>
+<p>Unlike in the earlier lessons, we don&#39;t actually have ratings for whether a user liked an article or not.  We only know that a user has interacted with an article.  In these cases, the popularity of an article can really only be based on how often an article was interacted with.</p>
+<p><code>1.</code> Fill in the function below to return the <strong>n</strong> top articles ordered with most interactions as the top. Test your function using the tests below.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 25 · saved execution 19</div><pre><code>def get_top_articles(n, df=df):
+    '''
+    INPUT:
+    n - (int) the number of top articles to return
+    df - (pandas dataframe) df as defined at the top of the notebook 
+    
+    OUTPUT:
+    top_articles - (list) A list of the top 'n' article titles 
+    
+    '''
+    # Get the top 'n' article IDs based on their count
+    top_ids = df['article_id'].value_counts().head(n).index
+    # Filter the DataFrame to these top IDs and drop any duplicates in titles
+    top_articles = df[df['article_id'].isin(top_ids)]['title'].drop_duplicates().tolist()
+    return top_articles
+
+
+def get_top_article_ids(n, df=df):
+    '''
+    INPUT:
+    n - (int) the number of top articles to return
+    df - (pandas dataframe) df as defined at the top of the notebook 
+    
+    OUTPUT:
+    top_articles - (list) A list of the top 'n' article titles 
+    
+    '''
+    top_article_ids = df['article_id'].value_counts().head(n).index.astype(str).tolist()
+    return top_article_ids</code></pre></section>
+<section class="cell code"><div class="label">Code cell 26 · saved execution 20</div><pre><code>print(get_top_articles(10))
+print(get_top_article_ids(10))</code></pre><div class="output"><pre>['healthcare python streaming application demo', 'use deep learning for image classification', 'apache spark lab, part 1: basic concepts', 'predicting churn with the spss random tree algorithm', 'analyze energy consumption in buildings', 'visualize car data with brunel', 'use xgboost, scikit-learn &amp; ibm watson machine learning apis', 'gosales transactions for logistic regression model', 'insights from new york car accident reports', 'finding optimal locations of new store using decision optimization']
+['1429.0', '1330.0', '1431.0', '1427.0', '1364.0', '1314.0', '1293.0', '1170.0', '1162.0', '1304.0']
+</pre></div></section>
+<section class="cell code"><div class="label">Code cell 27 · saved execution 21</div><pre><code># Test your function by returning the top 5, 10, and 20 articles
+top_5 = get_top_articles(5)
+top_10 = get_top_articles(10)
+top_20 = get_top_articles(20)
+
+# Test each of your three lists from above
+t.sol_2_test(get_top_articles)</code></pre><div class="output"><pre>Your top_5 looks like the solution list! Nice job.
+Your top_10 looks like the solution list! Nice job.
+Your top_20 looks like the solution list! Nice job.
+</pre></div></section>
+<section class="cell markdown"><h3>Part III: User-User Based Collaborative Filtering</h3>
+<p><code>1.</code> Use the function below to reformat the <strong>df</strong> dataframe to be shaped with users as the rows and articles as the columns.  </p>
+<ul>
+<li><p>Each <strong>user</strong> should only appear in each <strong>row</strong> once.</p>
+</li>
+<li><p>Each <strong>article</strong> should only show up in one <strong>column</strong>.  </p>
+</li>
+<li><p><strong>If a user has interacted with an article, then place a 1 where the user-row meets for that article-column</strong>.  It does not matter how many times a user has interacted with the article, all entries where a user has interacted with an article should be a 1.  </p>
+</li>
+<li><p><strong>If a user has not interacted with an item, then place a zero where the user-row meets for that article-column</strong>.</p>
+</li>
+</ul>
+<p>Use the tests to make sure the basic structure of your matrix matches what is expected by the solution.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 29 · saved execution 22</div><pre><code># create the user-article matrix with 1's and 0's
+
+def create_user_item_matrix(df):
+    '''
+    INPUT:
+    df - pandas dataframe with article_id, title, user_id columns
+    
+    OUTPUT:
+    user_item - user item matrix 
+    
+    Description:
+    Return a matrix with user ids as rows and article ids on the columns with 1 values where a user interacted with 
+    an article and a 0 otherwise
+    '''
+    # Create a matrix with user ids as rows and article ids as columns
+    # Use count to aggregate interactions, then any nonzero value will be set to 1
+    user_item = df.groupby(['user_id', 'article_id']).size().unstack(fill_value=0)
+    user_item[user_item &gt; 0] = 1  # Convert any count greater than 0 to 1
+    return user_item
+
+user_item = create_user_item_matrix(df)</code></pre></section>
+<section class="cell code"><div class="label">Code cell 30 · saved execution 23</div><pre><code>## Tests: You should just need to run this cell.  Don't change the code.
+assert user_item.shape[0] == 5149, &quot;Oops!  The number of users in the user-article matrix doesn't look right.&quot;
+assert user_item.shape[1] == 714, &quot;Oops!  The number of articles in the user-article matrix doesn't look right.&quot;
+assert user_item.sum(axis=1)[1] == 36, &quot;Oops!  The number of articles seen by user 1 doesn't look right.&quot;
+print(&quot;You have passed our quick tests!  Please proceed!&quot;)</code></pre><div class="output"><pre>You have passed our quick tests!  Please proceed!
+</pre></div></section>
+<section class="cell markdown"><p><code>2.</code> Complete the function below which should take a user_id and provide an ordered list of the most similar users to that user (from most similar to least similar).  The returned result should not contain the provided user_id, as we know that each user is similar to him/herself. Because the results for each user here are binary, it (perhaps) makes sense to compute similarity as the dot product of two users. </p>
+<p>Use the tests to test your function.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 32 · saved execution 24</div><pre><code>def find_similar_users(user_id, user_item=user_item):
+    '''
+    INPUT:
+    user_id - (int) a user_id
+    user_item - (pandas dataframe) matrix of users by articles: 
+                1's when a user has interacted with an article, 0 otherwise
+    
+    OUTPUT:
+    similar_users - (list) an ordered list where the closest users (largest dot product users)
+                    are listed first
+    
+    Description:
+    Computes the similarity of every pair of users based on the dot product
+    Returns an ordered
+    
+    '''
+    # Compute the similarity matrix (dot product of user-item matrix with its transpose)
+    similarity = user_item.dot(user_item.transpose())
+    
+    # Focus on the specific user and sort by similarity
+    similarities = similarity[user_id].sort_values(ascending=False)
+    
+    # Create list of just the ids and remove the own user's id
+    most_similar_users = similarities.index[similarities.index != user_id].tolist()
+    
+    return most_similar_users
+        </code></pre></section>
+<section class="cell code"><div class="label">Code cell 33 · saved execution 25</div><pre><code># Do a spot check of your function
+print(&quot;The 10 most similar users to user 1 are: {}&quot;.format(find_similar_users(1)[:10]))
+print(&quot;The 5 most similar users to user 3933 are: {}&quot;.format(find_similar_users(3933)[:5]))
+print(&quot;The 3 most similar users to user 46 are: {}&quot;.format(find_similar_users(46)[:3]))</code></pre><div class="output"><pre>The 10 most similar users to user 1 are: [3933, 23, 3782, 203, 4459, 131, 3870, 46, 4201, 5041]
+The 5 most similar users to user 3933 are: [1, 23, 3782, 4459, 203]
+The 3 most similar users to user 46 are: [4201, 23, 3782]
+</pre></div></section>
+<section class="cell markdown"><p><code>3.</code> Now that you have a function that provides the most similar users to each user, you will want to use these users to find articles you can recommend.  Complete the functions below to return the articles you would recommend to each user. </p>
+</section>
+<section class="cell code"><div class="label">Code cell 35 · saved execution 26</div><pre><code>def get_article_names(article_ids, df=df):
+    '''
+    INPUT:
+    article_ids - (list) a list of article ids
+    df - (pandas dataframe) df as defined at the top of the notebook
+    
+    OUTPUT:
+    article_names - (list) a list of article names associated with the list of article ids 
+                    (this is identified by the title column)
+    '''
+    # Your code here
+    article_names = df[df['article_id'].isin(article_ids)]['title'].drop_duplicates().tolist()
+    return article_names # Return the article names associated with list of article ids
+
+
+def get_user_articles(user_id, user_item=user_item):
+    '''
+    INPUT:
+    user_id - (int) a user id
+    user_item - (pandas dataframe) matrix of users by articles: 
+                1's when a user has interacted with an article, 0 otherwise
+    
+    OUTPUT:
+    article_ids - (list) a list of the article ids seen by the user
+    article_names - (list) a list of article names associated with the list of article ids 
+                    (this is identified by the doc_full_name column in df_content)
+    
+    Description:
+    Provides a list of the article_ids and article titles that have been seen by a user
+    '''
+    # Get the article ids seen by the user
+    article_ids = user_item.loc[user_id]
+    article_ids = article_ids[article_ids == 1].index.astype(str).tolist()
+    
+    # Retrieve article names using the previously defined function
+    article_names = get_article_names(article_ids, df)
+    
+    return article_ids, article_names
+
+
+def user_user_recs(user_id, m=10):
+    '''
+    INPUT:
+    user_id - (int) a user id
+    m - (int) the number of recommendations you want for the user
+    
+    OUTPUT:
+    recs - (list) a list of recommendations for the user
+    
+    Description:
+    Loops through the users based on closeness to the input user_id
+    For each user - finds articles the user hasn't seen before and provides them as recs
+    Does this until m recommendations are found
+    
+    Notes:
+    Users who are the same closeness are chosen arbitrarily as the 'next' user
+    
+    For the user where the number of recommended articles starts below m 
+    and ends exceeding m, the last items are chosen arbitrarily
+    
+    '''
+    # List of users ordered based on closeness to user_id
+    most_similar_users = find_similar_users(user_id)
+    
+    # List of article ids seen by user_id
+    user_articles_seen = get_user_articles(user_id)[0]
+    
+    recs = []
+    for neighbor_user in most_similar_users:
+        neighbor_articles_seen = set(get_user_articles(neighbor_user)[0])
+        recs += list(set(neighbor_articles_seen) - set(user_articles_seen))
+        if len(recs) &gt; m:
+            break
+    
+    recs = recs[:m]
+    
+    return recs # return your recommendations for this user_id    </code></pre></section>
+<section class="cell code"><div class="label">Code cell 36 · saved execution 27</div><pre><code># Check Results
+get_article_names(user_user_recs(1, 10)) # Return 10 recommendations for user 1</code></pre><div class="output"><pre>['using github for project control in dsx',
+ 'data visualization playbook: telling the data story',
+ 'movie recommender system with spark machine learning',
+ 'car performance data',
+ 'programmatic evaluation using watson conversation',
+ 'data science platforms are on the rise and ibm is leading the way',
+ 'deep learning achievements over the past year ',
+ 'small steps to tensorflow',
+ 'why even a moth’s brain is smarter than an ai',
+ 'from spark ml model to online scoring with scala']</pre></div></section>
+<section class="cell code"><div class="label">Code cell 37 · saved execution 28</div><pre><code># Test your functions here - No need to change this code - just run this cell
+assert set(get_article_names(['1024.0', '1176.0', '1305.0', '1314.0', '1422.0', '1427.0'])) == set(['using deep learning to reconstruct high-resolution audio', 'build a python app on the streaming analytics service', 'gosales transactions for naive bayes model', 'healthcare python streaming application demo', 'use r dataframes &amp; ibm watson natural language understanding', 'use xgboost, scikit-learn &amp; ibm watson machine learning apis']), &quot;Oops! Your the get_article_names function doesn't work quite how we expect.&quot;
+assert set(get_article_names(['1320.0', '232.0', '844.0'])) == set(['housing (2015): united states demographic measures','self-service data preparation with ibm data refinery','use the cloudant-spark connector in python notebook']), &quot;Oops! Your the get_article_names function doesn't work quite how we expect.&quot;
+assert set(get_user_articles(20)[0]) == set(['1320.0', '232.0', '844.0'])
+assert set(get_user_articles(20)[1]) == set(['housing (2015): united states demographic measures', 'self-service data preparation with ibm data refinery','use the cloudant-spark connector in python notebook'])
+assert set(get_user_articles(2)[0]) == set(['1024.0', '1176.0', '1305.0', '1314.0', '1422.0', '1427.0'])
+assert set(get_user_articles(2)[1]) == set(['using deep learning to reconstruct high-resolution audio', 'build a python app on the streaming analytics service', 'gosales transactions for naive bayes model', 'healthcare python streaming application demo', 'use r dataframes &amp; ibm watson natural language understanding', 'use xgboost, scikit-learn &amp; ibm watson machine learning apis'])
+print(&quot;If this is all you see, you passed all of our tests!  Nice job!&quot;)</code></pre><div class="output"><pre>If this is all you see, you passed all of our tests!  Nice job!
+</pre></div></section>
+<section class="cell markdown"><p><code>4.</code> Now we are going to improve the consistency of the <strong>user_user_recs</strong> function from above.  </p>
+<ul>
+<li><p>Instead of arbitrarily choosing when we obtain users who are all the same closeness to a given user - choose the users that have the most total article interactions before choosing those with fewer article interactions.</p>
+</li>
+<li><p>Instead of arbitrarily choosing articles from the user where the number of recommended articles starts below m and ends exceeding m, choose articles with the articles with the most total interactions before choosing those with fewer total interactions. This ranking should be  what would be obtained from the <strong>top_articles</strong> function you wrote earlier.</p>
+</li>
+</ul>
+</section>
+<section class="cell code"><div class="label">Code cell 39 · saved execution 156</div><pre><code>def get_top_sorted_users(user_id, df=df, user_item=user_item):
+    '''
+    INPUT:
+    user_id - (int)
+    df - (pandas dataframe) df as defined at the top of the notebook 
+    user_item - (pandas dataframe) matrix of users by articles: 
+            1's when a user has interacted with an article, 0 otherwise
+    
+    OUTPUT:
+    neighbors_df - (pandas dataframe) a dataframe with:
+                    neighbor_id - is a neighbor user_id
+                    similarity - measure of the similarity of each user to the provided user_id
+                    num_interactions - the number of articles viewed by the user - if a u
+                    
+    Other Details - sort the neighbors_df by the similarity and then by number of interactions where 
+                    highest of each is higher in the dataframe
+     
+    '''
+    # Fiding neighboring Id or the most similar users:
+    Neighbor_ids = find_similar_users(user_id, user_item)
+    
+    user_item_mat = np.matrix(user_item) # turn dataframe to matrix form
+    # compute similarity of each user to the provided user
+    user_vec = user_item.loc[user_id]
+    user_user_similarities = user_vec.dot(np.transpose(user_item_mat))
+    # sort by similarity
+    sorted_similarities = np.sort(user_user_similarities)[::-1]
+    # remove the similarity of the input-user to itself
+    similarities = [val for val in sorted_similarities if val!=np.sum(user_vec)]
+    
+    # counting the number of articles viewed by neighbouring users 
+    num_interactions = [df[df['user_id']==Uid]['article_id'].count() for Uid in Neighbor_ids]
+    
+    # put all computed parameters into a dataframe:
+    neighbors_df = pd.DataFrame()
+    neighbors_df['neighbor_id'] = Neighbor_ids
+    neighbors_df['similarity'] = similarities
+    neighbors_df['num_interactions'] = num_interactions
+    
+    # sort the neighbors_df by the similarity and then by number of interaction
+    neighbors_df = neighbors_df.sort_values(['similarity', 'num_interactions'], ascending=[False, False])
+    
+    return neighbors_df # Return the dataframe specified in the doc_string
+
+
+def user_user_recs_part2(user_id, m=10):
+    '''
+    INPUT:
+    user_id - (int) a user id
+    m - (int) the number of recommendations you want for the user
+    
+    OUTPUT:
+    recs - (list) a list of recommendations for the user by article id
+    rec_names - (list) a list of recommendations for the user by article title
+    
+    Description:
+    Loops through the users based on closeness to the input user_id
+    For each user - finds articles the user hasn't seen before and provides them as recs
+    Does this until m recommendations are found
+    
+    Notes:
+    * Choose the users that have the most total article interactions 
+    before choosing those with fewer article interactions.
+
+    * Choose articles with the articles with the most total interactions 
+    before choosing those with fewer total interactions. 
+   
+    '''
+      # Dataframe of closest users ordered by similarity and number of interactions
+    neighbors_df = get_top_sorted_users(user_id)
+    top_m_neighbor_ids = neighbors_df[:m]['neighbor_id'].tolist()
+    
+    # List of article ids seen by user_id
+    user_articles_seen = get_user_articles(user_id)[0]
+    
+    recs = []
+    for neighbor_user in top_m_neighbor_ids:
+        neighbor_articles_seen = set(get_user_articles(neighbor_user)[0])
+        recs += list(set(neighbor_articles_seen) - set(user_articles_seen))
+        if len(recs) &gt; m:
+            break
+    
+    recs = recs[:m]
+    rec_names = list(set(df[df[&quot;article_id&quot;].isin(recs)][&quot;title&quot;]))
+    
+    return recs, rec_names</code></pre></section>
+<section class="cell code"><div class="label">Code cell 40 · saved execution 157</div><pre><code># Quick spot check - don't change this code - just use it to test your functions
+rec_ids, rec_names = user_user_recs_part2(20, 10)
+print(&quot;The top 10 recommendations for user 20 are the following article ids:&quot;)
+print(rec_ids)
+print()
+print(&quot;The top 10 recommendations for user 20 are the following article names:&quot;)
+print(rec_names)</code></pre><div class="output"><pre>The top 10 recommendations for user 20 are the following article ids:
+['1304.0', '1410.0', '1351.0', '1151.0', '1444.0', '1166.0', '142.0', '1157.0', '109.0', '1335.0']
+
+The top 10 recommendations for user 20 are the following article names:
+['gosales transactions for logistic regression model', 'analyzing data by using the sparkling.data library features', 'uci: sms spam collection', 'labor', 'model bike sharing data with spss', 'neural networks for beginners: popular types and applications', 'worldwide fuel oil consumption by household (in 1000 metric tons)', 'airbnb data for analytics: washington d.c. listings', 'tensorflow quick tips', 'airbnb data for analytics: venice listings']
+</pre></div></section>
+<section class="cell markdown"><p><code>5.</code> Use your functions from above to correctly fill in the solutions to the dictionary below.  Then test your dictionary against the solution.  Provide the code you need to answer each following the comments below.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 42 · saved execution 158</div><pre><code>### Tests with a dictionary of results
+
+user1_most_sim = get_top_sorted_users(1).iloc[0].neighbor_id # Find the user that is most similar to user 1 
+user131_10th_sim = get_top_sorted_users(131).iloc[9].neighbor_id # Find the 10th most similar user to user 131</code></pre></section>
+<section class="cell code"><div class="label">Code cell 43 · saved execution 159</div><pre><code>## Dictionary Test Here
+sol_5_dict = {
+    'The user that is most similar to user 1.': user1_most_sim, 
+    'The user that is the 10th most similar to user 131': user131_10th_sim,
+}
+
+t.sol_5_test(sol_5_dict)</code></pre><div class="output"><pre>This all looks good!  Nice job!
+</pre></div></section>
+<section class="cell markdown"><p><code>6.</code> If we were given a new user, which of the above functions would you be able to use to make recommendations?  Explain.  Can you think of a better way we might make recommendations?  Use the cell below to explain a better method for new users.</p>
+</section>
+<section class="cell markdown"><p>Answer: Given a new user, we are unable to have their information and preferences. As a result, the recommendation would be the most popular articles. Later on, they have more interactions then we can use Collaborative Filtering. In addition, we can ask them to input their preferences then we can use this information to recommend them.</p>
+</section>
+<section class="cell markdown"><p><code>7.</code> Using your existing functions, provide the top 10 recommended articles you would provide for the a new user below.  You can test your function against our thoughts to make sure we are all on the same page with how we might make a recommendation.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 47 · saved execution 160</div><pre><code>new_user = '0.0'
+
+# What would your recommendations be for this new user '0.0'?  As a new user, they have no observed articles.
+# Provide a list of the top 10 article ids you would give to 
+new_user_recs = get_top_article_ids(10) # Your recommendations here
+
+</code></pre></section>
+<section class="cell code"><div class="label">Code cell 48 · saved execution 161</div><pre><code>assert set(new_user_recs) == set(['1314.0','1429.0','1293.0','1427.0','1162.0','1364.0','1304.0','1170.0','1431.0','1330.0']), &quot;Oops!  It makes sense that in this case we would want to recommend the most popular articles, because we don't know anything about these users.&quot;
+
+print(&quot;That's right!  Nice job!&quot;)</code></pre><div class="output"><pre>That's right!  Nice job!
+</pre></div></section>
+<section class="cell markdown"><h3>Part IV: Content Based Recommendations (EXTRA - NOT REQUIRED)</h3>
+<p>Another method we might use to make recommendations is to perform a ranking of the highest ranked articles associated with some term.  You might consider content to be the <strong>doc_body</strong>, <strong>doc_description</strong>, or <strong>doc_full_name</strong>.  There isn&#39;t one way to create a content based recommendation, especially considering that each of these columns hold content related information.  </p>
+<p><code>1.</code> Use the function body below to create a content based recommender.  Since there isn&#39;t one right answer for this recommendation tactic, no test functions are provided.  Feel free to change the function inputs if you decide you want to try a method that requires more input values.  The input values are currently set with one idea in mind that you may use to make content based recommendations.  One additional idea is that you might want to choose the most popular recommendations that meet your &#39;content criteria&#39;, but again, there is a lot of flexibility in how you might make these recommendations.</p>
+<h3>This part is NOT REQUIRED to pass this project.  However, you may choose to take this on as an extra way to show off your skills.</h3>
+</section>
+<section class="cell code"><div class="label">Code cell 50 · saved execution 162</div><pre><code>def make_content_recs():
+    '''
+    INPUT:
+    
+    OUTPUT:
+    
+    '''</code></pre></section>
+<section class="cell markdown"><p><code>2.</code> Now that you have put together your content-based recommendation system, use the cell below to write a summary explaining how your content based recommender works.  Do you see any possible improvements that could be made to your function?  Is there anything novel about your content based recommender?</p>
+<h3>This part is NOT REQUIRED to pass this project.  However, you may choose to take this on as an extra way to show off your skills.</h3>
+</section>
+<section class="cell markdown"><p><strong>Write an explanation of your content based recommendation system here.</strong></p>
+</section>
+<section class="cell markdown"><p><code>3.</code> Use your content-recommendation system to make recommendations for the below scenarios based on the comments.  Again no tests are provided here, because there isn&#39;t one right answer that could be used to find these content based recommendations.</p>
+<h3>This part is NOT REQUIRED to pass this project.  However, you may choose to take this on as an extra way to show off your skills.</h3>
+</section>
+<section class="cell code"><div class="label">Code cell 54 · saved execution 163</div><pre><code># make recommendations for a brand new user
+
+
+# make a recommendations for a user who only has interacted with article id '1427.0'
+
+</code></pre></section>
+<section class="cell markdown"><h3>Part V: Matrix Factorization</h3>
+<p>In this part of the notebook, you will build use matrix factorization to make article recommendations to the users on the IBM Watson Studio platform.</p>
+<p><code>1.</code> You should have already created a <strong>user_item</strong> matrix above in <strong>question 1</strong> of <strong>Part III</strong> above.  This first question here will just require that you run the cells to get things set up for the rest of <strong>Part V</strong> of the notebook. </p>
+</section>
+<section class="cell code"><div class="label">Code cell 56 · saved execution 164</div><pre><code># Load the matrix here
+user_item_matrix = pd.read_pickle('user_item_matrix.p')</code></pre></section>
+<section class="cell code"><div class="label">Code cell 57 · saved execution 165</div><pre><code># quick look at the matrix
+user_item_matrix.head()</code></pre><div class="output">
+
+<table>
+  <thead>
+    <tr>
+      <th>article_id</th>
+      <th>0.0</th>
+      <th>100.0</th>
+      <th>1000.0</th>
+      <th>1004.0</th>
+      <th>1006.0</th>
+      <th>1008.0</th>
+      <th>101.0</th>
+      <th>1014.0</th>
+      <th>1015.0</th>
+      <th>1016.0</th>
+      <th>...</th>
+      <th>977.0</th>
+      <th>98.0</th>
+      <th>981.0</th>
+      <th>984.0</th>
+      <th>985.0</th>
+      <th>986.0</th>
+      <th>990.0</th>
+      <th>993.0</th>
+      <th>996.0</th>
+      <th>997.0</th>
+    </tr>
+    <tr>
+      <th>user_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 714 columns</p>
+</div></section>
+<section class="cell markdown"><p><code>2.</code> In this situation, you can use Singular Value Decomposition from numpy on the user-item matrix.  Use the cell to perform SVD, and explain why this is different than in the lesson.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 59 · saved execution 166</div><pre><code># Perform SVD on the User-Item Matrix Here
+
+u, s, vt = np.linalg.svd(user_item_matrix) # use the built in to get the three matrices
+u.shape, s.shape, vt.shape</code></pre><div class="output"><pre>((5149, 5149), (714,), (714, 714))</pre></div></section>
+<section class="cell markdown"><p>The lesson discusses a data structure that includes numbers (ratings) and blank spots (no interaction). Unlike a typical matrix used in math, it&#39;s not suitable for certain calculations like SVD because it&#39;s not fully numeric. Funk SVD can be used instead to estimate the missing numbers.</p>
+<p>The exercise&#39;s matrix uses zeros and ones to show interactions—zeros mean no interaction and ones mean there is interaction. Although you can&#39;t reverse this type of matrix, you can still break it down into simpler parts using SVD.</p>
+</section>
+<section class="cell markdown"><p><code>3.</code> Now for the tricky part, how do we choose the number of latent features to use?  Running the below cell, you can see that as the number of latent features increases, we obtain a lower error rate on making predictions for the 1 and 0 values in the user-item matrix.  Run the cell below to get an idea of how the accuracy improves as we increase the number of latent features.</p>
+</section>
+<section class="cell code"><div class="label">Code cell 62 · saved execution 167</div><pre><code>num_latent_feats = np.arange(10,700+10,20)
+sum_errs = []
+
+for k in num_latent_feats:
+    # restructure with k latent features
+    s_new, u_new, vt_new = np.diag(s[:k]), u[:, :k], vt[:k, :]
+    
+    # take dot product
+    user_item_est = np.around(np.dot(np.dot(u_new, s_new), vt_new))
+    
+    # compute error for each prediction to actual value
+    diffs = np.subtract(user_item_matrix, user_item_est)
+    
+    # total errors and keep track of them
+    err = np.sum(np.sum(np.abs(diffs)))
+    sum_errs.append(err)
+    
+    
+plt.plot(num_latent_feats, 1 - np.array(sum_errs)/df.shape[0]);
+plt.xlabel('Number of Latent Features');
+plt.ylabel('Accuracy');
+plt.title('Accuracy vs. Number of Latent Features');</code></pre><div class="output"><img src="data:image/png;base64,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" alt="Original notebook output from cell 62" loading="lazy"></div></section>
+<section class="cell markdown"><p><code>4.</code> From the above, we can&#39;t really be sure how many features to use, because simply having a better way to predict the 1&#39;s and 0&#39;s of the matrix doesn&#39;t exactly give us an indication of if we are able to make good recommendations.  Instead, we might split our dataset into a training and test set of data, as shown in the cell below.  </p>
+<p>Use the code from question 3 to understand the impact on accuracy of the training and test sets of data with different numbers of latent features. Using the split below: </p>
+<ul>
+<li>How many users can we make predictions for in the test set?  </li>
+<li>How many users are we not able to make predictions for because of the cold start problem?</li>
+<li>How many articles can we make predictions for in the test set?  </li>
+<li>How many articles are we not able to make predictions for because of the cold start problem?</li>
+</ul>
+</section>
+<section class="cell code"><div class="label">Code cell 64 · saved execution 168</div><pre><code>df_train = df.head(40000)
+df_test = df.tail(5993)
+
+def create_test_and_train_user_item(df_train, df_test):
+    '''
+    INPUT:
+    df_train - training dataframe
+    df_test - test dataframe
+    
+    OUTPUT:
+    user_item_train - a user-item matrix of the training dataframe 
+                      (unique users for each row and unique articles for each column)
+    user_item_test - a user-item matrix of the testing dataframe 
+                    (unique users for each row and unique articles for each column)
+    test_idx - all of the test user ids
+    test_arts - all of the test article ids
+    
+    '''
+     # Your code here
+    user_item_train = create_user_item_matrix(df_train)
+    user_item_test = create_user_item_matrix(df_test)
+    
+    test_idx = user_item_test.index.values
+    test_arts = user_item_test.columns.values
+    
+    return user_item_train, user_item_test, test_idx, test_arts
+
+user_item_train, user_item_test, test_idx, test_arts = create_test_and_train_user_item(df_train, df_test)</code></pre></section>
+<section class="cell code"><div class="label">Code cell 65 · saved execution 169</div><pre><code>user_item_train.shape, user_item_test.shape</code></pre><div class="output"><pre>((4487, 714), (682, 574))</pre></div></section>
+<section class="cell code"><div class="label">Code cell 66 · saved execution 170</div><pre><code>train_idx = user_item_train.index
+common_idx = list(set(train_idx) &amp; set(test_idx))
+print(common_idx)
+
+train_arts = user_item_train.columns
+len(set(train_arts) &amp; set(test_arts))</code></pre><div class="output"><pre>[3968, 3777, 4002, 3684, 4293, 2917, 4487, 4231, 3527, 4204, 3532, 3024, 4274, 3801, 3093, 3989, 3990, 3193, 3740, 3998]
+</pre></div><div class="output"><pre>574</pre></div></section>
+<section class="cell code"><div class="label">Code cell 67 · saved execution 171</div><pre><code># Replace the values in the dictionary below
+a = 662 
+b = 574 
+c = 20 
+d = 0 
+
+
+sol_4_dict = {
+    'How many users can we make predictions for in the test set?': c, 
+    'How many users in the test set are we not able to make predictions for because of the cold start problem?': a, 
+    'How many articles can we make predictions for in the test set?': b,
+    'How many articles in the test set are we not able to make predictions for because of the cold start problem?': d,}
+
+t.sol_4_test(sol_4_dict)</code></pre><div class="output"><pre>Awesome job!  That's right!  All of the test articles are in the training data, but there are only 20 test users that were also in the training set.  All of the other users that are in the test set we have no data on.  Therefore, we cannot make predictions for these users using SVD.
+</pre></div></section>
+<section class="cell markdown"><p><code>5.</code> Now use the <strong>user_item_train</strong> dataset from above to find U, S, and V transpose using SVD. Then find the subset of rows in the <strong>user_item_test</strong> dataset that you can predict using this matrix decomposition with different numbers of latent features to see how many features makes sense to keep based on the accuracy on the test data. This will require combining what was done in questions <code>2</code> - <code>4</code>.</p>
+<p>Use the cells below to explore how well SVD works towards making predictions for recommendations on the test data.  </p>
+</section>
+<section class="cell code"><div class="label">Code cell 69 · saved execution 172</div><pre><code># fit SVD on the user_item_train matrix
+u_train, s_train, vt_train = np.linalg.svd(user_item_train) # fit svd similar to above then use the cells below</code></pre></section>
+<section class="cell code"><div class="label">Code cell 70 · saved execution 175</div><pre><code># Subset of rows in the user_item_test dataset that you can predict
+
+#  Rows that match 
+test_idx = user_item_test.index
+train_idx = user_item_train.index
+comm_idxs = list(set(train_idx)&amp;set(test_idx))
+
+# Cols that match
+test_col = user_item_test.columns
+train_col = user_item_train.columns
+comm_cols = list(set(train_col)&amp;set(test_col))
+
+# Train data
+train_row = user_item_train.index.isin(comm_idxs)
+train_col = user_item_train.columns.isin(comm_cols)
+
+
+# Test data
+test_row = user_item_test.index.isin(comm_idxs)
+sub_user_item_test = user_item_test.loc[test_row]
+
+u_test = u_train[train_row, :]
+vt_test = vt_train[:, train_col]</code></pre></section>
+<section class="cell code"><div class="label">Code cell 71 · saved execution 176</div><pre><code># Use these cells to see how well you can use the training 
+# decomposition to predict on test data
+user_item_test_subset = user_item_test.loc[common_idx]
+
+num_latent_feats = np.arange(10,700+10,20)
+train_sum_errs = []
+test_sum_errs = []
+
+for k in num_latent_feats:
+    # restructure with k latent features
+    s_train_new, u_train_new, vt_train_new = np.diag(s_train[:k]), u_train[:, :k], vt_train[:k, :]
+    u_test_new, vt_test_new = u_test[:, :k], vt_test[:k, :]
+    
+    # take dot product
+    user_item_train_est = np.around(np.dot(np.dot(u_train_new, s_train_new), vt_train_new))
+    user_item_test_est = np.around(np.dot(np.dot(u_test_new, s_train_new), vt_test_new))
+    
+    # compute error for each prediction to actual value
+    diffs_train = np.subtract(user_item_train, user_item_train_est)
+    diffs_test = np.subtract(user_item_test_subset, user_item_test_est)
+    
+    # total errors and keep track of them
+    train_err = np.sum(np.sum(np.abs(diffs_train)))
+    train_sum_errs.append(train_err)
+    
+    test_err = np.sum(np.sum(np.abs(diffs_test)))
+    test_sum_errs.append(test_err)</code></pre></section>
+<section class="cell code"><div class="label">Code cell 72 · saved execution 177</div><pre><code>plt.plot(num_latent_feats, 1 - (np.array(train_sum_errs)/(user_item_train.shape[0]*user_item_train.shape[1])), label='train');
+plt.plot(num_latent_feats, 1 - (np.array(test_sum_errs)/(user_item_test_subset.shape[0]*user_item_test_subset.shape[1])), label='test');
+plt.legend(loc='best')
+plt.xlabel('Number of Latent Features');
+plt.ylabel('Accuracy');
+plt.title('Accuracy VS. Number of Latent Features');
+plt.show();</code></pre><div class="output"><img src="data:image/png;base64,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" alt="Original notebook output from cell 72" loading="lazy"></div></section>
+<section class="cell markdown"><p><code>6.</code> Use the cell below to comment on the results you found in the previous question. Given the circumstances of your results, discuss what you might do to determine if the recommendations you make with any of the above recommendation systems are an improvement to how users currently find articles? </p>
+</section>
+<section class="cell markdown"><ul>
+<li><p>Training Curve (Blue Line): It appears to be plateauing, indicating that the model is stabilizing in its learning from the training data.</p>
+</li>
+<li><p>Testing Curve (Orange Line): This curve is decreasing, suggesting the model’s performance on unseen data (test data) is deteriorating over time or iterations.</p>
+</li>
+<li><p>Possible Interpretations:</p>
+<p>  • Overfitting: The model might be overfitting to the training data. This is suggested by the training performance stabilizing at a high level while the test performance worsens. Overfitting occurs when a model learns details and noise in the training data to an extent that it negatively impacts the performance of the model on new data.</p>
+<p>  • Generalization Issue: The model isn’t generalizing well to unseen data. While it learns the training data well, it fails to predict or classify new data effectively.</p>
+</li>
+<li><p>Steps to Improve Recommendation System:
+Given this scenario, improving the model’s performance and ensuring that the recommendations are beneficial compared to current methods might include:</p>
+<ol>
+<li>Regularization Techniques: Implement techniques such as dropout, L1 or L2 regularization, to reduce overfitting and improve model generalization.</li>
+<li>Model Complexity: Consider simplifying the model if it’s overly complex for the amount of training data available. Reducing the number of layers or the number of neurons in each layer can help.</li>
+<li>Cross-Validation: Use cross-validation techniques to ensure the model’s robustness and to gauge its performance more reliably across different subsets of the data.</li>
+<li>Early Stopping: Introduce early stopping in training, where you stop training as soon as the test performance begins to degrade, regardless of training performance.</li>
+<li>Hyperparameter Tuning: Experiment with different learning rates, batch sizes, or other model parameters to find a better set of parameters that might help in reducing overfitting.</li>
+<li>Feature Engineering: Revisit the input features used for training the model to ensure they are relevant and provide sufficient information for the model to learn effectively.</li>
+</ol>
+</li>
+<li><p>Evaluating Recommendation System Improvements: To determine if the new recommendation system is an improvement, consider these approaches:</p>
+<p>  • A/B Testing: Run an A/B test where a control group uses the current system, and a test group uses the new recommendation system. Compare user engagement metrics like click-through rate, time spent on articles, and user satisfaction.</p>
+<p>  • User Feedback: Collect qualitative feedback from users regarding the relevance and usefulness of the recommendations provided by the new system.</p>
+<p>  • Offline Evaluation: Use metrics such as precision, recall, F1-score, and ROC-AUC to evaluate the recommendations made by the new system based on historical data.</p>
+</li>
+</ul>
+</section>
+<section class="cell markdown"><p></p>
+<h3>Extras</h3>
+<p>Using your workbook, you could now save your recommendations for each user, develop a class to make new predictions and update your results, and make a flask app to deploy your results.  These tasks are beyond what is required for this project.  However, from what you learned in the lessons, you certainly capable of taking these tasks on to improve upon your work here!</p>
+<h2>Conclusion</h2>
+<blockquote>
+<p>Congratulations!  You have reached the end of the Recommendations with IBM project! </p>
+</blockquote>
+<blockquote>
+<p><strong>Tip</strong>: Once you are satisfied with your work here, check over your report to make sure that it is satisfies all the areas of the rubric. You should also probably remove all of the &quot;Tips&quot; like this one so that the presentation is as polished as possible.</p>
+</blockquote>
+<h2>Directions to Submit</h2>
+<blockquote>
+<p>Before you submit your project, you need to create a .html or .pdf version of this notebook in the workspace here. To do that, run the code cell below. If it worked correctly, you should get a return code of 0, and you should see the generated .html file in the workspace directory (click on the orange Jupyter icon in the upper left).</p>
+</blockquote>
+<blockquote>
+<p>Alternatively, you can download this report as .html via the <strong>File</strong> &gt; <strong>Download as</strong> submenu, and then manually upload it into the workspace directory by clicking on the orange Jupyter icon in the upper left, then using the Upload button.</p>
+</blockquote>
+<blockquote>
+<p>Once you&#39;ve done this, you can submit your project by clicking on the &quot;Submit Project&quot; button in the lower right here. This will create and submit a zip file with this .ipynb doc and the .html or .pdf version you created. Congratulations! </p>
+</blockquote>
+</section>
+<section class="cell code"><div class="label">Code cell 76 · saved execution 178</div><pre><code>from subprocess import call
+call(['python', '-m', 'nbconvert', 'Recommendations_with_IBM.ipynb'])</code></pre><div class="output"><pre>0</pre></div></section>
+<section class="cell code"><div class="label">Code cell 77</div><pre><code></code></pre></section><div class="footer">Archived from https://raw.githubusercontent.com/KeonPham/Recommendations-with-IBM/main/Recommendations_with_IBM.ipynb<br>Original cells: 77 · Static output blocks: 32 · Images: 3</div></main></body></html>

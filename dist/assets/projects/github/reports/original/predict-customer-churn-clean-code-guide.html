@@ -1,0 +1,88 @@
+<!doctype html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; base-uri 'none'; form-action 'none'"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Guide.ipynb</title><style>body{margin:0;background:#fff;color:#1f2933;font:16px/1.65 system-ui,sans-serif}main{max-width:1080px;margin:auto;padding:40px 24px}h1{font-size:34px;line-height:1.2}h2{margin-top:38px}header{border-bottom:1px solid #d9e0e5;padding-bottom:24px;margin-bottom:32px}.notice{background:#f0f4f7;border-left:4px solid #526c81;padding:16px;font-size:14px}.cell{margin:24px 0}.label{font:12px/1.4 system-ui;color:#667b8a;margin-bottom:6px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f7f9;padding:16px;border:1px solid #e1e6ea;border-radius:6px;font:13px/1.6 ui-monospace,Consolas,monospace}.output pre{background:#fff}img{display:block;max-width:100%;height:auto;margin:20px auto}table{border-collapse:collapse;display:block;overflow:auto;max-width:100%;font-size:13px}th,td{border:1px solid #d9e0e5;padding:6px 10px;text-align:left}blockquote{border-left:3px solid #d9e0e5;margin:20px 0;padding-left:18px;color:#51616b}.footer{margin-top:48px;border-top:1px solid #d9e0e5;padding-top:18px;font-size:13px;color:#51616b}</style></head><body><main><header><p>Original notebook / assignment archive</p><h1>Guide</h1><p>Udacity ML DevOps project.</p><div class="notice">Read-only export of the author’s original public notebook. Every original markdown and code cell is retained; safe saved static outputs are included. Code was not executed and results were not revalidated. Original course instructions, unfinished sections and errors may remain. Interactive widgets and external resource loads are disabled. Credential-like strings and account identifiers are redacted if detected.</div></header><section class="cell markdown"><h1>Predict Customer Churn</h1>
+<p>You can make sure the necessary libraries are included herein with the below button.</p>
+<p></p>
+<p>Alternatively, you can manually install dependencies as:</p>
+<pre><code>python -m pip install -r requirements_py3.6.txt
+</code></pre>
+<h3>Getting Started</h3>
+<p>Click on the folder icon in the top left of this workspace to see the folder and file structure for this project.  </p>
+<p>We have already provided you the <em>churn_notebook.ipynb</em> file containing the solution to identify the customer churn, but without implementing the engineering and software best practices.</p>
+<p>You need to refactor the given <em><strong>churn_notebook.ipynb</strong></em> file following the best coding practices to complete these files:</p>
+<ol>
+<li>churn_library.py</li>
+<li>churn_script_logging_and_tests.py</li>
+<li>README.md</li>
+</ol>
+<p>These three (incomplete) files are already created for you. You will notice all functions  have been provided with document strings in each of these files. These functions have been set up to guide you to a solution (no intended tricks here).  However, if you would like to refactor the notebook in an alternative way to the setup in these files that is also okay, as long as you meet all the requirements in the Rubric.</p>
+<h3>Instructions</h3>
+<p>These are the three files you will need to complete after refactoring the <em>churn_notebook.ipynb</em> file:</p>
+<ol>
+<li><em><strong>churn_library.py</strong></em><br>
+The <em>churn_library.py</em> is a library of functions to find customers who are likely to churn.  You may be able to complete this project by completing each of these functions, but you also have the flexibility to change or add functions to meet the rubric criteria.</li>
+</ol>
+<p> The document strings have already been created for all the functions in the <strong>churn_library.py</strong> to assist with one potential solution. In addition, for a better understanding of the function call, see the <strong>Sequence diagram</strong> in the classroom. </p>
+<p> After you have defined all functions in the <em>churn_library.py</em>, you may choose to add an <code>if __name__ == &quot;__main__&quot;</code> block that allows you to run the code below and understand the results for each of the functions and refactored code associated with the original notebook.</p>
+<pre><code>ipython churn_library.py
+</code></pre>
+<ol>
+<li><em><strong>churn_script_logging_and_tests.py</strong></em><br> 
+This file should:</li>
+</ol>
+<ul>
+<li><p>Contain unit tests for the <em>churn_library.py</em> functions. You have to write test for <em>each</em> input function. Use the basic assert statements that test functions work properly. The goal of test functions is to checking the returned items aren&#39;t empty or folders where results should land have results after the function has been run.</p>
+</li>
+<li><p>Log any errors and INFO messages. You should log the info messages and errors in a .log file, so it can be viewed post the run of the script. The log messages should easily be understood and traceable.</p>
+</li>
+</ul>
+<p> Also, ensure that testing and logging can be completed on the command line, meaning, running the below code in the terminal should test each of the functions and provide any errors to a file stored in the <em>/logs</em> folder.</p>
+<pre><code>ipython churn_script_logging_and_tests.py
+</code></pre>
+<blockquote>
+<p><strong>Testing framework</strong>: As long as you fulfil all the rubric criteria, the choice of testing framework rests with the student. For instance, you can use pytest for writing functional tests.  </p>
+</blockquote>
+<ol>
+<li><em><strong>README.md</strong></em><br>
+This file will provide an overview of the project, the instructions to use the code, for example, it explains how to test and log the result of each function. For instance, you can have the following detailed sections in the <em>README.md</em> file:</li>
+</ol>
+<ul>
+<li>Project description</li>
+<li>Files and data description</li>
+<li>Running the files</li>
+</ul>
+<h2>Code Quality Considerations</h2>
+<ul>
+<li><strong>Style Guide</strong> - Format your refactored code using PEP 8 – Style Guide. Running the command below can assist with formatting. To assist with meeting pep 8 guidelines, use <code>autopep8</code> via the command line commands below:</li>
+</ul>
+<pre><code>autopep8 --in-place --aggressive --aggressive churn_script_logging_and_tests.py
+autopep8 --in-place --aggressive --aggressive churn_library.py
+</code></pre>
+<ul>
+<li><strong>Style Checking and Error Spotting</strong> - Use Pylint for the code analysis looking for programming errors, and scope for further refactoring. You should check the pylint score using the command below.</li>
+</ul>
+<pre><code>pylint churn_library.py
+pylint churn_script_logging_and_tests.py
+</code></pre>
+<p> You should make sure you don&#39;t have any errors, and that your code is scoring as high as you can get it!  Shoot for a <code>pylint</code> score exceeding 7 for both Python files. </p>
+<ul>
+<li><strong>Docstring</strong> - All functions and files should have document strings that correctly identifies the inputs, outputs, and purpose of the function. All files have a document string that identifies the purpose of the file, the author, and the date the file was created.</li>
+</ul>
+<h2>Rubric</h2>
+<blockquote>
+<p><strong>Important</strong><br>It is good to have a quick look at the rubric before you start refactoring the code. The rubric defines the criteria against which Reviewers will evaluate your submission. In other words, it has details on what is needed for a successful solution.</p>
+</blockquote>
+</section>
+<section class="cell markdown"><h3>Troubleshooting</h3>
+<p>Though many of the libraries used in this notebook are a common part of data manipulation and machine learning models, there are a few useful command line installations that might prove to be useful when working in this workspace, as well as if you try to run files on your local machine.</p>
+<p><strong>Error</strong></p>
+<pre><code>QXcbConnection: Could not connect to display
+Aborted
+</code></pre>
+<p><strong>Solution</strong></p>
+<pre><code>import os
+os.environ[&#39;QT_QPA_PLATFORM&#39;]=&#39;offscreen&#39;
+</code></pre>
+<p>Install the linter and auto-formatter:</p>
+<pre><code>pip install pylint
+pip install autopep8
+</code></pre>
+</section><div class="footer">Archived from https://raw.githubusercontent.com/KeonPham/predict-customer-churn-clean-code/main/Guide.ipynb<br>Original cells: 2 · Static output blocks: 0 · Images: 0</div></main></body></html>
