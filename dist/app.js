@@ -227,17 +227,35 @@
   function renderCredentials() {
     const extras = window.PORTFOLIO_CREDENTIALS || {};
     const logo = {Udacity:'assets/logos/udacity.svg',HackerRank:'assets/logos/hackerrank.svg',Atoha:'assets/logos/atoha.png'};
-    $('#certificate-grid').innerHTML = programs.map(program => {
-      const extra = (extras.programs || []).find(item => item.title === program.title || (item.id && program.id && item.id === program.id));
-      const item = {...program,...extra};
-      const providerLogo = logo[item.provider] || logo[program.provider];
-      const providerMark = providerLogo ? '<img loading="lazy" decoding="async" src="' + escapeHTML(providerLogo) + '" alt="' + escapeHTML(item.provider) + '">' : '<span class="provider-name">' + escapeHTML(item.provider) + '</span>';
-      return '<article class="certificate"><div class="cert-top">' + providerMark + '<span>' + escapeHTML(item.year) + '</span></div><p class="eyebrow">' + escapeHTML(item.provider) + '</p><h3>' + escapeHTML(item.title) + '</h3><p class="cert-kind">' + escapeHTML(item.kind) + '</p><p class="credential-evidence">' + escapeHTML(item.evidenceNote || 'Listed in my CV') + '</p>' + gallery(item.media) + documents(item.documents) + '</article>';
+    const catalog = extras.programs?.length ? extras.programs : programs;
+    const groupOf = item => item.group || (/management|customer analytics|business intelligence|learning how/i.test(item.title) ? 'business' : /engineering|programming|sql/i.test(item.title) ? 'engineering' : 'data-ai');
+    const groups = [
+      {id:'data-ai',title:'Data science & AI',icon:'<circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8 3 3M5 19l3-3M16 8l3-3"/>'},
+      {id:'engineering',title:'Engineering & programming',icon:'<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>'},
+      {id:'business',title:'Business & leadership',icon:'<rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V3h8v4M3 12c5 4 13 4 18 0M12 12v5"/>'}
+    ];
+    $('#learning-count').textContent = String(catalog.length).padStart(2,'0');
+    $('#certificate-grid').innerHTML = groups.map(group => {
+      const items = catalog.filter(item => groupOf(item) === group.id);
+      if (!items.length) return '';
+      const cards = items.map(item => {
+        const providerLogo = localAsset(item.logo) || logo[item.provider];
+        const initials = item.provider.split(/\s+/).map(word => word[0]).slice(0,2).join('');
+        const mark = providerLogo ? '<img loading="lazy" decoding="async" src="' + escapeHTML(providerLogo) + '" alt="' + escapeHTML(item.provider) + '">' : '<span class="learning-monogram" aria-label="' + escapeHTML(item.provider) + '">' + escapeHTML(initials) + '</span>';
+        const url = sourceURL(item.credentialUrl);
+        const preview = (item.media || []).find(m => localAsset(m.src));
+        const previewButton = preview ? '<button class="learning-preview" data-image="' + escapeHTML(preview.src) + '" aria-label="View certificate: ' + escapeHTML(item.title) + '"><img loading="lazy" decoding="async" src="' + escapeHTML(preview.src) + '" alt="' + escapeHTML(preview.alt || item.title + ' certificate') + '"></button>' : '';
+        const link = url ? '<a data-credential-link href="' + escapeHTML(url) + '" target="_blank" rel="noopener">Verify credential ↗</a>' : '';
+        const date = item.issued || item.year;
+        return '<article class="learning-card"><div class="learning-logo">' + mark + '</div><div class="learning-copy"><h4>' + escapeHTML(item.title) + '</h4><p class="learning-provider">' + escapeHTML(item.provider) + '</p><p class="learning-meta">' + escapeHTML(item.kind) + (date ? ' · ' + escapeHTML(date) : '') + '</p>' + (link ? '<div class="learning-links">' + link + '</div>' : '') + '</div>' + previewButton + '</article>';
+      }).join('');
+      return '<section class="learning-group" aria-labelledby="learning-' + group.id + '"><header class="learning-group-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + group.icon + '</svg><h3 id="learning-' + group.id + '">' + escapeHTML(group.title) + '</h3><span>' + items.length + '</span></header><div class="learning-grid">' + cards + '</div></section>';
     }).join('');
     (extras.education || []).forEach(item => {
-      if (!['ait','hcmus'].includes(item.id)) return;
-      const container = $('[data-education="' + item.id + '"]');
-      if (container) container.insertAdjacentHTML('beforeend', '<div class="education-evidence">' + gallery(item.media) + documents(item.documents) + '</div>');
+      if (item.id !== 'hcmus') return;
+      const image = (item.media || []).find(m => localAsset(m.src));
+      const container = $('[data-education="hcmus"] .academic-foot');
+      if (container && image) container.insertAdjacentHTML('beforeend','<button class="quiet" data-image="' + escapeHTML(image.src) + '" aria-label="View bachelor diploma">View diploma ↗</button>');
     });
   }
   document.addEventListener('click', event => {

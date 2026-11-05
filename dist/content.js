@@ -2194,13 +2194,7 @@ window.PORTFOLIO_CREDENTIALS = {
   "education": [
     {
       "id": "ait",
-      "media": [
-        {
-          "src": "assets/projects/drive/public/credentials/ait-degree.webp",
-          "alt": "AIT Master of Science (Professional) diploma awarded to Khoa Pham",
-          "caption": "AIT diploma · awarded 17 December 2025"
-        }
-      ],
+      "media": [],
       "documents": []
     },
     {
@@ -2215,5 +2209,303 @@ window.PORTFOLIO_CREDENTIALS = {
       "documents": []
     }
   ],
-  "programs": []
+  "programs": [
+    {
+      "id": "udacity-data-scientist",
+      "title": "Data Scientist",
+      "provider": "Udacity",
+      "group": "data-ai",
+      "kind": "Nanodegree",
+      "year": "2024",
+      "logo": "assets/logos/udacity.svg",
+      "media": [],
+      "evidence": "cv",
+      "sources": [
+        {
+          "label": "CV",
+          "url": "https://drive.google.com/file/d/1PY5ls8EuaHZU_FrpLj4eJLD5JIq4PRa9/view"
+        }
+      ]
+    },
+    {
+      "id": "udacity-intro-ml-pytorch",
+      "title": "Introduction to Machine Learning with PyTorch",
+      "provider": "Udacity",
+      "group": "data-ai",
+      "kind": "Nanodegree",
+      "year": "2024",
+      "logo": "assets/logos/udacity.svg",
+      "media": [],
+      "evidence": "cv",
+      "sources": [
+        {
+          "label": "CV",
+          "url": "https://drive.google.com/file/d/1PY5ls8EuaHZU_FrpLj4eJLD5JIq4PRa9/view"
+        }
+      ]
+    },
+    {
+      "id": "aws-machine-learning-engineer",
+      "title": "AWS Machine Learning Engineer",
+      "provider": "Udacity",
+      "group": "data-ai",
+      "kind": "Nanodegree",
+      "issued": "Nov 2023",
+      "issuedISO": "2023-11",
+      "logo": "assets/logos/udacity.svg",
+      "credentialUrl": null,
+      "media": [],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "public_linkedin_index"
+    },
+    {
+      "id": "introduction-to-programming",
+      "title": "Introduction to Programming",
+      "provider": "Udacity",
+      "group": "engineering",
+      "kind": "Nanodegree",
+      "issued": "Jun 2023",
+      "issuedISO": "2023-06",
+      "logo": "assets/logos/udacity.svg",
+      "credentialUrl": null,
+      "media": [],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "public_linkedin_index"
+    },
+    {
+      "id": "data-engineering-with-aws",
+      "title": "Data Engineering with AWS",
+      "provider": "Udacity",
+      "group": "engineering",
+      "kind": "Nanodegree",
+      "issued": "Dec 2022",
+      "issuedISO": "2022-12",
+      "logo": "assets/logos/udacity.svg",
+      "credentialUrl": null,
+      "media": [],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "public_linkedin_index"
+    },
+    {
+      "id": "data-analyst",
+      "title": "Data Analyst",
+      "provider": "Udacity",
+      "group": "data-ai",
+      "kind": "Nanodegree",
+      "issued": "Jun 2022",
+      "issuedISO": "2022-06",
+      "logo": "assets/logos/udacity.svg",
+      "credentialUrl": null,
+      "media": [],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "public_linkedin_index"
+    },
+    {
+      "id": "data-analyst-with-python",
+      "title": "Data Analyst with Python",
+      "provider": "DataCamp",
+      "group": "data-ai",
+      "kind": "Learning track",
+      "issued": "Jun 2022",
+      "issuedISO": "2022-06",
+      "logo": "assets/credentials/issuer-datacamp.svg",
+      "credentialUrl": null,
+      "media": [],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "public_linkedin_index"
+    },
+    {
+      "id": "TGMKEQ8XDKLM",
+      "title": "Customer Analytics",
+      "provider": "Wharton · Coursera",
+      "group": "business",
+      "kind": "Course certificate",
+      "issued": "16 Nov 2021",
+      "issuedISO": "2021-11-16",
+      "logo": "assets/credentials/issuer-wharton-upenn.png",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/TGMKEQ8XDKLM",
+      "media": [
+        {
+          "src": "assets/credentials/coursera-customer-analytics.jpg",
+          "alt": "Customer Analytics Coursera certificate issued to Khoa Pham Nguyen Thanh",
+          "caption": "Wharton Customer Analytics course certificate, completed 16 November 2021"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://www.coursera.org/account/accomplishments/verify/TGMKEQ8XDKLM"
+        },
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "issuer_verified_page_and_image"
+    },
+    {
+      "id": "QHGG7FPN4ZYB",
+      "title": "Learning How to Learn",
+      "provider": "Deep Teaching Solutions · Coursera",
+      "group": "business",
+      "kind": "Course certificate",
+      "issued": "18 Oct 2021",
+      "issuedISO": "2021-10-18",
+      "logo": "assets/credentials/issuer-coursera.png",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/QHGG7FPN4ZYB",
+      "media": [
+        {
+          "src": "assets/credentials/coursera-learning-how-to-learn.jpg",
+          "alt": "Learning How to Learn Coursera certificate issued to Khoa Pham Nguyen Thanh",
+          "caption": "Learning How to Learn course certificate, completed 18 October 2021"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://www.coursera.org/account/accomplishments/verify/QHGG7FPN4ZYB"
+        },
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "issuer_verified_page_and_image"
+    },
+    {
+      "id": "4300DC1EEAE2",
+      "title": "SQL (Intermediate)",
+      "provider": "HackerRank",
+      "group": "engineering",
+      "kind": "Skills certificate",
+      "issued": "29 Sept 2021",
+      "issuedISO": "2021-09-29",
+      "logo": "assets/credentials/issuer-hackerrank-mark.svg",
+      "credentialUrl": "https://www.hackerrank.com/certificates/4300dc1eeae2",
+      "media": [
+        {
+          "src": "assets/credentials/hackerrank-sql-intermediate.jpg",
+          "alt": "HackerRank SQL Intermediate certificate issued to Khoa Nguyen Thanh Pham",
+          "caption": "HackerRank SQL Intermediate certificate, 29 September 2021"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://www.hackerrank.com/certificates/4300dc1eeae2"
+        },
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "issuer_verified_page_and_image"
+    },
+    {
+      "id": "sql-fundamentals-track",
+      "title": "SQL Fundamentals Track",
+      "provider": "DataCamp",
+      "group": "engineering",
+      "kind": "Learning track",
+      "issued": "Sept 2021",
+      "issuedISO": "2021-09",
+      "logo": "assets/credentials/issuer-datacamp.svg",
+      "credentialUrl": null,
+      "media": [],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "public_linkedin_index"
+    },
+    {
+      "id": "931F2A6BFB9F",
+      "title": "SQL (Basic)",
+      "provider": "HackerRank",
+      "group": "engineering",
+      "kind": "Skills certificate",
+      "issued": "19 Aug 2021",
+      "issuedISO": "2021-08-19",
+      "logo": "assets/credentials/issuer-hackerrank-mark.svg",
+      "credentialUrl": "https://www.hackerrank.com/certificates/931f2a6bfb9f",
+      "media": [
+        {
+          "src": "assets/credentials/hackerrank-sql-basic.jpg",
+          "alt": "HackerRank SQL Basic certificate issued to Khoa Pham Nguyen Thanh",
+          "caption": "HackerRank SQL Basic certificate, 19 August 2021"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Credential source",
+          "url": "https://www.hackerrank.com/certificates/931f2a6bfb9f"
+        },
+        {
+          "label": "Credential source",
+          "url": "https://vn.linkedin.com/in/khoapnt"
+        }
+      ],
+      "evidence": "issuer_verified_page_and_image"
+    },
+    {
+      "id": "atoha-project-management",
+      "title": "Practical Project Management",
+      "provider": "Atoha",
+      "group": "business",
+      "kind": "Professional training",
+      "year": "2023",
+      "logo": "assets/logos/atoha.png",
+      "media": [],
+      "evidence": "cv",
+      "sources": [
+        {
+          "label": "CV",
+          "url": "https://drive.google.com/file/d/1PY5ls8EuaHZU_FrpLj4eJLD5JIq4PRa9/view"
+        }
+      ]
+    },
+    {
+      "id": "mda-business-intelligence",
+      "title": "Business Intelligence Program",
+      "provider": "Mastering Data Analytics",
+      "group": "business",
+      "kind": "Learning program",
+      "year": "2021",
+      "media": [],
+      "evidence": "cv",
+      "sources": [
+        {
+          "label": "CV",
+          "url": "https://drive.google.com/file/d/1PY5ls8EuaHZU_FrpLj4eJLD5JIq4PRa9/view"
+        }
+      ]
+    }
+  ]
 };

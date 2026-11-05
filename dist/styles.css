@@ -113,3 +113,92 @@ input{font:inherit}.panel{scroll-margin-top:76px}.panel:focus,.case-heading h2:f
 .dashboard-pages button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .dashboard-stage .case-gallery{margin:0}.dashboard-stage figure{background:#fff}.dashboard-section .documents{margin-top:20px}
 @media(max-width:600px){.dashboard-section{padding:14px;margin:25px 0 35px}.dashboard-heading h3{font-size:25px}.dashboard-heading{align-items:flex-start}.dashboard-format{font-size:9px;padding:6px}.dashboard-intro{font-size:12px}.dashboard-pages{gap:6px}.dashboard-pages button{font-size:11px;padding:10px 11px}}
+
+/* Education & Certifications: compact records, grouped by the work they support. */
+#tab-credentials{flex:1.8;white-space:normal;line-height:1.25}
+#credentials .credential-nav{gap:28px;margin-bottom:28px}
+#credentials .credential-nav button{min-height:44px;padding:12px 0;font-size:12px;line-height:1.4;text-align:left}
+#credentials #education.degree-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start}
+#credentials .academic-card{min-width:0;padding:28px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 8px 24px -24px #294c35}
+#credentials .academic-top{display:flex;gap:13px;align-items:center;margin-bottom:26px;min-height:45px}
+#credentials .academic-logo{width:58px;height:58px;flex:0 0 58px;object-fit:contain;padding:7px;background:var(--ink);border-radius:9px}
+#credentials .academic-top>div{min-width:0}
+#credentials .academic-top p,#credentials .academic-top strong{display:block;font-size:12px;font-weight:600;line-height:1.5;color:var(--ink);margin:0}
+#credentials .academic-top small,#credentials .academic-top span{display:block;font-size:11px;font-weight:400;line-height:1.5;color:var(--muted);margin-top:3px}
+#credentials .academic-top p{font-size:11px;font-weight:400;color:var(--muted);margin-top:3px}
+#credentials .academic-program{min-height:42px}
+#credentials .academic-card>h3{font-size:26px;line-height:1.2;letter-spacing:-.8px;font-weight:500}
+#credentials .academic-program{margin-top:10px;font-size:13px;line-height:1.65;color:var(--muted);max-width:40ch}
+#credentials .academic-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;border-block:1px solid var(--line);padding:23px 0;margin:25px 0 20px}
+#credentials .academic-metrics>div+div{padding-left:20px;border-left:1px solid var(--line)}
+#credentials .academic-metrics strong{display:block;font-size:34px;font-weight:500;line-height:1.15;letter-spacing:-1.3px;color:var(--accent)}
+#credentials .academic-metrics strong small{font-size:13px;font-weight:400;letter-spacing:0;color:var(--muted)}
+#credentials .academic-metrics span{display:block;margin-top:7px;font-size:11px;line-height:1.5;color:var(--muted)}
+#credentials .academic-awards{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+#credentials .academic-awards>*{font-size:10px;font-weight:400;line-height:1.45;padding:6px 9px;border:1px solid #dce6d3;border-radius:5px;background:#f0f5e9;color:#486240}
+#credentials .academic-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-top:25px;padding-top:17px;border-top:1px solid #e8ece4}
+#credentials .academic-foot small,#credentials .academic-foot p{font-size:10px;line-height:1.6;color:var(--muted)}
+#credentials .academic-foot a,#credentials .academic-foot button{display:inline-block;padding:5px 0;background:none;font-size:11px;line-height:1.5;color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+#credentials .learning-intro{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 0 24px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+#credentials .learning-intro p{font-size:12px;line-height:1.7;color:var(--muted);max-width:76ch}
+#credentials .learning-intro a,#credentials .learning-intro button{flex-shrink:0;background:none;font-size:11px;color:var(--accent);padding:8px 0;line-height:1.5;text-decoration:underline;text-underline-offset:4px}
+#credentials .learning-groups{display:grid;gap:34px}
+#credentials .learning-group{min-width:0}
+#credentials header.learning-group-heading{display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:0;margin:0 0 16px;min-height:32px}
+#credentials .learning-group-heading svg{width:24px;height:24px;flex:0 0 24px;color:var(--accent)}
+#credentials .learning-group-heading h3{font-size:24px;font-weight:500;letter-spacing:-.6px;line-height:1.25}
+#credentials .learning-group-heading>span{font-size:11px;font-weight:400;line-height:1;padding:6px 8px;background:#eaf0e2;color:#5c7253;border-radius:5px}
+#credentials .learning-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+#credentials .learning-card{display:grid;grid-template-columns:40px minmax(0,1fr);grid-template-rows:auto auto;align-content:start;align-items:start;gap:12px 13px;min-width:0;min-height:152px;padding:19px 17px;border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:0 5px 16px -18px #2e5138;transition:border-color .18s,box-shadow .18s,transform .18s}
+#credentials .learning-card:hover{border-color:#b9cbb0;box-shadow:0 10px 23px -21px #27432f;transform:translateY(-2px)}
+#credentials .learning-logo{display:flex;align-items:center;justify-content:center;width:40px;height:40px;grid-column:1;grid-row:1;background:#f3f6ef;border:1px solid #e5ebde;border-radius:8px;padding:6px}
+#credentials .learning-logo img{width:100%;height:100%;max-width:100%;object-fit:contain}
+#credentials .learning-logo:has(img[src$="udacity.svg"]){background:#163bb7;border-color:#163bb7}
+#credentials .learning-monogram{display:grid;place-items:center;width:40px;height:40px;grid-column:1;grid-row:1;background:#eaf1e1;color:#45633b;border:1px solid #dfe8d5;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:-.4px}
+#credentials .learning-logo .learning-monogram{width:100%;height:100%;border:0;border-radius:0;background:none}
+#credentials .learning-copy{grid-column:2;grid-row:1;min-width:0}
+#credentials .learning-copy h4{margin:0;font-size:14px;font-weight:600;letter-spacing:-.15px;line-height:1.45;color:var(--ink);overflow-wrap:anywhere}
+#credentials .learning-provider{font-size:12px;line-height:1.5;color:#61715e;margin-top:5px}
+#credentials .learning-meta{font-size:11px;line-height:1.5;color:var(--muted);margin-top:6px}
+#credentials .learning-links{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:5px 15px;align-items:center;margin-top:1px}
+#credentials .learning-links a,#credentials .learning-links button{padding:4px 0;background:none;font-size:10px;font-weight:400;line-height:1.5;color:var(--accent);text-decoration:underline;text-underline-offset:3px;border:0}
+#credentials .learning-links a:hover,#credentials .learning-links button:hover{color:#1b3927}
+#credentials .learning-preview{grid-column:1/-1;justify-self:end;margin:0;width:80px;height:50px;border:1px solid #e0e7d8;border-radius:5px;background:#f7f9f3;overflow:hidden}
+#credentials .learning-preview img{display:block;width:80px;height:50px;object-fit:cover}
+#credentials .learning-card:has(.learning-preview){grid-template-columns:40px minmax(0,1fr) 80px}
+#credentials .learning-card:has(.learning-preview) .learning-preview{grid-column:3;grid-row:1;align-self:start}
+#credentials .learning-card:has(.learning-preview) .learning-links{grid-column:2/-1}
+@media(max-width:1000px){
+  #credentials .learning-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #credentials .academic-card{padding:24px}
+  #credentials .academic-metrics strong{font-size:30px}
+  #credentials .academic-metrics>div+div{padding-left:15px}
+}
+@media(max-width:600px){
+  .tabs button{flex:1;min-width:0;white-space:normal;line-height:1.2}
+  #tab-credentials{flex:1.85;padding:9px 4px;font-size:10px;min-height:44px;line-height:1.25}
+  #credentials .credential-nav{gap:22px;margin-bottom:23px}
+  #credentials .credential-nav button{min-height:44px;font-size:12px;padding:11px 0}
+  #credentials .credential-nav span{padding-left:5px;font-size:9px}
+  #credentials #education.degree-grid{grid-template-columns:minmax(0,1fr);gap:18px}
+  #credentials .academic-card{padding:23px}
+  #credentials .academic-top{margin-bottom:22px}
+  #credentials .academic-card>h3{font-size:25px}
+  #credentials .academic-program{font-size:12px}
+  #credentials .academic-metrics{gap:14px;margin:22px 0 17px;padding:20px 0}
+  #credentials .academic-metrics strong{font-size:30px}
+  #credentials .academic-foot{gap:13px;margin-top:21px}
+  #credentials .learning-intro{display:block;padding-bottom:20px;margin-bottom:3px}
+  #credentials .learning-intro p{font-size:12px}
+  #credentials .learning-intro a,#credentials .learning-intro button{display:inline-block;margin-top:10px}
+  #credentials .learning-groups{gap:29px}
+  #credentials .learning-group-heading h3{font-size:22px;letter-spacing:-.5px}
+  #credentials header.learning-group-heading{gap:10px;margin-bottom:14px}
+  #credentials .learning-grid{grid-template-columns:minmax(0,1fr);gap:12px}
+  #credentials .learning-card{min-height:140px;padding:18px;gap:10px 13px}
+  #credentials .learning-copy h4{font-size:14px}
+  #credentials .learning-links a,#credentials .learning-links button{font-size:11px;min-height:28px;display:inline-flex;align-items:center}
+}
+@media(prefers-reduced-motion:reduce){
+  #credentials .learning-card,#credentials .learning-card:hover{transition:none;transform:none}
+}
