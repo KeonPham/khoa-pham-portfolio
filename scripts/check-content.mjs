@@ -29,6 +29,12 @@ for(const p of projects) {
   assert(p.sources.every(s=>/^https:\/\//.test(s.url)),'Sources are HTTPS URLs');
   if(p.thumbnail)await localAsset(p.thumbnail);
   for(const m of p.media){assert(m.alt&&m.caption,'Images have descriptive alternatives and captions');await localAsset(m.src);}
+  if(p.dashboard){
+    assert(p.dashboard.pages.length>0&&p.dashboard.description,'Dashboard has context and preview pages');
+    for(const m of p.dashboard.pages){assert(m.label&&m.alt&&m.caption,'Dashboard pages have accessible labels');await localAsset(m.src);}
+    assert.equal(p.dashboard.document.type,'pdf','Dashboard export is a PDF document');
+    await localAsset(p.dashboard.document.src);
+  }
   for(const d of p.documents){
     assert(d.title&&['pdf','html','video','drive-video'].includes(d.type),'Documents have supported types');
     if(d.type==='drive-video'){assert(/^https:\/\/drive\.google\.com\/file\/d\/[\w-]+\/preview$/.test(d.src));continue;}

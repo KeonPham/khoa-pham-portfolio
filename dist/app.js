@@ -200,13 +200,20 @@
       return '<details class="document-card" data-document-type="' + escapeHTML(doc.type) + '" data-document-src="' + escapeHTML(doc.src) + '"><summary><span class="document-kind">' + kind + '</span><span>' + escapeHTML(doc.title) + '</span><span class="document-toggle" aria-hidden="true">+</span></summary><div class="document-content"><p class="document-note">' + note + '</p><div class="document-viewer"></div>' + extra + '</div></details>';
     }).join('');
   }
+  function renderDashboard(project) {
+    const dashboard = project.dashboard;
+    const pages = (dashboard?.pages || []).filter(page => localAsset(page.src));
+    if (!pages.length) return '';
+    const controls = pages.map((page, index) => '<button data-dashboard-project="' + escapeHTML(project.id) + '" data-dashboard-page="' + index + '" aria-pressed="' + (index === 0) + '">' + escapeHTML(page.label) + '</button>').join('');
+    return '<section class="dashboard-section" aria-label="Power BI dashboard"><div class="dashboard-heading"><div><p class="eyebrow">POWER BI</p><h3>' + escapeHTML(dashboard.title || 'Power BI dashboard') + '</h3></div><span class="dashboard-format">PDF export</span></div><p class="dashboard-intro">' + escapeHTML(dashboard.description) + '</p><div class="dashboard-pages" role="group" aria-label="Dashboard preview pages">' + controls + '</div><div class="dashboard-stage">' + gallery([pages[0]]) + '</div><p class="dashboard-status sr-only" role="status" aria-live="polite"></p><div class="documents">' + documents(dashboard.document ? [dashboard.document] : []) + '</div></section>';
+  }
   function renderProject(project) {
     const media = gallery(project.media);
     const docs = documents(project.documents);
     const sections = (project.sections || []).map(section => '<section><h3>' + escapeHTML(section.title) + '</h3>' + paragraphs(section.body) + '</section>').join('');
     const collection = (project.collection || []).map(item => '<article><h3>' + escapeHTML(item.title) + '</h3>' + paragraphs(item.body) + gallery(item.media) + documents(item.documents) + '</article>').join('');
     const sources = (project.sources || []).filter(item => sourceURL(item.url)).map(item => '<a href="' + escapeHTML(sourceURL(item.url)) + '" target="_blank" rel="noopener">' + escapeHTML(item.label) + ' ↗</a>').join('');
-    return '<div class="reader-topline"><button class="quiet" data-back-projects>← Project library</button><span>' + escapeHTML(themes[project.category] || 'Project') + '</span></div><div class="case-heading"><p class="eyebrow">' + escapeHTML(project.context) + '</p><h2 id="case-title" tabindex="-1">' + escapeHTML(project.title) + '</h2><p class="case-lead">' + escapeHTML(project.summary) + '</p><div class="stack">' + (project.stack || []).map(tool => '<span>' + escapeHTML(tool) + '</span>').join('') + '</div></div>' + (media ? '<section class="case-section"><p class="eyebrow">INSIDE THE PROJECT</p>' + media + '</section>' : '') + '<div class="case-narrative">' + sections + '</div>' + (collection ? '<section class="case-section"><p class="eyebrow">EXPLORE THE COLLECTION</p><div class="collection-grid">' + collection + '</div></section>' : '') + (docs ? '<section class="case-section"><h3>Read & explore</h3><p class="muted">Reports, presentations, and recordings from the work.</p><div class="documents">' + docs + '</div></section>' : '') + (sources ? '<details class="source-notes"><summary>Original sources</summary><div>' + sources + '</div></details>' : '') + '<div class="reader-end"><button class="quiet" data-back-projects>← Back to projects</button><a href="mailto:pntkhoa@gmail.com">Talk about this work ↗</a></div>';
+    return '<div class="reader-topline"><button class="quiet" data-back-projects>← Project library</button><span>' + escapeHTML(themes[project.category] || 'Project') + '</span></div><div class="case-heading"><p class="eyebrow">' + escapeHTML(project.context) + '</p><h2 id="case-title" tabindex="-1">' + escapeHTML(project.title) + '</h2><p class="case-lead">' + escapeHTML(project.summary) + '</p><div class="stack">' + (project.stack || []).map(tool => '<span>' + escapeHTML(tool) + '</span>').join('') + '</div></div>' + renderDashboard(project) + (media ? '<section class="case-section"><p class="eyebrow">INSIDE THE PROJECT</p>' + media + '</section>' : '') + '<div class="case-narrative">' + sections + '</div>' + (collection ? '<section class="case-section"><p class="eyebrow">EXPLORE THE COLLECTION</p><div class="collection-grid">' + collection + '</div></section>' : '') + (docs ? '<section class="case-section"><h3>Read & explore</h3><p class="muted">Reports, presentations, and recordings from the work.</p><div class="documents">' + docs + '</div></section>' : '') + (sources ? '<details class="source-notes"><summary>Original sources</summary><div>' + sources + '</div></details>' : '') + '<div class="reader-end"><button class="quiet" data-back-projects>← Back to projects</button><a href="mailto:pntkhoa@gmail.com">Talk about this work ↗</a></div>';
   }
   function renderStory(story) {
     return '<div class="reader-topline"><a class="quiet" href="#stories" data-go="stories">← All stories</a><span>' + escapeHTML(story.label) + '</span></div><div class="case-heading"><p class="eyebrow">A PERSONAL PERSPECTIVE</p><h2 id="story-title" tabindex="-1">' + escapeHTML(story.title) + '</h2><p class="case-lead">' + escapeHTML(story.lead) + '</p></div><figure class="story-feature"><img src="' + escapeHTML(story.image) + '" alt="' + escapeHTML(story.alt) + '" loading="lazy" decoding="async"></figure><div class="story-prose">' + story.sections.map(section => '<section><h3>' + escapeHTML(section.title) + '</h3>' + paragraphs(section.body) + '</section>').join('') + '</div><div class="reader-end"><a class="quiet" href="#stories" data-go="stories">← All stories</a><a href="#projects" data-go="projects">Explore the work ↗</a></div>';
@@ -236,6 +243,15 @@
       panel.tabIndex = -1;
       panel.focus({preventScroll:true});
       panel.scrollIntoView({behavior:motion.matches ? 'instant' : 'smooth',block:'start'});
+    } else if (control.hasAttribute('data-dashboard-page')) {
+      const project = projectMap.get(control.dataset.dashboardProject);
+      const pages = (project?.dashboard?.pages || []).filter(page => localAsset(page.src));
+      const index = Number(control.dataset.dashboardPage);
+      if (!Number.isInteger(index) || !pages[index]) return;
+      const section = control.closest('.dashboard-section');
+      $$('[data-dashboard-page]', section).forEach(button => button.setAttribute('aria-pressed', String(button === control)));
+      $('.dashboard-stage', section).innerHTML = gallery([pages[index]]);
+      $('.dashboard-status', section).textContent = pages[index].label + ' preview displayed.';
     } else if (control.dataset.image) {
       const src = localAsset(control.dataset.image);
       if (!src) return;

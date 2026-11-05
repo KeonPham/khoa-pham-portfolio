@@ -2025,6 +2025,7 @@ window.PORTFOLIO_PROJECTS = [
     "context": "Business analytics case study · Recommendations and projections",
     "summary": "A business case that moves from revenue patterns to a prioritized location and operating plan for vending machines.",
     "stack": [
+      "Power BI",
       "Business analysis",
       "Pareto analysis",
       "Segmentation",
@@ -2092,10 +2093,61 @@ window.PORTFOLIO_PROJECTS = [
       {
         "label": "Original Drive artifact",
         "url": "https://drive.google.com/file/d/1RNzUd3d36SlIzY-_xIEq1i652puQTRSr/view"
+      },
+      {
+        "label": "Original Power BI dashboard export",
+        "url": "https://drive.google.com/file/d/1JXDTP9MRY1gNHijVZNV2yZIXpvD_TI1u/view"
       }
     ],
     "thumbnail": "assets/projects/thumbnails/vending-location.webp",
-    "thumbnailAlt": "Vending Location Strategy — Breaking down the business problem"
+    "thumbnailAlt": "Vending Location Strategy — Breaking down the business problem",
+    "dashboard": {
+      "title": "Vending performance dashboard",
+      "description": "Six views from my original Power BI report, with the complete 22-page export below. These are saved report pages; the slicers shown are not interactive.",
+      "pages": [
+        {
+          "label": "Overview",
+          "src": "assets/projects/vending-dashboard/dashboard-01-overview.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: revenue, sales quantity, daily trends and product performance",
+          "caption": "Revenue, sales quantity, daily trends and product performance · original Power BI export · Page 1"
+        },
+        {
+          "label": "Geography",
+          "src": "assets/projects/vending-dashboard/dashboard-02-geography.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: district and location revenue, with the original geographic map",
+          "caption": "District and location revenue, with the original geographic map · original Power BI export · Page 2"
+        },
+        {
+          "label": "Locations",
+          "src": "assets/projects/vending-dashboard/dashboard-08-locations.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: location-type performance, revenue distributions and machine productivity",
+          "caption": "Location-type performance, revenue distributions and machine productivity · original Power BI export · Page 8"
+        },
+        {
+          "label": "Products",
+          "src": "assets/projects/vending-dashboard/dashboard-11-products.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: product revenue patterns and pareto analysis",
+          "caption": "Product revenue patterns and Pareto analysis · original Power BI export · Page 11"
+        },
+        {
+          "label": "Payments",
+          "src": "assets/projects/vending-dashboard/dashboard-17-payments.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: payment-channel revenue, distributions and contribution",
+          "caption": "Payment-channel revenue, distributions and contribution · original Power BI export · Page 17"
+        },
+        {
+          "label": "Daily patterns",
+          "src": "assets/projects/vending-dashboard/dashboard-19-payment-patterns.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: payment behavior by hour, day and weekend",
+          "caption": "Payment behavior by hour, day and weekend · original Power BI export · Page 19"
+        }
+      ],
+      "document": {
+        "title": "Complete Power BI dashboard export · 22 pages",
+        "src": "assets/projects/vending-dashboard/vending-dashboard.pdf",
+        "type": "pdf"
+      }
+    }
   },
   {
     "id": "finance-brain",
