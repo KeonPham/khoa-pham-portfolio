@@ -2218,31 +2218,59 @@ window.PORTFOLIO_CREDENTIALS = {
       "kind": "Nanodegree",
       "year": "2024",
       "logo": "assets/logos/udacity.svg",
-      "media": [],
-      "evidence": "cv",
+      "media": [
+        {
+          "src": "assets/credentials/udacity-data-scientist-certificate.png",
+          "alt": "Data Scientist certificate issued to Khoa Pham Nguyen Thanh",
+          "caption": "Udacity Data Scientist Nanodegree completion certificate, issued 2 June 2024."
+        }
+      ],
+      "evidence": "issuer_verified_certificate",
       "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.udacity.com/certificate/e/91ab0b5a-f036-11ee-a870-4b2fab00226a"
+        },
         {
           "label": "CV",
           "url": "https://drive.google.com/file/d/1PY5ls8EuaHZU_FrpLj4eJLD5JIq4PRa9/view"
         }
-      ]
+      ],
+      "credentialUrl": "https://www.udacity.com/certificate/e/91ab0b5a-f036-11ee-a870-4b2fab00226a",
+      "credentialId": "91ab0b5a-f036-11ee-a870-4b2fab00226a",
+      "issuedISO": "2024-06-02",
+      "issued": "2 Jun 2024"
     },
     {
       "id": "udacity-intro-ml-pytorch",
-      "title": "Introduction to Machine Learning with PyTorch",
+      "title": "Introduction to Machine Learning with Pytorch",
       "provider": "Udacity",
       "group": "data-ai",
       "kind": "Nanodegree",
       "year": "2024",
       "logo": "assets/logos/udacity.svg",
-      "media": [],
-      "evidence": "cv",
+      "media": [
+        {
+          "src": "assets/credentials/udacity-intro-ml-pytorch-certificate.png",
+          "alt": "Introduction to Machine Learning with Pytorch certificate issued to Khoa Pham Nguyen Thanh",
+          "caption": "Udacity Introduction to Machine Learning with Pytorch Nanodegree completion certificate, issued 1 April 2024."
+        }
+      ],
+      "evidence": "issuer_verified_certificate",
       "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.udacity.com/certificate/e/ce1397b0-cc19-11ee-afbb-8724d6e2478f"
+        },
         {
           "label": "CV",
           "url": "https://drive.google.com/file/d/1PY5ls8EuaHZU_FrpLj4eJLD5JIq4PRa9/view"
         }
-      ]
+      ],
+      "credentialUrl": "https://www.udacity.com/certificate/e/ce1397b0-cc19-11ee-afbb-8724d6e2478f",
+      "credentialId": "ce1397b0-cc19-11ee-afbb-8724d6e2478f",
+      "issuedISO": "2024-04-01",
+      "issued": "1 Apr 2024"
     },
     {
       "id": "aws-machine-learning-engineer",
@@ -2250,37 +2278,59 @@ window.PORTFOLIO_CREDENTIALS = {
       "provider": "Udacity",
       "group": "data-ai",
       "kind": "Nanodegree",
-      "issued": "Nov 2023",
-      "issuedISO": "2023-11",
+      "issued": "12 Nov 2023",
+      "issuedISO": "2023-11-12",
       "logo": "assets/logos/udacity.svg",
-      "credentialUrl": null,
-      "media": [],
+      "credentialUrl": "https://www.udacity.com/certificate/e/a40e2a06-1f22-11ee-9e10-8fd43f0312b9",
+      "media": [
+        {
+          "src": "assets/credentials/udacity-aws-ml-engineer-certificate.png",
+          "alt": "AWS Machine Learning Engineer Nanodegree certificate issued to Khoa Pham Nguyen Thanh",
+          "caption": "Udacity AWS Machine Learning Engineer Nanodegree completion certificate, issued 12 November 2023."
+        }
+      ],
       "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.udacity.com/certificate/e/a40e2a06-1f22-11ee-9e10-8fd43f0312b9"
+        },
         {
           "label": "Credential source",
           "url": "https://vn.linkedin.com/in/khoapnt"
         }
       ],
-      "evidence": "public_linkedin_index"
+      "evidence": "issuer_verified_certificate",
+      "credentialId": "a40e2a06-1f22-11ee-9e10-8fd43f0312b9"
     },
     {
       "id": "introduction-to-programming",
-      "title": "Introduction to Programming",
+      "title": "Intro to Programming",
       "provider": "Udacity",
       "group": "engineering",
       "kind": "Nanodegree",
-      "issued": "Jun 2023",
-      "issuedISO": "2023-06",
+      "issued": "8 Jun 2023",
+      "issuedISO": "2023-06-08",
       "logo": "assets/logos/udacity.svg",
-      "credentialUrl": null,
-      "media": [],
+      "credentialUrl": "https://www.udacity.com/certificate/e/54c84a0c-bb73-11ed-a144-5be99a98df1b",
+      "media": [
+        {
+          "src": "assets/credentials/udacity-intro-programming-certificate.png",
+          "alt": "Intro to Programming certificate issued to Khoa Pham Nguyen Thanh",
+          "caption": "Udacity Intro to Programming Nanodegree completion certificate, issued 8 June 2023."
+        }
+      ],
       "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.udacity.com/certificate/e/54c84a0c-bb73-11ed-a144-5be99a98df1b"
+        },
         {
           "label": "Credential source",
           "url": "https://vn.linkedin.com/in/khoapnt"
         }
       ],
-      "evidence": "public_linkedin_index"
+      "evidence": "issuer_verified_certificate",
+      "credentialId": "54c84a0c-bb73-11ed-a144-5be99a98df1b"
     },
     {
       "id": "data-engineering-with-aws",
@@ -2288,18 +2338,29 @@ window.PORTFOLIO_CREDENTIALS = {
       "provider": "Udacity",
       "group": "engineering",
       "kind": "Nanodegree",
-      "issued": "Dec 2022",
-      "issuedISO": "2022-12",
+      "issued": "26 Dec 2022",
+      "issuedISO": "2022-12-26",
       "logo": "assets/logos/udacity.svg",
-      "credentialUrl": null,
-      "media": [],
+      "credentialUrl": "https://www.udacity.com/certificate/WKEUNHQC",
+      "media": [
+        {
+          "src": "assets/credentials/udacity-data-engineering-with-aws-certificate.png",
+          "alt": "Data Engineering with AWS certificate issued to Khoa Pham Nguyen Thanh",
+          "caption": "Udacity Data Engineering Nanodegree certificate, issued 26 December 2022."
+        }
+      ],
       "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.udacity.com/certificate/WKEUNHQC"
+        },
         {
           "label": "Credential source",
           "url": "https://vn.linkedin.com/in/khoapnt"
         }
       ],
-      "evidence": "public_linkedin_index"
+      "evidence": "issuer_verified_certificate",
+      "credentialId": "WKEUNHQC"
     },
     {
       "id": "data-analyst",
@@ -2307,37 +2368,59 @@ window.PORTFOLIO_CREDENTIALS = {
       "provider": "Udacity",
       "group": "data-ai",
       "kind": "Nanodegree",
-      "issued": "Jun 2022",
-      "issuedISO": "2022-06",
+      "issued": "11 Jun 2022",
+      "issuedISO": "2022-06-11",
       "logo": "assets/logos/udacity.svg",
-      "credentialUrl": null,
-      "media": [],
+      "credentialUrl": "https://www.udacity.com/certificate/DNVGMAF2",
+      "media": [
+        {
+          "src": "assets/credentials/udacity-data-analyst-certificate.png",
+          "alt": "Data Analyst certificate issued to Khoa Pham Nguyen Thanh",
+          "caption": "Udacity Data Analyst Nanodegree certificate, issued 11 June 2022."
+        }
+      ],
       "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.udacity.com/certificate/DNVGMAF2"
+        },
         {
           "label": "Credential source",
           "url": "https://vn.linkedin.com/in/khoapnt"
         }
       ],
-      "evidence": "public_linkedin_index"
+      "evidence": "issuer_verified_certificate",
+      "credentialId": "DNVGMAF2"
     },
     {
       "id": "data-analyst-with-python",
-      "title": "Data Analyst with Python",
+      "title": "Data Analyst in Python",
       "provider": "DataCamp",
       "group": "data-ai",
       "kind": "Learning track",
-      "issued": "Jun 2022",
-      "issuedISO": "2022-06",
+      "issued": "26 Jun 2022",
+      "issuedISO": "2022-06-26",
       "logo": "assets/credentials/issuer-datacamp.svg",
-      "credentialUrl": null,
-      "media": [],
+      "credentialUrl": "https://www.datacamp.com/completed/statement-of-accomplishment/track/f43a328027a5761bc4ac427659aac6b38d4edb2c",
+      "media": [
+        {
+          "src": "assets/credentials/datacamp-data-analyst-python-statement.webp",
+          "alt": "Data Analyst in Python DataCamp statement of accomplishment awarded to Khoa Nguyen Thanh Pham",
+          "caption": "DataCamp Statement of Accomplishment — Data Analyst in Python, completed 26 June 2022."
+        }
+      ],
       "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.datacamp.com/completed/statement-of-accomplishment/track/f43a328027a5761bc4ac427659aac6b38d4edb2c"
+        },
         {
           "label": "Credential source",
           "url": "https://vn.linkedin.com/in/khoapnt"
         }
       ],
-      "evidence": "public_linkedin_index"
+      "evidence": "issuer_verified_certificate",
+      "credentialId": "f43a328027a5761bc4ac427659aac6b38d4edb2c"
     },
     {
       "id": "TGMKEQ8XDKLM",
@@ -2428,22 +2511,33 @@ window.PORTFOLIO_CREDENTIALS = {
     },
     {
       "id": "sql-fundamentals-track",
-      "title": "SQL Fundamentals Track",
+      "title": "SQL Fundamentals",
       "provider": "DataCamp",
       "group": "engineering",
       "kind": "Learning track",
-      "issued": "Sept 2021",
-      "issuedISO": "2021-09",
+      "issued": "14 Sept 2021",
+      "issuedISO": "2021-09-14",
       "logo": "assets/credentials/issuer-datacamp.svg",
-      "credentialUrl": null,
-      "media": [],
+      "credentialUrl": "https://www.datacamp.com/completed/statement-of-accomplishment/track/cf98c43160b979baff3275257438753efe3529e1",
+      "media": [
+        {
+          "src": "assets/credentials/datacamp-sql-fundamentals-statement.webp",
+          "alt": "SQL Fundamentals DataCamp statement of accomplishment awarded to Khoa Nguyen Thanh Pham",
+          "caption": "DataCamp Statement of Accomplishment — SQL Fundamentals, completed 14 September 2021."
+        }
+      ],
       "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.datacamp.com/completed/statement-of-accomplishment/track/cf98c43160b979baff3275257438753efe3529e1"
+        },
         {
           "label": "Credential source",
           "url": "https://vn.linkedin.com/in/khoapnt"
         }
       ],
-      "evidence": "public_linkedin_index"
+      "evidence": "issuer_verified_certificate",
+      "credentialId": "cf98c43160b979baff3275257438753efe3529e1"
     },
     {
       "id": "931F2A6BFB9F",
