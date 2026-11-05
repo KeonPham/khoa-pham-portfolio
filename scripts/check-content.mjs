@@ -24,7 +24,7 @@ async function localAsset(src) {
 }
 for(const p of projects) {
   assert(p.title&&p.summary&&p.context&&p.sections.length,'Every project has readable context, summary and case text: '+p.id);
-  assert(['agents','vision','engineering','ml','analytics','archive'].includes(p.category),'Known project category');
+  assert(['agents','vision','engineering','ml','analytics'].includes(p.category),'Known project category');
   assert(p.sources.length,'Every project has source attribution');
   assert(p.sources.every(s=>/^https:\/\//.test(s.url)),'Sources are HTTPS URLs');
   if(p.thumbnail)await localAsset(p.thumbnail);

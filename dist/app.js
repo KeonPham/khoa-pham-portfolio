@@ -6,7 +6,7 @@
   const paragraphs = text => String(text || '').split(/\n\s*\n/).filter(Boolean).map(p => '<p>' + escapeHTML(p).replace(/\n/g, '<br>') + '</p>').join('');
   const projects = Array.isArray(window.PORTFOLIO_PROJECTS) ? window.PORTFOLIO_PROJECTS : [];
   const projectMap = new Map(projects.map(project => [project.id, project]));
-  const themes = {all:'All work',agents:'AI Agents',vision:'Computer Vision',engineering:'Data Engineering',ml:'Machine Learning',analytics:'Analytics',archive:'Learning archive'};
+  const themes = {all:'All work',agents:'AI Agents',vision:'Computer Vision',engineering:'Data Engineering',ml:'Machine Learning',analytics:'Analytics'};
   const tabNames = ['profile','stories','projects','cv','credentials'];
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const localAsset = src => typeof src === 'string' && /^assets\/[a-zA-Z0-9_./% -]+$/.test(src) && !src.includes('..') ? src : '';

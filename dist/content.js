@@ -1689,53 +1689,6 @@ window.PORTFOLIO_PROJECTS = [
     "thumbnailAlt": "Most frequent first-choice predicted breeds in the cleaned archive."
   },
   {
-    "id": "animal-trading-card",
-    "title": "An early HTML and CSS build",
-    "category": "archive",
-    "context": "Front-end learning exercise.",
-    "summary": "A small animal trading-card page built with semantic HTML and CSS.",
-    "stack": [
-      "HTML",
-      "CSS"
-    ],
-    "sections": [
-      {
-        "title": "The problem",
-        "body": "Practice turning a visual card concept into a structured web page."
-      },
-      {
-        "title": "The work",
-        "body": "Structure the title, image, description and facts in HTML.\n\nApply CSS layout, spacing and visual hierarchy."
-      },
-      {
-        "title": "What the artifacts show",
-        "body": "Public repository includes card.html, styles.css and image assets."
-      },
-      {
-        "title": "What I learned",
-        "body": "Establish web-layout fundamentals that support later application work."
-      },
-      {
-        "title": "Project scope",
-        "body": "Archive-level learning artifact; not a flagship product case.\n\nThird-party animal photography is not republished in this media pack."
-      }
-    ],
-    "media": [],
-    "documents": [
-      {
-        "title": "Code & analysis notes",
-        "src": "assets/projects/github/reports/animal-trading-card.html",
-        "type": "html"
-      }
-    ],
-    "sources": [
-      {
-        "label": "Animal-Trading-Cards",
-        "url": "https://github.com/KeonPham/Animal-Trading-Cards"
-      }
-    ]
-  },
-  {
     "id": "tb-classification",
     "title": "Tuberculosis Classification Study",
     "category": "vision",
@@ -2246,11 +2199,6 @@ window.PORTFOLIO_CREDENTIALS = {
           "src": "assets/projects/drive/public/credentials/ait-degree.webp",
           "alt": "AIT Master of Science (Professional) diploma awarded to Khoa Pham",
           "caption": "AIT diploma · awarded 17 December 2025"
-        },
-        {
-          "src": "assets/projects/drive/public/credentials/ait-recognition-excerpt.webp",
-          "alt": "Excerpt of the Vietnamese recognition document for the AIT professional master degree",
-          "caption": "Recognition excerpt · qualification equivalent to Vietnam Level 7"
         }
       ],
       "documents": []
