@@ -2211,6 +2211,70 @@ window.PORTFOLIO_CREDENTIALS = {
   ],
   "programs": [
     {
+      "id": "aiesec-product-management-mentor",
+      "title": "Product Management Essentials · Mentor",
+      "provider": "AIESEC in Vietnam",
+      "group": "business",
+      "kind": "Certificate of appreciation",
+      "issued": "6 Jan 2024",
+      "issuedISO": "2024-01-06",
+      "media": [
+        {
+          "src": "assets/credentials/aiesec-mentor-appreciation.png",
+          "alt": "AIESEC appreciation certificate awarded to Pham Nguyen Thanh Khoa for mentoring Product Management Essentials 2023",
+          "caption": "Mentor recognition for Product Management Essentials 2023: From Blank to High Rank, issued 6 January 2024."
+        }
+      ],
+      "evidence": "original_recognition_certificate_reviewed",
+      "sources": [
+        {
+          "label": "Original appreciation certificate",
+          "url": "https://drive.google.com/file/d/1sAp8KvFv0XrG10qTgC1Aq6aQsWBV4C5v/view"
+        }
+      ]
+    },
+    {
+      "id": "vlu-english-proficiency",
+      "title": "English Certificate of Proficiency",
+      "provider": "Van Lang University",
+      "group": "language",
+      "kind": "Language certificate",
+      "issued": "12 Jan 2026",
+      "issuedISO": "2026-01-12",
+      "result": "Level 4/6 · Overall score 8.0/10",
+      "media": [],
+      "evidence": "original_certificate_reviewed",
+      "sources": [
+        {
+          "label": "Original certificate reviewed privately"
+        },
+        {
+          "label": "Issuer examination centre",
+          "url": "https://vstep.vlu.edu.vn/"
+        }
+      ]
+    },
+    {
+      "id": "udacity-agentic-thinking-101",
+      "title": "Agentic Thinking 101",
+      "provider": "Udacity",
+      "group": "data-ai",
+      "kind": "Completed course",
+      "year": "2026",
+      "logo": "assets/logos/udacity.svg",
+      "media": [],
+      "evidence": "issuer_completion_email_reviewed",
+      "sources": [
+        {
+          "label": "Issuer completion email reviewed privately"
+        },
+        {
+          "label": "Course information",
+          "url": "https://www.udacity.com/course/agentic-thinking-101--cd15637"
+        }
+      ]
+    },
+    {
       "id": "udacity-data-scientist",
       "title": "Data Scientist",
       "provider": "Udacity",
