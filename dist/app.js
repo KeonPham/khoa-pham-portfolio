@@ -278,7 +278,12 @@
       const target = projectOpen ? $('#case-title') : storyOpen ? $('#story-title') : $('#' + route.tab);
       if (target) { if (!target.hasAttribute('tabindex')) target.tabIndex = -1; target.focus({preventScroll:true}); }
     }
-    if (options.scroll) $('#' + route.tab).scrollIntoView({behavior:motion.matches ? 'instant' : 'smooth',block:'start'});
+    if (options.scroll) {
+      // Main tabs are complete views: keep the name and navigation visible.
+      // Only detailed readers need to align below the sticky tab bar.
+      if (projectOpen || storyOpen) $('#' + route.tab).scrollIntoView({behavior:motion.matches ? 'instant' : 'smooth',block:'start'});
+      else window.scrollTo({top:0,left:0,behavior:'instant'});
+    }
   }
   function renderProjects() {
     const query = route.query.toLocaleLowerCase();
@@ -407,9 +412,9 @@
       const actual = imageDialog.classList.toggle('actual-size');
       control.setAttribute('aria-pressed', String(actual));
       control.textContent = actual ? 'Fit image' : 'Actual size';
-    } else if (control.dataset.tab || control.dataset.go) {
+    } else if (control.dataset.tab || control.dataset.go || control.matches('.brand')) {
       event.preventDefault();
-      navigate({...route,tab:control.dataset.tab || control.dataset.go,project:'',story:''},{scroll:true});
+      navigate({...route,tab:control.dataset.tab || control.dataset.go || 'profile',project:'',story:''},{scroll:true});
     } else if (control.dataset.filter) {
       event.preventDefault();
       navigate({...route,tab:'projects',theme:control.dataset.filter,project:''});
