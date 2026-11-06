@@ -2342,18 +2342,22 @@ window.PORTFOLIO_CREDENTIALS = {
       "media": [
         {
           "src": "assets/credentials/aiesec-mentor-appreciation.png",
-          "alt": "AIESEC appreciation certificate awarded to Pham Nguyen Thanh Khoa for mentoring Product Management Essentials 2023",
-          "caption": "Mentor recognition for Product Management Essentials 2023: From Blank to High Rank, issued 6 January 2024."
+          "alt": "AIESEC appreciation certificate awarded to Pham Nguyen Thanh Khoa for mentoring Product Management Essentials 2023, issued 6 January 2024.",
+          "caption": "AIESEC in Vietnam · Product Management Essentials 2023 mentor · 6 January 2024"
         }
       ],
-      "evidence": "original_recognition_certificate_reviewed",
+      "evidence": "original_certificate_supplied_by_owner",
       "sources": [
+        {
+          "label": "Original certificate supplied by owner"
+        },
         {
           "label": "Original appreciation certificate",
           "url": "https://drive.google.com/file/d/1sAp8KvFv0XrG10qTgC1Aq6aQsWBV4C5v/view"
         }
       ],
-      "recordUrl": "https://www.linkedin.com/in/khoapnt/details/honors/"
+      "recordUrl": "https://www.linkedin.com/in/khoapnt/details/honors/",
+      "detail": "Mentored participants in Product Management Essentials 2023: From Blank to High Rank, a program by AIESEC in Vietnam."
     },
     {
       "id": "vlu-english-proficiency",
@@ -2813,17 +2817,20 @@ window.PORTFOLIO_CREDENTIALS = {
       "kind": "Certificate of appreciation",
       "issued": "Nov 2025",
       "issuedISO": "2025-11",
-      "detail": "Recognized for sharing industry experience with MBA students.",
+      "detail": "Recognized by RMIT Vietnam for sharing industry insights with MBA students in the Digital Innovation course, Semester 3, 2025.",
       "recordUrl": "https://www.linkedin.com/in/khoapnt/details/honors/",
       "media": [
         {
-          "src": "assets/rmit-speaking-linkedin.jpg",
-          "alt": "Khoa Pham sharing industry experience with students at RMIT",
-          "caption": "Guest-speaking session at RMIT. Event photograph, not the appreciation certificate."
+          "src": "assets/credentials/rmit-digital-innovation-appreciation.png",
+          "alt": "RMIT Certificate of Appreciation presented to Khoa Pham for the Digital Innovation course in Semester 3, 2025.",
+          "caption": "RMIT Vietnam · Digital Innovation guest speaker · Semester 3, 2025"
         }
       ],
-      "evidence": "user_supplied_linkedin_honors_screenshot",
+      "evidence": "original_certificate_supplied_by_owner",
       "sources": [
+        {
+          "label": "Original certificate supplied by owner"
+        },
         {
           "label": "LinkedIn Honors & Awards",
           "url": "https://www.linkedin.com/in/khoapnt/details/honors/"
@@ -2836,13 +2843,22 @@ window.PORTFOLIO_CREDENTIALS = {
       "provider": "Society of Petroleum Engineers (SPE)",
       "group": "honors",
       "kind": "Scholarship",
-      "issued": "Jan 2011",
-      "issuedISO": "2011-01",
-      "detail": "Represented scholarship recipients with a thank-you speech to industry professionals and professors.",
+      "issued": "Mar 2011",
+      "issuedISO": "2011-03",
+      "detail": "I received the SPE Vietnam Scholarship and was honored to represent the scholarship recipients, delivering a thank-you speech to petroleum industry professionals, SPE members, and professors at the Sheraton Hotel in 2011.",
       "recordUrl": "https://www.linkedin.com/in/khoapnt/details/honors/",
-      "media": [],
-      "evidence": "user_supplied_linkedin_honors_screenshot",
+      "media": [
+        {
+          "src": "assets/credentials/spe-vietnam-scholarship.png",
+          "alt": "SPE Vietnam Certificate of Scholarship awarded to Pham Nguyen Thanh Khoa of Ho Chi Minh City University of Sciences, March 2011.",
+          "caption": "SPE Vietnam Scholarship · March 2011"
+        }
+      ],
+      "evidence": "original_certificate_supplied_by_owner",
       "sources": [
+        {
+          "label": "Original certificate supplied by owner"
+        },
         {
           "label": "LinkedIn Honors & Awards",
           "url": "https://www.linkedin.com/in/khoapnt/details/honors/"
