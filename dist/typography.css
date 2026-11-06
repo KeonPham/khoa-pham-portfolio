@@ -126,6 +126,6 @@ em{font-family:inherit;font-style:normal;font-weight:700}
 [data-story-card="transition"] .story-image img{object-fit:contain;background:#e7e9e3}
 
 /* A compact portrait balances the introduction without dominating it. */
-.hero .portrait{width:100%;max-width:320px;aspect-ratio:1;justify-self:center}
+.hero .portrait{width:100%;max-width:320px;aspect-ratio:1;border-radius:50%;justify-self:center}
 .hero .portrait::after{display:none}
 @media(max-width:900px){.hero .portrait{max-width:280px}}
