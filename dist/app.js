@@ -15,43 +15,125 @@
     catch { return ''; }
   };
   const stories = {
-    transition: {
-      title:'A different field. The same curiosity.',
-      label:'Changing fields',
-      image:'assets/building-desk-linkedin.jpg',
-      alt:'Khoa’s study desk with technical notes and code',
-      lead:'My path into data did not start with a computer science degree.',
-      sections:[
-        {title:'Learning to read a system',body:'I began in geology and field engineering. At Baker Hughes, the work took me to Vietnam, Oman, Malaysia, the UAE, and Australia. The setting changed, but the discipline stayed the same: work with evidence, understand the constraints, and communicate clearly when decisions matter.\n\nWorking with clients and colleagues across countries also taught me to listen before proposing an answer. People can be solving the same problem with very different assumptions.'},
-        {title:'Making the transition deliberate',body:'Moving from oil and gas into data meant becoming a beginner again. I made space for daily coding, structured programs, and projects that forced me to apply what I was learning. Python and SQL became practical tools for asking better questions of data.\n\nThe transition continued through data engineering at FPT Software, supporting Airbus Skywise, and into regional analytics work at HEINEKEN. Learning was part of the work, not a stage I finished before doing it.'},
-        {title:'What carried forward',body:'Today, my work in data and AI product development brings the technical and human sides together. I still enjoy building, testing, and understanding how things work. I also care about whether a team has a shared question, whether the result is understandable, and whether it makes the next decision easier.'}
-      ]
+  "learning": {
+    "title": "What a master’s degree taught me about learning.",
+    "label": "Learning & resilience",
+    "image": "assets/ait-graduation-linkedin.jpg",
+    "alt": "Khoa at his Asian Institute of Technology graduation",
+    "lead": "A 3.94 GPA tells only part of the story. The harder lessons came from the work behind it.",
+    "engagement": {
+      "reactions": 88,
+      "comments": 23
     },
-    learning: {
-      title:'From a master’s thesis to working software.',
-      label:'Learning by building',
-      image:'assets/ait-graduation-linkedin.jpg',
-      alt:'Khoa at his Asian Institute of Technology graduation',
-      lead:'Understanding a model is one challenge. Building something useful around it is another.',
-      sections:[
-        {title:'Start with the fundamentals',body:'The MSc (Professional) program at the Asian Institute of Technology gave me a structured way to deepen my knowledge of data science and AI. Coursework, experiments, and implementation made the ideas concrete, from data engineering to machine learning.\n\nThe degree was awarded in December 2025, with a 3.94/4.00 GPA and an Excellent project examination result.'},
-        {title:'Connect research to a working application',body:'My work on medical image segmentation explored convolutional and transformer-based approaches. The surrounding MedSegAPI project extends that learning into the practical concerns of serving a model: application interfaces, deployment, and monitoring.\n\nI like that change of perspective. A model is one part of a larger system; people also need a reliable way to use and understand its output.'},
-        {title:'Keep the boundaries visible',body:'Research results belong with their data, assumptions, and limitations. These portfolio projects are research and learning artifacts; they are not claims of clinical deployment. Sharing the reports and implementation makes the work easier to inspect and discuss.'}
-      ]
+    "sections": [
+      {
+        "title": "Understanding under pressure",
+        "body": "At AIT, learning meant weekly assignments, presentations, substantial reports and coding projects. Exams moved between handwritten code, data architecture, live debugging and research proposals. Knowing a definition was not enough; I had to explain and apply it."
+      },
+      {
+        "title": "Choosing the difficult subject",
+        "body": "Computer Vision was my B+ subject. I chose it for my thesis because the setback showed me where I wanted to go deeper. The experience reinforced a practical habit: study consistently, start early and connect theory with implementation."
+      },
+      {
+        "title": "What stayed with me",
+        "body": "The strongest lessons were perseverance, communication and responsibility for how data is used. I later graduated in December 2025 with a 3.94/4.00 GPA and an Excellent project examination result."
+      }
+    ],
+    "discussion": "Readers responded to the effort behind the grades. Gavin Pathross highlighted perseverance, communication and ethics; other comments recognized consistency and encouraged the next stage of learning.",
+    "sources": [
+      {
+        "label": "Original post & reader comments",
+        "url": "https://www.linkedin.com/posts/khoapnt_my-masters-journey-at-asian-institute-of-activity-7389839556889587712-EK7n"
+      },
+      {
+        "label": "Graduation follow-up",
+        "url": "https://www.linkedin.com/feed/update/urn:li:activity:7407202277469483008/"
+      }
+    ]
+  },
+  "transition": {
+    "title": "From geology to data: the Moneyball moment.",
+    "label": "Career transition",
+    "image": "assets/building-desk-linkedin.jpg",
+    "alt": "Khoa’s study desk with technical notes and code",
+    "lead": "A film about baseball changed how I thought about the data I was already working with.",
+    "engagement": {
+      "reactions": 32,
+      "comments": 2
     },
-    people: {
-      title:'Make the technical understandable.',
-      label:'Working with people',
-      image:'assets/rmit-speaking-linkedin.jpg',
-      alt:'Khoa sharing experience with an RMIT MBA class',
-      lead:'Technical decisions become useful when people understand what they mean for the work.',
-      sections:[
-        {title:'Start with a shared question',body:'Engineers, operations teams, and business stakeholders often describe the same problem differently. I try to make the underlying question explicit before discussing a dashboard, a pipeline, or an AI solution. What decision should become easier? What does a useful result look like?'},
-        {title:'Connect teams across functions and cultures',body:'At HEINEKEN, my work grew from APAC Data Analytics Lead into APAC Data Analytics Manager. It involved data engineers, business analysts, and regional and global stakeholders working on manufacturing analytics.\n\nThat experience built on years of field work across countries. Clear context, careful listening, and a shared understanding of trade-offs matter as much as the technical design.'},
-        {title:'Share what you have learned',body:'Speaking with an RMIT MBA class and mentoring through AIESEC are part of the same habit: translate experience into something another person can use. Explaining an idea clearly is also a useful test of how well I understand it myself.'}
-      ]
-    }
-  };
+    "sections": [
+      {
+        "title": "Seeing value in a different way",
+        "body": "My first career was in petroleum geology and field engineering. Working with drilling data made me curious about what the measurements could reveal. Moneyball gave that curiosity a direction: overlooked evidence could change a decision, even in an established industry."
+      },
+      {
+        "title": "Building a new foundation",
+        "body": "I started with SQL, Python, DataCamp and small Power BI and Power Query projects. The transition led to Airbus Skywise work at FPT Software, then predictive models, dashboards and manufacturing analytics at HEINEKEN."
+      },
+      {
+        "title": "Making the insight useful",
+        "body": "The work also required explaining pipelines and analytical results to people from other functions. The lesson I carried forward was to connect data with the decision it could improve—and keep learning as the questions changed."
+      }
+    ],
+    "discussion": "One reader from an oil-field background said the article inspired them. Another asked for more writing—a reminder that sharing the transition can help someone considering their own.",
+    "sources": [
+      {
+        "label": "Original Moneyball article & comments",
+        "url": "https://www.linkedin.com/pulse/from-geology-data-analytics-lead-how-moneyball-my-pham-nguyen-thanh-8zqfc"
+      }
+    ]
+  },
+  "people": {
+    "title": "From industry experience to the MBA classroom.",
+    "label": "Communication & community",
+    "image": "assets/rmit-speaking-linkedin.jpg",
+    "alt": "Khoa sharing experience with an RMIT MBA class",
+    "lead": "Guest speaking at RMIT was an opportunity to make data and AI tangible for a business audience.",
+    "sections": [
+      {
+        "title": "Connect the technology to the work",
+        "body": "In November 2025, I joined RMIT Vietnam’s MBA Digital Innovation course as a guest speaker. I shared examples from industrial IoT, oil and gas, aviation, brewery analytics and medical-AI research."
+      },
+      {
+        "title": "Make the explanation travel",
+        "body": "Those examples cross different industries, but they share a communication challenge: explain the business problem, the role of data and the practical meaning of the result. Bringing hands-on experience into the classroom is part of how I share what I learn."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Guest Speaker — RMIT MBA Class",
+        "url": "https://www.linkedin.com/feed/update/urn:li:activity:7394708697018454016/"
+      }
+    ]
+  },
+  "agents": {
+    "title": "Two personal AI agents. Two real frustrations.",
+    "label": "Building & product thinking",
+    "image": "assets/research-radar-linkedin.jpg",
+    "alt": "Research Radar workflow from Khoa’s original LinkedIn post",
+    "lead": "I built Research Radar and Finance Brain for my own workflows—starting with problems I could feel.",
+    "sections": [
+      {
+        "title": "Research Radar",
+        "body": "A Telegram trigger starts a workflow that discovers and filters research, assesses papers, generates a script and media, renders a short video digest and delivers it back to Telegram. The goal was to make keeping up with research more manageable."
+      },
+      {
+        "title": "Finance Brain",
+        "body": "The second prototype extracts and normalizes documents, categorizes transactions and stores structured records in SQLite. A LangGraph ReAct agent supports natural-language questions and charts over that personal dataset."
+      },
+      {
+        "title": "Build from the friction",
+        "body": "Both were personal proofs of concept. Building for myself made the requirements concrete: I could see where the workflow helped and where it still needed work. That is a useful starting point for product discovery."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Original post — Research Radar & Finance Brain",
+        "url": "https://www.linkedin.com/feed/update/urn:li:activity:7459215570140393472/"
+      }
+    ]
+  }
+};
   const programs = [
     {title:'Data Scientist',provider:'Udacity',year:'2024',kind:'Nanodegree'},
     {title:'Introduction to Machine Learning with PyTorch',provider:'Udacity',year:'2024',kind:'Nanodegree'},
@@ -222,7 +304,10 @@
     return '<div class="reader-topline"><button class="quiet" data-back-projects>← Project library</button><span>' + escapeHTML(themes[project.category] || 'Project') + '</span></div><div class="case-heading"><p class="eyebrow">' + escapeHTML(project.context) + '</p><h2 id="case-title" tabindex="-1">' + escapeHTML(project.title) + '</h2><p class="case-lead">' + escapeHTML(project.summary) + '</p><div class="stack">' + (project.stack || []).map(tool => '<span>' + escapeHTML(tool) + '</span>').join('') + '</div></div>' + renderDemo(project) + renderDashboard(project) + (media ? '<section class="case-section"><p class="eyebrow">INSIDE THE PROJECT</p>' + media + '</section>' : '') + '<div class="case-narrative">' + sections + '</div>' + (collection ? '<section class="case-section"><p class="eyebrow">EXPLORE THE COLLECTION</p><div class="collection-grid">' + collection + '</div></section>' : '') + (docs ? '<section class="case-section"><h3>Read & explore</h3><p class="muted">Reports, presentations, and recordings from the work.</p><div class="documents">' + docs + '</div></section>' : '') + (sources ? '<details class="source-notes"><summary>Original sources</summary><div>' + sources + '</div></details>' : '') + '<div class="reader-end"><button class="quiet" data-back-projects>← Back to projects</button><a href="mailto:pntkhoa@gmail.com">Talk about this work ↗</a></div>';
   }
   function renderStory(story) {
-    return '<div class="reader-topline"><a class="quiet" href="#stories" data-go="stories">← All stories</a><span>' + escapeHTML(story.label) + '</span></div><div class="case-heading"><p class="eyebrow">A PERSONAL PERSPECTIVE</p><h2 id="story-title" tabindex="-1">' + escapeHTML(story.title) + '</h2><p class="case-lead">' + escapeHTML(story.lead) + '</p></div><figure class="story-feature"><img src="' + escapeHTML(story.image) + '" alt="' + escapeHTML(story.alt) + '" loading="lazy" decoding="async"></figure><div class="story-prose">' + story.sections.map(section => '<section><h3>' + escapeHTML(section.title) + '</h3>' + paragraphs(section.body) + '</section>').join('') + '</div><div class="reader-end"><a class="quiet" href="#stories" data-go="stories">← All stories</a><a href="#projects" data-go="projects">Explore the work ↗</a></div>';
+    const links = story.sources.map(source => '<a href="' + escapeHTML(sourceURL(source.url)) + '" target="_blank" rel="noopener">' + escapeHTML(source.label) + ' ↗</a>').join('');
+    const engagement = story.engagement ? '<p class="story-engagement">' + story.engagement.reactions + ' reactions · ' + story.engagement.comments + ' comments <small>Indexed LinkedIn snapshot; live totals may differ.</small></p>' : '';
+    const discussion = story.discussion ? '<section class="story-discussion"><h3>From the conversation</h3><p>' + escapeHTML(story.discussion) + '</p><small>Summary of public reader comments. Read the original discussion via the reference below.</small></section>' : '';
+    return '<div class="reader-topline"><a class="quiet" href="#stories" data-go="stories">← All stories</a><span>' + escapeHTML(story.label) + '</span></div><div class="case-heading"><p class="eyebrow">STORIES FROM LINKEDIN</p><h2 id="story-title" tabindex="-1">' + escapeHTML(story.title) + '</h2><p class="case-lead">' + escapeHTML(story.lead) + '</p>' + engagement + '</div><figure class="story-feature"><img src="' + escapeHTML(story.image) + '" alt="' + escapeHTML(story.alt) + '" loading="lazy" decoding="async"></figure><div class="story-prose">' + story.sections.map(section => '<section><h3>' + escapeHTML(section.title) + '</h3>' + paragraphs(section.body) + '</section>').join('') + discussion + '<section class="story-references"><h3>Original posts &amp; references</h3>' + links + '</section></div><div class="reader-end"><a class="quiet" href="#stories" data-go="stories">← All stories</a><a href="#projects" data-go="projects">Explore the work ↗</a></div>';
   }
   function renderCredentials() {
     const extras = window.PORTFOLIO_CREDENTIALS || {};

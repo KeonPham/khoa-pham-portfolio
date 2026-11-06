@@ -80,6 +80,20 @@ em{font-family:inherit;font-style:normal;font-weight:700}
 }
 
 /* Experience: scope, delivery and value remain visible without disclosure panels. */
+.story-source{display:block;width:fit-content;font-size:14px;line-height:1.6;color:var(--accent);text-decoration:underline;text-underline-offset:4px;margin-top:12px}
+.story-references a{display:block;width:fit-content;font-size:16px;line-height:1.65;margin:12px 0;color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+.story-engagement{font-size:15px;color:var(--accent);margin-top:20px}
+.story-engagement small{display:block;font-size:13px;color:var(--muted);margin-top:7px}
+.story-discussion{background:var(--soft);padding:24px;border-radius:12px}
+.story-discussion small{display:block;font-size:13px;line-height:1.6;color:var(--muted);margin-top:14px}
+@media screen{
+ .story-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px}
+ .story-card .story-card-engagement{font-size:14px;color:var(--accent);margin-top:14px}
+ .story-card-engagement span{color:var(--muted);font-size:12px}
+ .story-image{height:260px}
+ .story-card .story-action{margin-bottom:0}
+}
+@media(max-width:700px){.story-grid{grid-template-columns:1fr}.story-image{height:230px}.story-discussion{padding:20px}}
 .cv-role h4{font-size:17px;line-height:1.4;color:var(--ink);margin:26px 0 12px;font-weight:700}
 .cv-role strong{color:var(--ink);font-weight:700}
 @media screen{
