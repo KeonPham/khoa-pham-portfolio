@@ -54,8 +54,8 @@
   "transition": {
     "title": "From geology to data: the Moneyball moment.",
     "label": "Career transition",
-    "image": "assets/building-desk-linkedin.jpg",
-    "alt": "Khoa’s study desk with technical notes and code",
+    "image": "assets/heineken-milestone-linkedin.jpg",
+    "alt": "Khoa at a HEINEKEN career milestone in August 2022",
     "lead": "A film about baseball changed how I thought about the data I was already working with.",
     "engagement": {
       "reactions": 32,
