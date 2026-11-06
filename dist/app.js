@@ -59,7 +59,8 @@
     "lead": "A film about baseball changed how I thought about the data I was already working with.",
     "engagement": {
       "reactions": 32,
-      "comments": 2
+      "comments": 2,
+      "sourceLabel": "Moneyball article"
     },
     "sections": [
       {
@@ -75,8 +76,12 @@
         "body": "The work also required explaining pipelines and analytical results to people from other functions. The lesson I carried forward was to connect data with the decision it could improve—and keep learning as the questions changed."
       }
     ],
-    "discussion": "One reader from an oil-field background said the article inspired them. Another asked for more writing—a reminder that sharing the transition can help someone considering their own.",
+    "discussion": "In the Moneyball article’s comments, one reader from an oil-field background said the article inspired them. Another asked for more writing—a reminder that sharing the transition can help someone considering their own.",
     "sources": [
+      {
+        "label": "Career transition — original LinkedIn post",
+        "url": "https://www.linkedin.com/feed/update/urn:li:activity:7375437969115107328/"
+      },
       {
         "label": "Original Moneyball article & comments",
         "url": "https://www.linkedin.com/pulse/from-geology-data-analytics-lead-how-moneyball-my-pham-nguyen-thanh-8zqfc"
@@ -305,7 +310,7 @@
   }
   function renderStory(story) {
     const links = story.sources.map(source => '<a href="' + escapeHTML(sourceURL(source.url)) + '" target="_blank" rel="noopener">' + escapeHTML(source.label) + ' ↗</a>').join('');
-    const engagement = story.engagement ? '<p class="story-engagement">' + story.engagement.reactions + ' reactions · ' + story.engagement.comments + ' comments <small>Indexed LinkedIn snapshot; live totals may differ.</small></p>' : '';
+    const engagement = story.engagement ? '<p class="story-engagement">' + (story.engagement.sourceLabel ? escapeHTML(story.engagement.sourceLabel) + ' · ' : '') + story.engagement.reactions + ' reactions · ' + story.engagement.comments + ' comments <small>Indexed LinkedIn snapshot; live totals may differ.</small></p>' : '';
     const discussion = story.discussion ? '<section class="story-discussion"><h3>From the conversation</h3><p>' + escapeHTML(story.discussion) + '</p><small>Summary of public reader comments. Read the original discussion via the reference below.</small></section>' : '';
     return '<div class="reader-topline"><a class="quiet" href="#stories" data-go="stories">← All stories</a><span>' + escapeHTML(story.label) + '</span></div><div class="case-heading"><p class="eyebrow">STORIES FROM LINKEDIN</p><h2 id="story-title" tabindex="-1">' + escapeHTML(story.title) + '</h2><p class="case-lead">' + escapeHTML(story.lead) + '</p>' + engagement + '</div><figure class="story-feature"><img src="' + escapeHTML(story.image) + '" alt="' + escapeHTML(story.alt) + '" loading="lazy" decoding="async"></figure><div class="story-prose">' + story.sections.map(section => '<section><h3>' + escapeHTML(section.title) + '</h3>' + paragraphs(section.body) + '</section>').join('') + discussion + '<section class="story-references"><h3>Original posts &amp; references</h3>' + links + '</section></div><div class="reader-end"><a class="quiet" href="#stories" data-go="stories">← All stories</a><a href="#projects" data-go="projects">Explore the work ↗</a></div>';
   }
