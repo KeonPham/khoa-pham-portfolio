@@ -306,7 +306,7 @@ window.PORTFOLIO_PROJECTS = [
       {
         "src": "assets/research-radar-linkedin.jpg",
         "alt": "Research Radar workflow shared by Khoa on LinkedIn",
-        "caption": "The original workflow shared with the prototype."
+        "caption": "Complete workflow shared with the prototype: discovery, assessment, content generation, video rendering and Telegram delivery."
       }
     ],
     "documents": [],
@@ -317,7 +317,33 @@ window.PORTFOLIO_PROJECTS = [
       }
     ],
     "thumbnail": "assets/projects/thumbnails/research-radar.webp",
-    "thumbnailAlt": "Research Radar workflow shared by Khoa on LinkedIn"
+    "thumbnailAlt": "Research Radar workflow shared by Khoa on LinkedIn",
+    "collection": [
+      {
+        "title": "01 · Trigger, discover & assess",
+        "body": "A closer look at the cron and Telegram triggers, discovery, gating and assessment stages.",
+        "media": [
+          {
+            "src": "assets/research-radar-linkedin.jpg",
+            "focus": "research-discovery",
+            "alt": "Detail of the original Research Radar workflow: triggers, discovery, gating and assessment.",
+            "caption": "Detail from the original workflow · Discovery cursor, gating audit and analysis cache."
+          }
+        ]
+      },
+      {
+        "title": "02 · Generate, render & deliver",
+        "body": "A closer look at script, voiceover, image, music and metadata generation, followed by video rendering and Telegram updates.",
+        "media": [
+          {
+            "src": "assets/research-radar-linkedin.jpg",
+            "focus": "research-production",
+            "alt": "Detail of the original Research Radar workflow: content generation, video rendering and Telegram delivery.",
+            "caption": "Detail from the original workflow · Content generation, rendering and delivery."
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "data-engineering-collection",

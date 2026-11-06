@@ -303,7 +303,12 @@
   }
   function gallery(items = []) {
     const images = items.filter(item => localAsset(item.src));
-    return images.length ? '<div class="case-gallery">' + images.map(item => '<figure><button class="image-zoom" data-image="' + escapeHTML(item.src) + '" aria-label="Enlarge image: ' + escapeHTML(item.alt || item.caption || 'Project image') + '"><img src="' + escapeHTML(item.src) + '" alt="' + escapeHTML(item.alt || item.caption || 'Project image') + '" loading="lazy" decoding="async"><span aria-hidden="true">Enlarge ↗</span></button>' + (item.caption ? '<figcaption>' + escapeHTML(item.caption) + '</figcaption>' : '') + '</figure>').join('') + '</div>' : '';
+    return images.length ? '<div class="case-gallery">' + images.map(item => {
+      const focus = ['research-discovery','research-production'].includes(item.focus) ? item.focus : '';
+      const img = '<img src="' + escapeHTML(item.src) + '" alt="' + escapeHTML(item.alt || item.caption || 'Project image') + '" loading="lazy" decoding="async">';
+      const visual = focus ? '<span class="image-focus ' + focus + '">' + img + '</span>' : img;
+      return '<figure><button class="image-zoom" data-image="' + escapeHTML(item.src) + '" aria-label="Enlarge image: ' + escapeHTML(item.alt || item.caption || 'Project image') + '">' + visual + '<span aria-hidden="true">Enlarge ↗</span></button>' + (item.caption ? '<figcaption>' + escapeHTML(item.caption) + '</figcaption>' : '') + '</figure>';
+    }).join('') + '</div>' : '';
   }
   function documentSource(doc) {
     if (doc.type === 'drive-video' && /^https:\/\/drive\.google\.com\/file\/d\/[A-Za-z0-9_-]+\/preview$/.test(doc.src)) return doc.src;

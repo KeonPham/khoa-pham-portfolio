@@ -174,3 +174,10 @@ header .brand .brand-details{font-size:14px;font-weight:400;color:#687582;margin
 @media(max-width:600px){
  .case-gallery:has(img[src*="projects/finance-brain/"]){grid-template-columns:minmax(0,1fr)}
 }
+
+.image-zoom>.image-focus{display:block;position:relative;inset:auto;width:100%;padding:0;border:0;border-radius:0;box-shadow:none;overflow:hidden;background:#fff}
+.image-focus.research-discovery{aspect-ratio:440/559}
+.image-focus.research-production{aspect-ratio:584/559}
+.image-focus img{position:absolute;top:0;max-width:none;height:auto}
+.image-focus.research-discovery img{width:232.727%;left:0}
+.image-focus.research-production img{width:175.342%;left:-75.342%}
