@@ -2818,7 +2818,7 @@ window.PORTFOLIO_CREDENTIALS = {
       "issued": "Nov 2025",
       "issuedISO": "2025-11",
       "detail": "Recognized by RMIT Vietnam for sharing industry insights with MBA students in the Digital Innovation course, Semester 3, 2025.",
-      "recordUrl": "https://www.linkedin.com/in/khoapnt/details/honors/",
+      "recordUrl": "https://www.linkedin.com/feed/update/urn:li:activity:7394708697018454016/",
       "media": [
         {
           "src": "assets/credentials/rmit-digital-innovation-appreciation.png",
@@ -2834,8 +2834,13 @@ window.PORTFOLIO_CREDENTIALS = {
         {
           "label": "LinkedIn Honors & Awards",
           "url": "https://www.linkedin.com/in/khoapnt/details/honors/"
+        },
+        {
+          "label": "Guest-speaking post supplied by owner",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7394708697018454016/"
         }
-      ]
+      ],
+      "recordLabel": "Guest Speaker — RMIT MBA Class"
     },
     {
       "id": "spe-vietnam-scholarship",

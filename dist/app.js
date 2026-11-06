@@ -249,7 +249,7 @@
         const recordUrl = sourceURL(item.recordUrl);
         const preview = (item.media || []).find(m => localAsset(m.src));
         const previewButton = preview ? '<button class="learning-preview" data-image="' + escapeHTML(preview.src) + '" aria-label="View ' + (group.id === 'honors' ? 'image: ' : 'certificate: ') + escapeHTML(item.title) + '"><img loading="lazy" decoding="async" src="' + escapeHTML(preview.src) + '" alt="' + escapeHTML(preview.alt || item.title + ' certificate') + '"></button>' : '';
-        const link = url ? '<a data-credential-link href="' + escapeHTML(url) + '" target="_blank" rel="noopener">Verify credential ↗</a>' : recordUrl ? '<a href="' + escapeHTML(recordUrl) + '" target="_blank" rel="noopener">LinkedIn record ↗</a>' : '';
+        const link = url ? '<a data-credential-link href="' + escapeHTML(url) + '" target="_blank" rel="noopener">Verify credential ↗</a>' : recordUrl ? '<a href="' + escapeHTML(recordUrl) + '" target="_blank" rel="noopener">' + escapeHTML(item.recordLabel || 'LinkedIn record') + ' ↗</a>' : '';
         const date = item.issued || item.year;
         return '<article class="learning-card"><div class="learning-logo">' + mark + '</div><div class="learning-copy"><h4>' + escapeHTML(item.title) + '</h4><p class="learning-provider">' + escapeHTML(item.provider) + '</p><p class="learning-meta">' + escapeHTML(item.kind) + (date ? ' · ' + escapeHTML(date) : '') + '</p>' + (item.result ? '<p class="learning-meta">' + escapeHTML(item.result) + '</p>' : '') + (item.detail ? '<p class="learning-meta">' + escapeHTML(item.detail) + '</p>' : '') + (link ? '<div class="learning-links">' + link + '</div>' : '') + '</div>' + previewButton + '</article>';
       }).join('');
