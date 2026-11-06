@@ -569,8 +569,8 @@ window.PORTFOLIO_PROJECTS = [
         "url": "https://drive.google.com/file/d/1xhHqHIjOMI8XoaXU4DAOmtdnCx6_Ad5r/view"
       }
     ],
-    "thumbnail": "assets/projects/thumbnails/starbucks-offer-response.webp",
-    "thumbnailAlt": "Original model comparison, including the leakage-affected result and corrected experiments."
+    "thumbnail": "assets/projects/thumbnails/starbucks-shap-0.png",
+    "thumbnailAlt": "SHAP summary plot explaining feature impact on Starbucks offer-response predictions."
   },
   {
     "id": "disaster-response",
