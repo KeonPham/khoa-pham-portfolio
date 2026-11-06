@@ -252,12 +252,6 @@
       }).join('');
       return '<section class="learning-group" aria-labelledby="learning-' + group.id + '"><header class="learning-group-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + group.icon + '</svg><h3 id="learning-' + group.id + '">' + escapeHTML(group.title) + '</h3><span>' + items.length + '</span></header><div class="learning-grid">' + cards + '</div></section>';
     }).join('');
-    (extras.education || []).forEach(item => {
-      if (item.id !== 'hcmus') return;
-      const image = (item.media || []).find(m => localAsset(m.src));
-      const container = $('[data-education="hcmus"] .academic-foot');
-      if (container && image) container.insertAdjacentHTML('beforeend','<button class="quiet" data-image="' + escapeHTML(image.src) + '" aria-label="View bachelor diploma">View diploma ↗</button>');
-    });
   }
   document.addEventListener('click', event => {
     const control = event.target.closest('a,button');
