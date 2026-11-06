@@ -2335,7 +2335,7 @@ window.PORTFOLIO_CREDENTIALS = {
       "id": "aiesec-product-management-mentor",
       "title": "Product Management Essentials · Mentor",
       "provider": "AIESEC in Vietnam",
-      "group": "business",
+      "group": "honors",
       "kind": "Certificate of appreciation",
       "issued": "6 Jan 2024",
       "issuedISO": "2024-01-06",
@@ -2352,7 +2352,8 @@ window.PORTFOLIO_CREDENTIALS = {
           "label": "Original appreciation certificate",
           "url": "https://drive.google.com/file/d/1sAp8KvFv0XrG10qTgC1Aq6aQsWBV4C5v/view"
         }
-      ]
+      ],
+      "recordUrl": "https://www.linkedin.com/in/khoapnt/details/honors/"
     },
     {
       "id": "vlu-english-proficiency",
@@ -2803,6 +2804,50 @@ window.PORTFOLIO_CREDENTIALS = {
       "issued": "Nov 2021",
       "issuedISO": "2021-11",
       "result": "6 advanced modules · 2.5 months"
+    },
+    {
+      "id": "rmit-digital-innovation-guest-speaker",
+      "title": "Guest Speaker · MBA Digital Innovation",
+      "provider": "RMIT Vietnam",
+      "group": "honors",
+      "kind": "Certificate of appreciation",
+      "issued": "Nov 2025",
+      "issuedISO": "2025-11",
+      "detail": "Recognized for sharing industry experience with MBA students.",
+      "recordUrl": "https://www.linkedin.com/in/khoapnt/details/honors/",
+      "media": [
+        {
+          "src": "assets/rmit-speaking-linkedin.jpg",
+          "alt": "Khoa Pham sharing industry experience with students at RMIT",
+          "caption": "Guest-speaking session at RMIT. Event photograph, not the appreciation certificate."
+        }
+      ],
+      "evidence": "user_supplied_linkedin_honors_screenshot",
+      "sources": [
+        {
+          "label": "LinkedIn Honors & Awards",
+          "url": "https://www.linkedin.com/in/khoapnt/details/honors/"
+        }
+      ]
+    },
+    {
+      "id": "spe-vietnam-scholarship",
+      "title": "SPE Vietnam Scholarship",
+      "provider": "Society of Petroleum Engineers (SPE)",
+      "group": "honors",
+      "kind": "Scholarship",
+      "issued": "Jan 2011",
+      "issuedISO": "2011-01",
+      "detail": "Represented scholarship recipients with a thank-you speech to industry professionals and professors.",
+      "recordUrl": "https://www.linkedin.com/in/khoapnt/details/honors/",
+      "media": [],
+      "evidence": "user_supplied_linkedin_honors_screenshot",
+      "sources": [
+        {
+          "label": "LinkedIn Honors & Awards",
+          "url": "https://www.linkedin.com/in/khoapnt/details/honors/"
+        }
+      ]
     }
   ]
 };

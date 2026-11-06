@@ -230,6 +230,7 @@
     const catalog = extras.programs?.length ? extras.programs : programs;
     const groupOf = item => item.group || (/management|customer analytics|business intelligence|learning how/i.test(item.title) ? 'business' : /engineering|programming|sql/i.test(item.title) ? 'engineering' : 'data-ai');
     const groups = [
+      {id:'honors',title:'Honors & Awards',icon:'<circle cx="12" cy="8" r="5"/><path d="m8 12-2 9 6-3 6 3-2-9"/>'},
       {id:'data-ai',title:'Data science & AI',icon:'<circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4M5 5l3 3m8 8 3 3M5 19l3-3M16 8l3-3"/>'},
       {id:'engineering',title:'Engineering & programming',icon:'<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>'},
       {id:'business',title:'Business & leadership',icon:'<rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V3h8v4M3 12c5 4 13 4 18 0M12 12v5"/>'},
@@ -238,15 +239,17 @@
     $('#learning-count').textContent = String(catalog.length).padStart(2,'0');
     $('#certificate-grid').innerHTML = groups.map(group => {
       const items = catalog.filter(item => groupOf(item) === group.id);
+      if (group.id === 'honors') items.sort((a,b) => (b.issuedISO || '').localeCompare(a.issuedISO || ''));
       if (!items.length) return '';
       const cards = items.map(item => {
         const providerLogo = localAsset(item.logo) || logo[item.provider];
         const initials = item.provider.split(/\s+/).map(word => word[0]).slice(0,2).join('');
         const mark = providerLogo ? '<img loading="lazy" decoding="async" src="' + escapeHTML(providerLogo) + '" alt="' + escapeHTML(item.provider) + '">' : '<span class="learning-monogram" aria-label="' + escapeHTML(item.provider) + '">' + escapeHTML(initials) + '</span>';
         const url = sourceURL(item.credentialUrl);
+        const recordUrl = sourceURL(item.recordUrl);
         const preview = (item.media || []).find(m => localAsset(m.src));
-        const previewButton = preview ? '<button class="learning-preview" data-image="' + escapeHTML(preview.src) + '" aria-label="View certificate: ' + escapeHTML(item.title) + '"><img loading="lazy" decoding="async" src="' + escapeHTML(preview.src) + '" alt="' + escapeHTML(preview.alt || item.title + ' certificate') + '"></button>' : '';
-        const link = url ? '<a data-credential-link href="' + escapeHTML(url) + '" target="_blank" rel="noopener">Verify credential ↗</a>' : '';
+        const previewButton = preview ? '<button class="learning-preview" data-image="' + escapeHTML(preview.src) + '" aria-label="View ' + (group.id === 'honors' ? 'image: ' : 'certificate: ') + escapeHTML(item.title) + '"><img loading="lazy" decoding="async" src="' + escapeHTML(preview.src) + '" alt="' + escapeHTML(preview.alt || item.title + ' certificate') + '"></button>' : '';
+        const link = url ? '<a data-credential-link href="' + escapeHTML(url) + '" target="_blank" rel="noopener">Verify credential ↗</a>' : recordUrl ? '<a href="' + escapeHTML(recordUrl) + '" target="_blank" rel="noopener">LinkedIn record ↗</a>' : '';
         const date = item.issued || item.year;
         return '<article class="learning-card"><div class="learning-logo">' + mark + '</div><div class="learning-copy"><h4>' + escapeHTML(item.title) + '</h4><p class="learning-provider">' + escapeHTML(item.provider) + '</p><p class="learning-meta">' + escapeHTML(item.kind) + (date ? ' · ' + escapeHTML(date) : '') + '</p>' + (item.result ? '<p class="learning-meta">' + escapeHTML(item.result) + '</p>' : '') + (item.detail ? '<p class="learning-meta">' + escapeHTML(item.detail) + '</p>' : '') + (link ? '<div class="learning-links">' + link + '</div>' : '') + '</div>' + previewButton + '</article>';
       }).join('');

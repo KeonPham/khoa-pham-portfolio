@@ -57,7 +57,7 @@ const learning=scope.window.PORTFOLIO_CREDENTIALS.programs;
 assert.equal(new Set(learning.map(c=>c.id)).size,learning.length,'Unique credential identifiers');
 for(const c of learning){
   assert(c.title&&c.provider&&c.kind&&c.sources.length,'Learning records have context and provenance');
-  assert(['data-ai','engineering','business','language'].includes(c.group),'Known credential group');
+  assert(['data-ai','engineering','business','language','honors'].includes(c.group),'Known credential group');
   if(c.logo)await localAsset(c.logo);
   if(c.credentialUrl)assert(/^https:\/\//.test(c.credentialUrl),'Credential verification links are HTTPS');
   for(const m of c.media||[]){assert(m.alt&&m.caption);await localAsset(m.src);}
