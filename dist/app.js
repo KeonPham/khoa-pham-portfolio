@@ -54,8 +54,8 @@
   "transition": {
     "title": "From geology to data: the Moneyball moment.",
     "label": "Career transition",
-    "image": "assets/learning-investment-spreadsheet.webp",
-    "alt": "Khoa’s Excel tracker of investment in courses, books, subscriptions and a master’s degree from 2021 to 2025",
+    "image": "assets/khoa-ai-center.webp",
+    "alt": "Khoa standing outside the AI Center",
     "lead": "A film about baseball changed how I thought about the data I was already working with.",
     "engagement": {
       "reactions": 32,
