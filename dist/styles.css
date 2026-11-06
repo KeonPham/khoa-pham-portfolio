@@ -124,23 +124,24 @@ input{font:inherit}.panel{scroll-margin-top:76px}.panel:focus,.case-heading h2:f
 #credentials .academic-logo{width:276px;max-width:100%;height:92px;flex:0 0 auto;object-fit:contain;padding:14px 18px;background:#194f3f;border-radius:8px}
 #credentials [data-education="hcmus"] .academic-logo{background:#173f7c}
 #credentials .academic-top>div{min-width:0}
-#credentials .academic-top p,#credentials .academic-top strong{display:block;font-size:12px;font-weight:600;line-height:1.5;color:var(--ink);margin:0}
+#credentials .academic-top p,#credentials .academic-top strong{display:block;font-size:14px;font-weight:600;line-height:1.5;color:var(--ink);margin:0}
 #credentials .academic-top small,#credentials .academic-top span{display:block;font-size:11px;font-weight:400;line-height:1.5;color:var(--muted);margin-top:3px}
-#credentials .academic-top p{font-size:11px;font-weight:400;color:var(--muted);margin-top:3px}
-#credentials .academic-program{min-height:42px}
-#credentials .academic-card>h3{font-size:26px;line-height:1.2;letter-spacing:-.8px;font-weight:500}
-#credentials .academic-program{margin-top:10px;font-size:13px;line-height:1.65;color:var(--muted);max-width:40ch}
+#credentials .academic-top p{font-size:13px;font-weight:400;color:var(--muted);margin-top:5px}
+#credentials .academic-program{min-height:50px}
+#credentials .academic-card>h3{font-size:26px;line-height:1.25;letter-spacing:-.6px;font-weight:500;text-wrap:balance}
+#credentials .academic-card>h3 .degree-qualifier{display:block;margin-top:5px;font-size:19px;line-height:1.4;letter-spacing:-.2px;color:var(--muted)}
+#credentials .academic-program{margin-top:16px;font-size:16px;line-height:1.55;color:var(--muted);max-width:none;text-wrap:balance}
 #credentials .academic-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;border-block:1px solid var(--line);padding:23px 0;margin:25px 0 20px}
 #credentials .academic-metrics>div+div{padding-left:20px;border-left:1px solid var(--line)}
 #credentials .academic-metrics strong{display:block;font-size:34px;font-weight:500;line-height:1.15;letter-spacing:-1.3px;color:var(--accent)}
 #credentials .academic-metrics strong small{font-size:13px;font-weight:400;letter-spacing:0;color:var(--muted)}
-#credentials .academic-metrics span{display:block;margin-top:7px;font-size:11px;line-height:1.5;color:var(--muted)}
+#credentials .academic-metrics span{display:block;margin-top:7px;font-size:13px;line-height:1.5;color:var(--muted)}
 #credentials .academic-awards{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-#credentials .academic-awards>*{font-size:10px;font-weight:400;line-height:1.45;padding:6px 9px;border:1px solid #dce6d3;border-radius:5px;background:#f0f5e9;color:#486240}
+#credentials .academic-awards>*{font-size:12px;font-weight:400;line-height:1.5;padding:7px 10px;border:1px solid #dce6d3;border-radius:5px;background:#f0f5e9;color:#486240}
 #credentials .academic-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-top:auto;padding-top:22px;border-top:1px solid #e8ece4}
 #credentials .academic-awards{margin-bottom:26px}
 #credentials .academic-foot small,#credentials .academic-foot p{font-size:10px;line-height:1.6;color:var(--muted)}
-#credentials .academic-foot a,#credentials .academic-foot button{display:inline-block;padding:5px 0;background:none;font-size:11px;line-height:1.5;color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+#credentials .academic-foot a,#credentials .academic-foot button{display:inline-block;padding:5px 0;background:none;font-size:13px;line-height:1.5;color:var(--accent);text-decoration:underline;text-underline-offset:4px}
 #credentials .learning-intro{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 0 24px;margin-bottom:6px;border-bottom:1px solid var(--line)}
 #credentials .learning-intro p{font-size:12px;line-height:1.7;color:var(--muted);max-width:76ch}
 #credentials .learning-intro a,#credentials .learning-intro button{flex-shrink:0;background:none;font-size:11px;color:var(--accent);padding:8px 0;line-height:1.5;text-decoration:underline;text-underline-offset:4px}
@@ -188,7 +189,7 @@ input{font:inherit}.panel{scroll-margin-top:76px}.panel:focus,.case-heading h2:f
   #credentials .academic-top{gap:22px;margin-bottom:24px}
   #credentials .academic-logo{width:252px;height:84px;padding:13px 17px}
   #credentials .academic-card>h3{font-size:25px}
-  #credentials .academic-program{font-size:12px}
+  #credentials .academic-program{font-size:16px}
   #credentials .academic-metrics{gap:14px;margin:22px 0 17px;padding:20px 0}
   #credentials .academic-metrics strong{font-size:30px}
   #credentials .academic-foot{gap:13px;margin-top:auto}
