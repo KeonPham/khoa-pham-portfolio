@@ -628,8 +628,8 @@ window.PORTFOLIO_PROJECTS = [
         "url": "https://github.com/KeonPham/disaster_response_model"
       }
     ],
-    "thumbnail": "assets/projects/thumbnails/disaster-response.webp",
-    "thumbnailAlt": "Original classifier evaluation showing precision, recall, F1 and support by message category."
+    "thumbnail": "assets/projects/thumbnails/disaster-response-workflow.svg",
+    "thumbnailAlt": "Workflow illustration: incoming message, TF-IDF and XGBoost classifier, and example response categories such as water and shelter."
   },
   {
     "id": "sparkify-churn",

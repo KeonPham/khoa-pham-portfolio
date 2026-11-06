@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="410" viewBox="0 0 1100 410" role="img" aria-labelledby="title desc">
+  <title id="title">Disaster response: from messages to response categories</title>
+  <desc id="desc">Workflow illustration based on the project repository. Incoming text passes through TF-IDF and a multi-output XGBoost classifier. Example category types include water, food and shelter; these are not live predictions.</desc>
+  <rect width="1100" height="410" fill="#edf1e9"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="44" y="55" fill="#32634b" font-size="18" font-weight="700" letter-spacing="2">DISASTER RESPONSE · NLP</text>
+    <text x="44" y="105" fill="#202a27" font-size="36" font-weight="700">One message. Multiple needs.</text>
+    <rect x="44" y="146" width="300" height="181" rx="16" fill="#fff" stroke="#d4ded1"/>
+    <path d="M68 172h30v21H81l-8 7v-7h-5z" fill="none" stroke="#32634b" stroke-width="2.5" stroke-linejoin="round"/>
+    <text x="112" y="190" fill="#32634b" font-size="18" font-weight="700">INCOMING MESSAGE</text>
+    <text x="68" y="239" fill="#202a27" font-size="24">“We need drinking water</text>
+    <text x="68" y="273" fill="#202a27" font-size="24">and somewhere to stay.”</text>
+    <path d="M362 235h36m-9-9 9 9-9 9" fill="none" stroke="#32634b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="416" y="146" width="238" height="181" rx="16" fill="#234b3c"/>
+    <text x="535" y="198" text-anchor="middle" fill="#d9efb1" font-size="18" font-weight="700">TEXT CLASSIFIER</text>
+    <text x="535" y="243" text-anchor="middle" fill="#fff" font-size="29" font-weight="700">TF-IDF</text>
+    <text x="535" y="281" text-anchor="middle" fill="#fff" font-size="24">+ XGBoost</text>
+    <path d="M672 235h36m-9-9 9 9-9 9" fill="none" stroke="#32634b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="726" y="146" width="330" height="181" rx="16" fill="#fff" stroke="#d4ded1"/>
+    <text x="750" y="190" fill="#32634b" font-size="18" font-weight="700">RESPONSE CATEGORIES</text>
+    <rect x="750" y="215" width="126" height="43" rx="8" fill="#dcebdc"/>
+    <text x="813" y="244" text-anchor="middle" fill="#234b3c" font-size="23" font-weight="700">Water</text>
+    <rect x="888" y="215" width="142" height="43" rx="8" fill="#dcebdc"/>
+    <text x="959" y="244" text-anchor="middle" fill="#234b3c" font-size="23" font-weight="700">Shelter</text>
+    <text x="750" y="294" fill="#6c756f" font-size="19">Example category types</text>
+    <text x="44" y="374" fill="#6c756f" font-size="18">Workflow illustration · Multi-label classification · Flask web app</text>
+  </g>
+</svg>
