@@ -137,6 +137,33 @@
         "url": "https://www.linkedin.com/feed/update/urn:li:activity:7459215570140393472/"
       }
     ]
+  },
+  "growth": {
+    "title": "Three years. Many changes.",
+    "label": "Leadership & change",
+    "image": "assets/heineken-milestone-linkedin.jpg",
+    "alt": "Khoa at a HEINEKEN career milestone in August 2022",
+    "lead": "A three-year milestone at HEINEKEN became a reflection on adapting, growing and building with a changing team.",
+    "sections": [
+      {
+        "title": "The team changed—and so did I",
+        "body": "Looking back at the team photo from my first day, I realized I was the only original member still there after 1,095 days. Colleagues had moved on, the structure had changed and our goals had evolved. Seeing familiar faces leave was initially unsettling."
+      },
+      {
+        "title": "Making room for new perspectives",
+        "body": "New people brought different skills and fresh ideas. Restructuring also opened opportunities to grow. Through those changes, I developed capabilities I had not expected to build."
+      },
+      {
+        "title": "What the milestone meant",
+        "body": "The lesson was to appreciate the people and experiences that shaped the past while staying open to what comes next. Professional growth also comes from learning to work with new teams, adapting to new expectations and continuing to contribute through uncertainty."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Three Years, Many Changes! — original LinkedIn post",
+        "url": "https://www.linkedin.com/posts/khoapnt_growth-change-professional-ugcPost-7359593508476768258-Qtjk/"
+      }
+    ]
   }
 };
   const programs = [
