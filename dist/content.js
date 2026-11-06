@@ -2132,7 +2132,7 @@ window.PORTFOLIO_PROJECTS = [
       },
       {
         "title": "A small system with clear boundaries",
-        "body": "The emphasis is on connecting ingestion, structured storage and useful queries. The public portfolio describes the workflow; personal financial records and private screenshots are not part of this case study."
+        "body": "The emphasis is on connecting ingestion, structured storage and useful queries. The architecture and demo outputs show the personal proof of concept in action, including an emailed spending summary, generated observations and a chart attachment."
       }
     ],
     "collection": [
@@ -2149,14 +2149,37 @@ window.PORTFOLIO_PROJECTS = [
         "body": "Query through a LangGraph agent and inspect charts."
       }
     ],
-    "media": [],
+    "media": [
+      {
+        "src": "assets/projects/finance-brain/architecture.webp",
+        "alt": "Finance Brain architecture: statement extraction, SQLite storage, LangGraph advisor and reporting tools.",
+        "caption": "System architecture: from bank statements to structured data, a conversational advisor and email reports."
+      },
+      {
+        "src": "assets/projects/finance-brain/email-summary.webp",
+        "alt": "Finance Brain transport spending email showing a monthly breakdown and merchant totals.",
+        "caption": "Email demo · Monthly spending summary and merchant breakdown, January–April 2026."
+      },
+      {
+        "src": "assets/projects/finance-brain/email-insights.webp",
+        "alt": "Finance Brain email continuation with key observations and an attached chart.",
+        "caption": "Email demo · Generated observations and chart attachment."
+      },
+      {
+        "src": "assets/projects/finance-brain/transport-chart.webp",
+        "alt": "Prototype chart comparing monthly transport spending and transaction counts.",
+        "caption": "Generated chart attached to the email report · Prototype output."
+      }
+    ],
     "documents": [],
     "sources": [
       {
         "label": "Original project post",
         "url": "https://www.linkedin.com/feed/update/urn:li:activity:7459215570140393472/"
       }
-    ]
+    ],
+    "thumbnail": "assets/projects/finance-brain/architecture.webp",
+    "thumbnailAlt": "Finance Brain architecture: statement extraction, SQLite storage, LangGraph advisor and reporting tools."
   },
   {
     "id": "transformer-timeseries",

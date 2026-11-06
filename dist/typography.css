@@ -166,3 +166,11 @@ header .brand .brand-details{font-size:14px;font-weight:400;color:#687582;margin
  header .brand .brand-headline{font-size:16px;margin-top:12px}
  header .brand .brand-details{font-size:13px;max-width:44ch;text-wrap:balance}
 }
+
+/* Wide architecture and chart, paired phone screenshots for the email demo. */
+.case-gallery:has(img[src*="projects/finance-brain/"]){grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+.case-gallery:has(img[src*="projects/finance-brain/"]) figure:first-child,
+.case-gallery:has(img[src*="projects/finance-brain/"]) figure:last-child{grid-column:1/-1}
+@media(max-width:600px){
+ .case-gallery:has(img[src*="projects/finance-brain/"]){grid-template-columns:minmax(0,1fr)}
+}
