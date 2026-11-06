@@ -2211,6 +2211,110 @@ window.PORTFOLIO_CREDENTIALS = {
   ],
   "programs": [
     {
+      "id": "deeplearning-ai-pytorch",
+      "title": "PyTorch for Deep Learning",
+      "provider": "DeepLearning.AI",
+      "group": "data-ai",
+      "kind": "Professional Certificate",
+      "issued": "30 Sept 2026",
+      "issuedISO": "2026-09-30",
+      "credentialId": "22eac0c3-7eee-4a81-b4f0-8dcd28fd4e1b",
+      "credentialUrl": "https://www.deeplearning.ai/certificates/22eac0c3-7eee-4a81-b4f0-8dcd28fd4e1b",
+      "logo": "assets/credentials/deeplearning-ai-logo.png",
+      "media": [
+        {
+          "src": "assets/credentials/deeplearning-ai-pytorch-page.png",
+          "alt": "Public DeepLearning.AI certificate page for Khoa Pham Nguyen Thanh's PyTorch for Deep Learning Professional Certificate",
+          "caption": "DeepLearning.AI PyTorch for Deep Learning Professional Certificate, completed by Khoa Pham Nguyen Thanh on September 30, 2026."
+        }
+      ],
+      "evidence": "issuer_verified_credential",
+      "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.deeplearning.ai/certificates/22eac0c3-7eee-4a81-b4f0-8dcd28fd4e1b"
+        }
+      ]
+    },
+    {
+      "id": "deeplearning-ai-spec-driven-development",
+      "title": "Spec-Driven Development with Coding Agents",
+      "provider": "DeepLearning.AI",
+      "group": "engineering",
+      "kind": "Accomplishment",
+      "issued": "24 May 2026",
+      "issuedISO": "2026-05-24",
+      "credentialId": "43eb373e-aea4-4bf0-93b8-316317ff6dc8",
+      "credentialUrl": "https://www.deeplearning.ai/accomplishments/43eb373e-aea4-4bf0-93b8-316317ff6dc8",
+      "logo": "assets/credentials/deeplearning-ai-logo.png",
+      "media": [
+        {
+          "src": "assets/credentials/deeplearning-ai-spec-driven-development-page.png",
+          "alt": "Public DeepLearning.AI accomplishment page for Khoa Pham Nguyen Thanh's Spec-Driven Development with Coding Agents course",
+          "caption": "DeepLearning.AI accomplishment for Spec-Driven Development with Coding Agents, completed by Khoa Pham Nguyen Thanh on May 24, 2026."
+        }
+      ],
+      "evidence": "issuer_verified_credential",
+      "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.deeplearning.ai/accomplishments/43eb373e-aea4-4bf0-93b8-316317ff6dc8"
+        }
+      ]
+    },
+    {
+      "id": "anthropic-introduction-claude-cowork",
+      "title": "Introduction to Claude Cowork",
+      "provider": "Anthropic",
+      "group": "data-ai",
+      "kind": "Course completion",
+      "issued": "1 May 2026",
+      "issuedISO": "2026-05-01",
+      "credentialId": "7rqs73snufam",
+      "credentialUrl": "https://verify.skilljar.com/c/7rqs73snufam",
+      "logo": "assets/credentials/anthropic-logo.png",
+      "media": [
+        {
+          "src": "assets/credentials/anthropic-introduction-claude-cowork.jpg",
+          "alt": "Anthropic certificate of completion for Khoa Pham: Introduction to Claude Cowork, issued May 1, 2026.",
+          "caption": "Introduction to Claude Cowork · Anthropic · May 1, 2026"
+        }
+      ],
+      "evidence": "issuer_verified_credential",
+      "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://verify.skilljar.com/c/7rqs73snufam"
+        }
+      ]
+    },
+    {
+      "id": "imperial-mathematics-linear-algebra",
+      "title": "Mathematics for Machine Learning: Linear Algebra",
+      "provider": "Imperial College London",
+      "group": "data-ai",
+      "kind": "Course certificate",
+      "issued": "28 Aug 2024",
+      "issuedISO": "2024-08-28",
+      "credentialId": "ZM54A9IKVVSR",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/ZM54A9IKVVSR",
+      "logo": "assets/credentials/imperial-college-london-logo.png",
+      "media": [
+        {
+          "src": "assets/credentials/imperial-mathematics-linear-algebra-certificate.jpg",
+          "alt": "Course certificate for Khoa Pham Nguyen Thanh: Mathematics for Machine Learning: Linear Algebra, Imperial College London through Coursera, 28 August 2024.",
+          "caption": "Mathematics for Machine Learning: Linear Algebra — Imperial College London, offered through Coursera. Awarded 28 August 2024."
+        }
+      ],
+      "evidence": "issuer_verified_credential",
+      "sources": [
+        {
+          "label": "Issuer verification",
+          "url": "https://www.coursera.org/account/accomplishments/verify/ZM54A9IKVVSR"
+        }
+      ]
+    },
+    {
       "id": "ielts-academic",
       "title": "IELTS Academic",
       "provider": "IELTS",
