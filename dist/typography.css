@@ -155,3 +155,14 @@ header .socials{flex-shrink:0}
  .cv-pdf-actions{justify-content:flex-start;margin-top:20px}
 }
 @media print{.cv-pdf-actions{display:none!important}}
+
+header .brand .brand-headline{font-size:18px;font-weight:700;color:var(--accent);margin-top:10px}
+header .brand .brand-details{font-size:14px;font-weight:400;color:#687582;margin-top:4px;line-height:1.6}
+@media(max-width:600px){
+ .shell>header{display:block;position:relative}
+ header .brand{display:block}
+ header .brand-name{padding-right:120px}
+ header .socials{position:absolute;right:0;top:24px}
+ header .brand .brand-headline{font-size:16px;margin-top:12px}
+ header .brand .brand-details{font-size:13px;max-width:44ch;text-wrap:balance}
+}

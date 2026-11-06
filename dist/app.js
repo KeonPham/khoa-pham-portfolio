@@ -489,8 +489,15 @@
     else { researchButton.removeAttribute('data-project'); researchButton.dataset.go = 'projects'; }
   }
   renderCredentials();
-  window.addEventListener('hashchange', () => applyRoute());
-  window.addEventListener('popstate', () => applyRoute());
+  // Let the browser finish its native fragment jump before positioning a main view.
+  function restoreMainViewTop() {
+    requestAnimationFrame(() => {
+      if (!route.project && !route.story) window.scrollTo({top:0,left:0,behavior:'instant'});
+    });
+  }
+  window.addEventListener('hashchange', () => { applyRoute(); restoreMainViewTop(); });
+  window.addEventListener('popstate', () => { applyRoute(); restoreMainViewTop(); });
   window.addEventListener('resize', updateMarker);
+  window.addEventListener('load', restoreMainViewTop, {once:true});
   applyRoute();
 })();
