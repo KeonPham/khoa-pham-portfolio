@@ -54,8 +54,8 @@
   "transition": {
     "title": "From geology to data: the Moneyball moment.",
     "label": "Career transition",
-    "image": "assets/projects/drive/public/projects/customer-cohort/page-01.webp",
-    "alt": "Customer cohort analysis table from Khoa’s Power BI project",
+    "image": "assets/learning-investment-spreadsheet.webp",
+    "alt": "Khoa’s Excel tracker of investment in courses, books, subscriptions and a master’s degree from 2021 to 2025",
     "lead": "A film about baseball changed how I thought about the data I was already working with.",
     "engagement": {
       "reactions": 32,
