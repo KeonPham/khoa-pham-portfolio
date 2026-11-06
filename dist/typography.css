@@ -127,6 +127,5 @@ em{font-family:inherit;font-style:normal;font-weight:700}
 
 /* A compact portrait balances the introduction without dominating it. */
 .hero .portrait{width:100%;max-width:320px;aspect-ratio:1;justify-self:center}
-.hero .portrait figcaption{left:20px;bottom:20px}
-.hero .portrait strong{font-size:24px}
+.hero .portrait::after{display:none}
 @media(max-width:900px){.hero .portrait{max-width:280px}}
