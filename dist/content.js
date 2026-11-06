@@ -705,6 +705,313 @@ window.PORTFOLIO_PROJECTS = [
     "thumbnailAlt": "Gradient-boosting feature importance from the original Sparkify notebook."
   },
   {
+    "id": "vending-location",
+    "title": "Vending Location Strategy",
+    "category": "analytics",
+    "context": "Business analytics case study · Recommendations and projections",
+    "summary": "A business case that moves from revenue patterns to a prioritized location and operating plan for vending machines.",
+    "stack": [
+      "Power BI",
+      "Business analysis",
+      "Pareto analysis",
+      "Segmentation",
+      "Revenue analytics",
+      "Data storytelling"
+    ],
+    "sections": [
+      {
+        "title": "The problem",
+        "body": "After a lockdown period, the analysis asks which operational changes could improve vending revenue and where a limited relocation effort should focus."
+      },
+      {
+        "title": "The work",
+        "body": "Structured the problem around machine productivity, location type, demand timing, product price points and payment channels.\n\nUsed Pareto and quadrant analyses to identify concentrated revenue and underperforming locations.\n\nProposed a staged relocation plan, supported by channel comparisons and day/hour operating patterns."
+      },
+      {
+        "title": "What the artifacts show",
+        "body": "The deck observes that about 20% of machines contribute 57% of revenue in the analyzed dataset.\n\nThe proposed relocation of 12 machines is estimated to add approximately VND 42 million, or 10% revenue growth.\n\nThese figures describe an analytical scenario and projected opportunity, not verified realized gains."
+      },
+      {
+        "title": "What I learned",
+        "body": "A recommendation becomes more useful when it names the next operational action and its assumptions.\n\nExecutive communication should separate observed facts, proposed actions and estimated value."
+      }
+    ],
+    "media": [
+      {
+        "src": "assets/projects/drive/public/projects/vending-location/page-02.webp",
+        "alt": "Vending Location Strategy — Breaking down the business problem",
+        "caption": "Breaking down the business problem"
+      },
+      {
+        "src": "assets/projects/drive/public/projects/vending-location/page-05.webp",
+        "alt": "Vending Location Strategy — Machine productivity and revenue concentration",
+        "caption": "Machine productivity and revenue concentration"
+      },
+      {
+        "src": "assets/projects/drive/public/projects/vending-location/page-07.webp",
+        "alt": "Vending Location Strategy — Location-productivity comparison",
+        "caption": "Location-productivity comparison"
+      },
+      {
+        "src": "assets/projects/drive/public/projects/vending-location/page-08.webp",
+        "alt": "Vending Location Strategy — Proposed relocation scenario",
+        "caption": "Proposed relocation scenario"
+      },
+      {
+        "src": "assets/projects/drive/public/projects/vending-location/page-12.webp",
+        "alt": "Vending Location Strategy — Trading patterns across days and hours",
+        "caption": "Trading patterns across days and hours"
+      },
+      {
+        "src": "assets/projects/drive/public/projects/vending-location/page-16.webp",
+        "alt": "Vending Location Strategy — Recommendations and projected opportunity",
+        "caption": "Recommendations and projected opportunity"
+      }
+    ],
+    "documents": [
+      {
+        "title": "Full project document · 16 pages",
+        "src": "assets/projects/drive/public/projects/vending-location/vending-location.pdf",
+        "type": "pdf"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Original Drive artifact",
+        "url": "https://drive.google.com/file/d/1RNzUd3d36SlIzY-_xIEq1i652puQTRSr/view"
+      },
+      {
+        "label": "Original Power BI dashboard export",
+        "url": "https://drive.google.com/file/d/1JXDTP9MRY1gNHijVZNV2yZIXpvD_TI1u/view"
+      }
+    ],
+    "thumbnail": "assets/projects/vending-dashboard/dashboard-01-overview.webp",
+    "thumbnailAlt": "Vending performance Power BI dashboard with revenue trends, location productivity and product performance.",
+    "dashboard": {
+      "title": "Vending performance dashboard",
+      "description": "Six views from my original Power BI report, with the complete 22-page export below. These are saved report pages; the slicers shown are not interactive.",
+      "pages": [
+        {
+          "label": "Overview",
+          "src": "assets/projects/vending-dashboard/dashboard-01-overview.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: revenue, sales quantity, daily trends and product performance",
+          "caption": "Revenue, sales quantity, daily trends and product performance · original Power BI export · Page 1"
+        },
+        {
+          "label": "Geography",
+          "src": "assets/projects/vending-dashboard/dashboard-02-geography.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: district and location revenue, with the original geographic map",
+          "caption": "District and location revenue, with the original geographic map · original Power BI export · Page 2"
+        },
+        {
+          "label": "Locations",
+          "src": "assets/projects/vending-dashboard/dashboard-08-locations.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: location-type performance, revenue distributions and machine productivity",
+          "caption": "Location-type performance, revenue distributions and machine productivity · original Power BI export · Page 8"
+        },
+        {
+          "label": "Products",
+          "src": "assets/projects/vending-dashboard/dashboard-11-products.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: product revenue patterns and pareto analysis",
+          "caption": "Product revenue patterns and Pareto analysis · original Power BI export · Page 11"
+        },
+        {
+          "label": "Payments",
+          "src": "assets/projects/vending-dashboard/dashboard-17-payments.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: payment-channel revenue, distributions and contribution",
+          "caption": "Payment-channel revenue, distributions and contribution · original Power BI export · Page 17"
+        },
+        {
+          "label": "Daily patterns",
+          "src": "assets/projects/vending-dashboard/dashboard-19-payment-patterns.webp",
+          "alt": "Khoa Pham vending Power BI dashboard: payment behavior by hour, day and weekend",
+          "caption": "Payment behavior by hour, day and weekend · original Power BI export · Page 19"
+        }
+      ],
+      "document": {
+        "title": "Complete Power BI dashboard export · 22 pages",
+        "src": "assets/projects/vending-dashboard/vending-dashboard.pdf",
+        "type": "pdf"
+      }
+    }
+  },
+  {
+    "id": "momo-analytics",
+    "title": "MoMo — Revenue & Customer Analytics",
+    "category": "analytics",
+    "context": "Recruitment case study · March 2024 · Submitted for a Senior Analytics Engineer role.",
+    "summary": "From transaction, commission and customer tables to a Power BI view of revenue, customer behavior and cashback trade-offs.",
+    "stack": [
+      "Python",
+      "pandas",
+      "Power BI",
+      "Data cleaning",
+      "Customer analytics"
+    ],
+    "sections": [
+      {
+        "title": "The business question",
+        "body": "How do revenue and customer activity vary by month, weekday, merchant and customer segment? The take-home case connects data processing with performance reporting and recommendations for a mobile top-up service."
+      },
+      {
+        "title": "From source tables to analysis",
+        "body": "Used Python and pandas to join transaction, merchant-commission and user tables, remove duplicate orders, standardize inconsistent fields and derive revenue and new-user measures. Built Power BI pages for performance trends, customer segments, a revenue decomposition tree and key-influencer exploration."
+      },
+      {
+        "title": "From findings to decisions",
+        "body": "Compared merchant contributions, weekday patterns and new versus existing users. The recommendation deck examines cashback as a trade-off between revenue per transaction and potential engagement, retention and transaction growth, with break-even analysis and a limited test before wider rollout."
+      },
+      {
+        "title": "What I delivered",
+        "body": "A data-processing notebook, a four-page dashboard export and an analysis presentation. The visuals below are original outputs from my submitted exercise. Recommendations are proposed actions, not measured business outcomes."
+      }
+    ],
+    "media": [
+      {
+        "src": "assets/projects/analytics/momo/dashboard-01.webp",
+        "alt": "Performance overview — transaction value, revenue, customers and monthly patterns.",
+        "caption": "Performance overview — transaction value, revenue, customers and monthly patterns."
+      },
+      {
+        "src": "assets/projects/analytics/momo/dashboard-02.webp",
+        "alt": "Customer and revenue analysis — merchant, gender and new-user patterns.",
+        "caption": "Customer and revenue analysis — merchant, gender and new-user patterns."
+      },
+      {
+        "src": "assets/projects/analytics/momo/dashboard-03.webp",
+        "alt": "Revenue decomposition — exploring the drivers behind the total.",
+        "caption": "Revenue decomposition — exploring the drivers behind the total."
+      },
+      {
+        "src": "assets/projects/analytics/momo/dashboard-04.webp",
+        "alt": "Key-influencer exploration in Power BI.",
+        "caption": "Key-influencer exploration in Power BI."
+      },
+      {
+        "src": "assets/projects/analytics/momo/insight-10.webp",
+        "alt": "Recommendations from the original take-home analysis.",
+        "caption": "Recommendations from the original take-home analysis."
+      },
+      {
+        "src": "assets/projects/analytics/momo/insight-12.webp",
+        "alt": "Cashback trade-offs — break-even analysis and testing before rollout.",
+        "caption": "Cashback trade-offs — break-even analysis and testing before rollout."
+      }
+    ],
+    "documents": [
+      {
+        "title": "Original Power BI dashboard · 4 pages",
+        "src": "assets/projects/analytics/momo/performance-dashboard.pdf",
+        "type": "pdf"
+      },
+      {
+        "title": "Analysis & recommendations · 13 pages",
+        "src": "assets/projects/analytics/momo/analysis-presentation.pdf",
+        "type": "pdf"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Original submission — Original Power BI dashboard · 4 pages",
+        "url": "assets/projects/analytics/momo/performance-dashboard.pdf"
+      },
+      {
+        "label": "Original submission — Analysis & recommendations · 13 pages",
+        "url": "assets/projects/analytics/momo/analysis-presentation.pdf"
+      }
+    ],
+    "thumbnail": "assets/projects/analytics/momo/dashboard-02.webp",
+    "thumbnailAlt": "MoMo analytics case study: original purple Power BI customer and revenue dashboard."
+  },
+  {
+    "id": "wecheer-loyalty",
+    "title": "Wecheer — Loyalty & Cohort Analytics",
+    "category": "analytics",
+    "context": "BI / Data Analyst recruitment exercise · VUSE loyalty-program dataset · January 2022.",
+    "summary": "Connecting purchases, loyalty stamps and rewards to understand customer activity, purchase patterns and cohort retention.",
+    "stack": [
+      "Power BI",
+      "Data modeling",
+      "Customer segmentation",
+      "Cohort analysis",
+      "Data storytelling"
+    ],
+    "sections": [
+      {
+        "title": "The business question",
+        "body": "Understand how customers participate in a receipt-based loyalty program: purchases generate stamps, and accumulated stamps can be exchanged for rewards. The exercise supplied three linked tables covering consumption, stamps received and rewards received."
+      },
+      {
+        "title": "What I built",
+        "body": "Cleaned the consumption data, modeled the relationships in Power BI and built dashboards for rewards, stamps and purchasing activity. Explored daily and weekly participation, weekday and hourly patterns, transaction frequency, basket size and spending."
+      },
+      {
+        "title": "Customer segments and retention",
+        "body": "Defined three customer groups using purchase frequency and spending, then compared their behavior. Added cohort views of customer counts, retention and average spend to connect acquisition timing with repeat activity."
+      },
+      {
+        "title": "What the work demonstrates",
+        "body": "Turning connected event tables into a coherent data model, building readable dashboards and communicating behavioral patterns through a recommendation deck. This is a recruitment case study, not a claim of deployed client work or realized business impact. The portfolio includes selected aggregate dashboard pages and presentation excerpts."
+      }
+    ],
+    "media": [
+      {
+        "src": "assets/projects/analytics/wecheer/dashboard-01.webp",
+        "alt": "Rewards dashboard — participation and daily, weekly and hourly patterns.",
+        "caption": "Rewards dashboard — participation and daily, weekly and hourly patterns."
+      },
+      {
+        "src": "assets/projects/analytics/wecheer/dashboard-02.webp",
+        "alt": "Reward activity and decomposition across customer segments.",
+        "caption": "Reward activity and decomposition across customer segments."
+      },
+      {
+        "src": "assets/projects/analytics/wecheer/dashboard-03.webp",
+        "alt": "Loyalty stamps — distribution over time and weekday patterns.",
+        "caption": "Loyalty stamps — distribution over time and weekday patterns."
+      },
+      {
+        "src": "assets/projects/analytics/wecheer/dashboard-05.webp",
+        "alt": "Consumption dashboard — spending, transactions and basket metrics.",
+        "caption": "Consumption dashboard — spending, transactions and basket metrics."
+      },
+      {
+        "src": "assets/projects/analytics/wecheer/dashboard-08.webp",
+        "alt": "Basket analysis — product value, quantity and purchase frequency.",
+        "caption": "Basket analysis — product value, quantity and purchase frequency."
+      },
+      {
+        "src": "assets/projects/analytics/wecheer/insight-11.webp",
+        "alt": "Cohort analysis — customer counts, retention and average spend.",
+        "caption": "Cohort analysis — customer counts, retention and average spend."
+      }
+    ],
+    "documents": [
+      {
+        "title": "Selected aggregate dashboards · 5 pages",
+        "src": "assets/projects/analytics/wecheer/loyalty-dashboard.pdf",
+        "type": "pdf"
+      },
+      {
+        "title": "Analysis presentation · 11 selected pages",
+        "src": "assets/projects/analytics/wecheer/analysis-presentation.pdf",
+        "type": "pdf"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Original submission — Selected aggregate dashboards · 5 pages",
+        "url": "assets/projects/analytics/wecheer/loyalty-dashboard.pdf"
+      },
+      {
+        "label": "Original submission — Analysis presentation · 11 selected pages",
+        "url": "assets/projects/analytics/wecheer/analysis-presentation.pdf"
+      }
+    ],
+    "thumbnail": "assets/projects/analytics/wecheer/dashboard-01.webp",
+    "thumbnailAlt": "Wecheer loyalty analytics case study: original gold and blue rewards dashboard."
+  },
+  {
     "id": "baywheels-rider-behavior",
     "title": "The rhythm of a bike-sharing city",
     "category": "analytics",
@@ -2000,137 +2307,6 @@ window.PORTFOLIO_PROJECTS = [
     ],
     "thumbnail": "assets/projects/thumbnails/customer-cohort.webp",
     "thumbnailAlt": "Customer Cohort Dashboard — Customer-count cohorts"
-  },
-  {
-    "id": "vending-location",
-    "title": "Vending Location Strategy",
-    "category": "analytics",
-    "context": "Business analytics case study · Recommendations and projections",
-    "summary": "A business case that moves from revenue patterns to a prioritized location and operating plan for vending machines.",
-    "stack": [
-      "Power BI",
-      "Business analysis",
-      "Pareto analysis",
-      "Segmentation",
-      "Revenue analytics",
-      "Data storytelling"
-    ],
-    "sections": [
-      {
-        "title": "The problem",
-        "body": "After a lockdown period, the analysis asks which operational changes could improve vending revenue and where a limited relocation effort should focus."
-      },
-      {
-        "title": "The work",
-        "body": "Structured the problem around machine productivity, location type, demand timing, product price points and payment channels.\n\nUsed Pareto and quadrant analyses to identify concentrated revenue and underperforming locations.\n\nProposed a staged relocation plan, supported by channel comparisons and day/hour operating patterns."
-      },
-      {
-        "title": "What the artifacts show",
-        "body": "The deck observes that about 20% of machines contribute 57% of revenue in the analyzed dataset.\n\nThe proposed relocation of 12 machines is estimated to add approximately VND 42 million, or 10% revenue growth.\n\nThese figures describe an analytical scenario and projected opportunity, not verified realized gains."
-      },
-      {
-        "title": "What I learned",
-        "body": "A recommendation becomes more useful when it names the next operational action and its assumptions.\n\nExecutive communication should separate observed facts, proposed actions and estimated value."
-      }
-    ],
-    "media": [
-      {
-        "src": "assets/projects/drive/public/projects/vending-location/page-02.webp",
-        "alt": "Vending Location Strategy — Breaking down the business problem",
-        "caption": "Breaking down the business problem"
-      },
-      {
-        "src": "assets/projects/drive/public/projects/vending-location/page-05.webp",
-        "alt": "Vending Location Strategy — Machine productivity and revenue concentration",
-        "caption": "Machine productivity and revenue concentration"
-      },
-      {
-        "src": "assets/projects/drive/public/projects/vending-location/page-07.webp",
-        "alt": "Vending Location Strategy — Location-productivity comparison",
-        "caption": "Location-productivity comparison"
-      },
-      {
-        "src": "assets/projects/drive/public/projects/vending-location/page-08.webp",
-        "alt": "Vending Location Strategy — Proposed relocation scenario",
-        "caption": "Proposed relocation scenario"
-      },
-      {
-        "src": "assets/projects/drive/public/projects/vending-location/page-12.webp",
-        "alt": "Vending Location Strategy — Trading patterns across days and hours",
-        "caption": "Trading patterns across days and hours"
-      },
-      {
-        "src": "assets/projects/drive/public/projects/vending-location/page-16.webp",
-        "alt": "Vending Location Strategy — Recommendations and projected opportunity",
-        "caption": "Recommendations and projected opportunity"
-      }
-    ],
-    "documents": [
-      {
-        "title": "Full project document · 16 pages",
-        "src": "assets/projects/drive/public/projects/vending-location/vending-location.pdf",
-        "type": "pdf"
-      }
-    ],
-    "sources": [
-      {
-        "label": "Original Drive artifact",
-        "url": "https://drive.google.com/file/d/1RNzUd3d36SlIzY-_xIEq1i652puQTRSr/view"
-      },
-      {
-        "label": "Original Power BI dashboard export",
-        "url": "https://drive.google.com/file/d/1JXDTP9MRY1gNHijVZNV2yZIXpvD_TI1u/view"
-      }
-    ],
-    "thumbnail": "assets/projects/thumbnails/vending-location.webp",
-    "thumbnailAlt": "Vending Location Strategy — Breaking down the business problem",
-    "dashboard": {
-      "title": "Vending performance dashboard",
-      "description": "Six views from my original Power BI report, with the complete 22-page export below. These are saved report pages; the slicers shown are not interactive.",
-      "pages": [
-        {
-          "label": "Overview",
-          "src": "assets/projects/vending-dashboard/dashboard-01-overview.webp",
-          "alt": "Khoa Pham vending Power BI dashboard: revenue, sales quantity, daily trends and product performance",
-          "caption": "Revenue, sales quantity, daily trends and product performance · original Power BI export · Page 1"
-        },
-        {
-          "label": "Geography",
-          "src": "assets/projects/vending-dashboard/dashboard-02-geography.webp",
-          "alt": "Khoa Pham vending Power BI dashboard: district and location revenue, with the original geographic map",
-          "caption": "District and location revenue, with the original geographic map · original Power BI export · Page 2"
-        },
-        {
-          "label": "Locations",
-          "src": "assets/projects/vending-dashboard/dashboard-08-locations.webp",
-          "alt": "Khoa Pham vending Power BI dashboard: location-type performance, revenue distributions and machine productivity",
-          "caption": "Location-type performance, revenue distributions and machine productivity · original Power BI export · Page 8"
-        },
-        {
-          "label": "Products",
-          "src": "assets/projects/vending-dashboard/dashboard-11-products.webp",
-          "alt": "Khoa Pham vending Power BI dashboard: product revenue patterns and pareto analysis",
-          "caption": "Product revenue patterns and Pareto analysis · original Power BI export · Page 11"
-        },
-        {
-          "label": "Payments",
-          "src": "assets/projects/vending-dashboard/dashboard-17-payments.webp",
-          "alt": "Khoa Pham vending Power BI dashboard: payment-channel revenue, distributions and contribution",
-          "caption": "Payment-channel revenue, distributions and contribution · original Power BI export · Page 17"
-        },
-        {
-          "label": "Daily patterns",
-          "src": "assets/projects/vending-dashboard/dashboard-19-payment-patterns.webp",
-          "alt": "Khoa Pham vending Power BI dashboard: payment behavior by hour, day and weekend",
-          "caption": "Payment behavior by hour, day and weekend · original Power BI export · Page 19"
-        }
-      ],
-      "document": {
-        "title": "Complete Power BI dashboard export · 22 pages",
-        "src": "assets/projects/vending-dashboard/vending-dashboard.pdf",
-        "type": "pdf"
-      }
-    }
   },
   {
     "id": "finance-brain",

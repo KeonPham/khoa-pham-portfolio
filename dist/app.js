@@ -11,6 +11,7 @@
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const localAsset = src => typeof src === 'string' && /^assets\/[a-zA-Z0-9_./% -]+$/.test(src) && !src.includes('..') ? src : '';
   const sourceURL = value => {
+    if (localAsset(value) && /\.pdf$/i.test(value)) return value;
     try { const url = new URL(value); return url.protocol === 'https:' ? url.href : ''; }
     catch { return ''; }
   };
