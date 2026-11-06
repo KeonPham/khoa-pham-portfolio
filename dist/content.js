@@ -2316,6 +2316,7 @@ window.PORTFOLIO_CREDENTIALS = {
     },
     {
       "id": "ielts-academic",
+      "logo": "assets/idp-logo.webp",
       "title": "IELTS Academic",
       "provider": "IELTS",
       "group": "language",
@@ -2361,6 +2362,7 @@ window.PORTFOLIO_CREDENTIALS = {
     },
     {
       "id": "vlu-english-proficiency",
+      "logo": "assets/vstep-logo.webp",
       "title": "VSTEP English Proficiency",
       "provider": "Van Lang University",
       "group": "language",
