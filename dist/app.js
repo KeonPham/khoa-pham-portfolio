@@ -54,8 +54,8 @@
   "transition": {
     "title": "From geology to data: the Moneyball moment.",
     "label": "Career transition",
-    "image": "assets/heineken-milestone-linkedin.jpg",
-    "alt": "Khoa at a HEINEKEN career milestone in August 2022",
+    "image": "assets/projects/drive/public/projects/customer-cohort/page-01.webp",
+    "alt": "Customer cohort analysis table from Khoa’s Power BI project",
     "lead": "A film about baseball changed how I thought about the data I was already working with.",
     "engagement": {
       "reactions": 32,

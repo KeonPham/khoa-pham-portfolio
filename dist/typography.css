@@ -121,3 +121,6 @@ em{font-family:inherit;font-style:normal;font-weight:700}
  .cv-role .cv-stack,.cv-role .cv-impact-note,.cv-role .cv-recognition{font-size:9px;margin-top:7px}
  .cv-role .cv-progression{font-size:9px;margin:5px 0}
 }
+
+/* Keep the cohort table legible without cropping its rows or columns. */
+[data-story-card="transition"] .story-image img{object-fit:contain;background:#fff}
