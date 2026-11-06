@@ -2844,19 +2844,19 @@ window.PORTFOLIO_CREDENTIALS = {
     },
     {
       "id": "spe-vietnam-scholarship",
-      "title": "SPE Vietnam Scholarship",
+      "title": "Society of Petroleum Engineers · Vietnam Scholarship",
       "provider": "Society of Petroleum Engineers (SPE)",
       "group": "honors",
       "kind": "Scholarship",
       "issued": "Mar 2011",
       "issuedISO": "2011-03",
-      "detail": "I received the SPE Vietnam Scholarship and was honored to represent the scholarship recipients, delivering a thank-you speech to petroleum industry professionals, SPE members, and professors at the Sheraton Hotel in 2011.",
+      "detail": "I received the Society of Petroleum Engineers (SPE) Vietnam Scholarship and was honored to represent the scholarship recipients, delivering a thank-you speech to petroleum industry professionals, SPE members, and professors at the Sheraton Hotel in 2011.",
       "recordUrl": "https://www.linkedin.com/in/khoapnt/details/honors/",
       "media": [
         {
           "src": "assets/credentials/spe-vietnam-scholarship.png",
-          "alt": "SPE Vietnam Certificate of Scholarship awarded to Pham Nguyen Thanh Khoa of Ho Chi Minh City University of Sciences, March 2011.",
-          "caption": "SPE Vietnam Scholarship · March 2011"
+          "alt": "Society of Petroleum Engineers Vietnam Certificate of Scholarship awarded to Pham Nguyen Thanh Khoa, March 2011.",
+          "caption": "Society of Petroleum Engineers · Vietnam Scholarship · March 2011"
         }
       ],
       "evidence": "original_certificate_supplied_by_owner",

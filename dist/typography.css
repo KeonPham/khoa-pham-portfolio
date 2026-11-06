@@ -1,0 +1,80 @@
+@font-face{font-family:Lato;src:url('assets/fonts/lato-regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:Lato;src:url('assets/fonts/lato-bold.ttf') format('truetype');font-style:normal;font-weight:700;font-display:swap}
+:root{font-family:Lato,Arial,sans-serif;font-size:16px}
+button,input,textarea,select{font-family:inherit}
+em{font-family:inherit;font-style:normal;font-weight:700}
+@media screen{
+ body{font-size:16px;line-height:1.7}
+ h1,h2,h3,h4{font-weight:700;line-height:1.25;text-wrap:balance}
+ h1,.hero h1{font-size:clamp(40px,4.6vw,64px);line-height:1.12;letter-spacing:-1.8px}
+ h2{font-size:clamp(34px,3.4vw,46px);letter-spacing:-1px}
+ .brand{font-size:19px}.brand small{font-size:13px;line-height:1.4}
+ .tabs button{font-size:16px;font-weight:700;padding:16px 12px}.tabs button span{font-size:12px}
+ .eyebrow,.hero .eyebrow,.story-card .eyebrow,.case-heading .eyebrow,.sectiontop p{font-size:12px;line-height:1.6;letter-spacing:1.3px}
+ .intro{font-size:20px;line-height:1.7}.journey{font-size:16px;line-height:1.75}
+ .primary,.quiet,.quiet.small,.story-card .story-action{font-size:15px;line-height:1.5}
+ .primary{padding:15px 20px}.actions{flex-wrap:wrap;gap:16px 24px}
+ .traits span,.outline-tag{font-size:13px;line-height:1.5}
+ .portrait-label,.portrait figcaption>span{font-size:12px;line-height:1.5}
+ .portrait strong{font-size:28px;line-height:1.2}
+ .proof-strip article>span{font-size:14px;line-height:1.6}.proof-strip strong{font-size:34px;line-height:1.2}
+ .page-heading>p{font-size:16px;line-height:1.7;max-width:360px}
+ .story-card h3{font-size:26px;line-height:1.3}.story-card p:not(.eyebrow){font-size:16px;line-height:1.75}
+ .story-prose p{font-size:18px;line-height:1.8}.story-prose h3{font-size:28px;line-height:1.3}
+ .filters button{font-size:14px;padding:11px 14px;line-height:1.5}
+ .project-toolbar label,.project-toolbar p{font-size:14px}.project-toolbar input{font-size:16px}
+ .project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .project-body h3{font-size:25px;line-height:1.3}.project-body p{font-size:16px;line-height:1.75}
+ .project-body .project-category,.diagram-label{font-size:12px}.project-foot{font-size:14px;flex-wrap:wrap}
+ .stack span,.case-heading .stack span{font-size:13px;line-height:1.5}
+ .reader-topline>span,.reader-topline .quiet,.reader-end,.reader-end .quiet{font-size:14px}
+ .case-heading h2{font-size:clamp(34px,4.3vw,54px);line-height:1.18;letter-spacing:-1px;overflow-wrap:normal}
+ .case-lead{font-size:20px;line-height:1.7}
+ .case-narrative p,.collection-grid p{font-size:17px;line-height:1.8}
+ .case-narrative h3,.collection-grid h3{font-size:26px;line-height:1.3}
+ .case-section>.muted,.dashboard-intro{font-size:16px;line-height:1.7}
+ .case-gallery figcaption,.case-demo figcaption,.image-zoom>span,.source-notes,.document-note,.document-copy,.demo-duration,.dashboard-format,.dashboard-pages button{font-size:14px;line-height:1.6}
+ .document-card>summary{font-size:16px}.document-kind{font-size:12px}
+ .cv-aside h3{font-size:27px}.cv-aside p:not(.eyebrow),.cv-aside .cv-study{font-size:16px;line-height:1.8}
+ .cv-timeline h3{font-size:26px;line-height:1.3}.cv-timeline p,.cv-timeline li{font-size:17px;line-height:1.75}
+ .cv-timeline small,.cv-timeline .date,.cv-timeline .employer{font-size:14px;line-height:1.6}
+ .cv-layout{grid-template-columns:310px minmax(0,1fr);gap:42px}
+ .image-dialog-toolbar>span,.image-dialog-toolbar .quiet,.image-dialog-toolbar .primary{font-size:14px}
+ footer{font-size:14px;line-height:1.6}
+ #credentials .academic-card>h3{font-size:28px;font-weight:700}
+ #credentials .academic-card>h3 .degree-qualifier{font-size:20px;font-weight:400}
+ #credentials .academic-program{font-size:17px;line-height:1.7}
+ #credentials .academic-awards>*{font-size:14px;text-wrap:balance}
+ #credentials .academic-metrics strong{font-weight:700}
+ #credentials .learning-copy h4{font-weight:700}
+}
+@media screen and (max-width:900px){
+ .hero{grid-template-columns:1fr;gap:32px}.hero-copy{max-width:680px}.portrait{max-width:600px;aspect-ratio:1.4}
+ .intro,.journey{max-width:60ch}.cv-layout{grid-template-columns:250px minmax(0,1fr);gap:28px}
+ .story-grid{grid-template-columns:1fr 1fr}.story-image{height:230px}
+ .proof-strip article{gap:14px;padding-left:18px}
+}
+@media screen and (max-width:700px){
+ html{scroll-padding-top:125px}.panel{scroll-margin-top:120px}
+ .tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:6px}
+ .tabs button{font-size:14px;padding:12px 4px;min-height:44px;line-height:1.3}
+ .tabs button span,.tab-marker{display:none}
+ .tabs button[aria-selected=true]{background:var(--ink);color:white;box-shadow:0 3px 8px #20342b20}
+ #tab-credentials{grid-column:1/-1;font-size:15px;padding:12px;min-height:44px}
+ .brand{font-size:17px}.brand small{font-size:12px;max-width:160px}.socials{gap:6px}
+ .socials a{width:32px;height:32px}.shell{padding:0 20px}
+ .hero h1{font-size:42px}.hero .eyebrow{font-size:12px}.intro{font-size:19px}
+ .portrait figcaption>span,.portrait-label{font-size:11px}
+ .proof-strip{grid-template-columns:1fr;gap:0;padding:0}
+ .proof-strip article,.proof-strip article:first-child{display:grid;grid-template-columns:90px minmax(0,1fr);gap:20px;border-left:0;padding:20px 0}
+ .proof-strip article+article{border-top:1px solid var(--line)}.proof-strip article>span{font-size:15px;margin:0}
+ .proof-strip strong{font-size:32px}.sectiontop{gap:16px;align-items:flex-start}
+ .sectiontop p{font-size:12px}.sectiontop .small{font-size:14px}
+ .project-grid,.story-grid{grid-template-columns:1fr}.project-art{height:220px}
+ .cv-layout{display:flex;flex-direction:column-reverse;gap:28px}.cv-aside{position:static}
+ .case-lead{font-size:18px}.case-heading h2{font-size:34px}
+ .reader-topline,.reader-end{flex-wrap:wrap}.reader-topline .quiet{white-space:normal}
+ .image-dialog-toolbar{flex-wrap:wrap;gap:10px}.image-dialog-toolbar>div{gap:15px}
+ .document-card>summary{align-items:flex-start}.document-kind{min-width:38px}
+ footer{flex-wrap:wrap}.company-strip{gap:24px}
+}
