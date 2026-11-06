@@ -129,3 +129,10 @@ em{font-family:inherit;font-style:normal;font-weight:700}
 .hero .portrait{width:100%;max-width:320px;aspect-ratio:1;border-radius:50%;justify-self:center}
 .hero .portrait::after{display:none}
 @media(max-width:900px){.hero .portrait{max-width:280px}}
+
+/* A name-led, editorial header inspired by the supplied reference. */
+header .brand{min-width:0;letter-spacing:0}
+header .brand-name{display:block;font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,3.1vw,44px);font-weight:700;line-height:1.15;letter-spacing:-.8px;color:#202c38}
+header .brand small{font-family:Lato,Arial,sans-serif;font-size:15px;line-height:1.5;font-weight:400;margin-top:8px;max-width:none;color:#687582}
+header .socials{flex-shrink:0}
+@media(max-width:600px){header{gap:14px}header .brand small{font-size:12px;margin-top:6px}}
