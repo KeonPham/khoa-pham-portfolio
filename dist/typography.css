@@ -168,6 +168,13 @@ header .brand .brand-details{font-size:14px;font-weight:400;color:#687582;margin
 }
 
 /* Wide architecture and chart, paired phone screenshots for the email demo. */
+/* Research workflow overview followed by the three Telegram steps. */
+.case-gallery:has(img[src*="projects/research-radar/"]){grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
+.case-gallery:has(img[src*="projects/research-radar/"]) figure:first-child{grid-column:1/-1}
+@media(max-width:700px){
+ .case-gallery:has(img[src*="projects/research-radar/"]){grid-template-columns:minmax(0,1fr)}
+}
+
 .case-gallery:has(img[src*="projects/finance-brain/"]){grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
 .case-gallery:has(img[src*="projects/finance-brain/"]) figure:first-child,
 .case-gallery:has(img[src*="projects/finance-brain/"]) figure:last-child{grid-column:1/-1}

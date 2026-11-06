@@ -281,7 +281,7 @@ window.PORTFOLIO_PROJECTS = [
     "title": "Research Radar",
     "category": "agents",
     "context": "Personal proof of concept",
-    "summary": "A Telegram-triggered workflow that turns selected research papers into short video digests.",
+    "summary": "Type /RR in Telegram to turn AI and LLM research papers into a three-minute video digest: objective, methodology, results and open gaps.",
     "stack": [
       "AI agents",
       "Research workflows",
@@ -290,16 +290,20 @@ window.PORTFOLIO_PROJECTS = [
     ],
     "sections": [
       {
-        "title": "The idea",
-        "body": "Make a growing research reading list easier to explore. The experiment brings discovery, screening, assessment and a short audiovisual explanation into one workflow."
+        "title": "Why I built it",
+        "body": "Keeping up with AI research should not mean falling into arXiv rabbit holes at midnight. Research Radar helps me discover relevant papers, apply my own filter criteria and get a concise explanation I can watch in Telegram."
       },
       {
-        "title": "How it works",
-        "body": "A Telegram request starts seven stages: trigger, discover, gate, assess, generate script/voiceover/images, render video, and deliver the digest back to Telegram."
+        "title": "Seven steps, one workflow",
+        "body": "Trigger → Discover → Gate → Assess → Generate script + voiceover + images → Render video → Deliver to Telegram. The /RR command starts the workflow; the digest covers the objective, methodology, results and open gaps."
+      },
+      {
+        "title": "From paper selection to video delivery",
+        "body": "The Telegram demo offers three papers to choose from, with automatic selection after a timeout if I do not reply. Once a paper is selected, script generation, voiceover, images, video rendering and delivery run automatically. The screenshots show discovery, the generated digest and a 3:10 video delivered by the bot."
       },
       {
         "title": "What this demonstrates",
-        "body": "Connecting tools around a useful end-to-end task, with explicit selection stages before content generation. This is a personal prototype, not a validated research-review service."
+        "body": "An end-to-end agent workflow connecting research discovery, selection and multimedia generation around a daily learning habit. This is a personal proof of concept; the original paper remains available alongside the digest for deeper reading."
       }
     ],
     "media": [
@@ -307,6 +311,21 @@ window.PORTFOLIO_PROJECTS = [
         "src": "assets/research-radar-linkedin.jpg",
         "alt": "Research Radar workflow shared by Khoa on LinkedIn",
         "caption": "The original workflow shared with the prototype."
+      },
+      {
+        "src": "assets/projects/research-radar/telegram-discovery.webp",
+        "alt": "Telegram bot offering three research papers to choose from",
+        "caption": "01 / Discover & select — three papers matched to the requested topic."
+      },
+      {
+        "src": "assets/projects/research-radar/telegram-digest.webp",
+        "alt": "Selected paper, source link and generated digest in Telegram",
+        "caption": "02 / Assess & generate — the selected paper, original source and research digest."
+      },
+      {
+        "src": "assets/projects/research-radar/telegram-video.webp",
+        "alt": "Screenshot of a generated research video delivered in Telegram",
+        "caption": "03 / Deliver — a 3:10 video digest sent directly to Telegram. Screenshot from the demo."
       }
     ],
     "documents": [],
