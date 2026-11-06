@@ -2211,6 +2211,23 @@ window.PORTFOLIO_CREDENTIALS = {
   ],
   "programs": [
     {
+      "id": "ielts-academic",
+      "title": "IELTS Academic",
+      "provider": "IELTS",
+      "group": "language",
+      "kind": "English language test",
+      "issued": "Oct 2026",
+      "issuedISO": "2026-10",
+      "result": "Overall band 6.5",
+      "media": [],
+      "evidence": "user_provided_result",
+      "sources": [
+        {
+          "label": "Overall score and test month supplied by the owner"
+        }
+      ]
+    },
+    {
       "id": "aiesec-product-management-mentor",
       "title": "Product Management Essentials · Mentor",
       "provider": "AIESEC in Vietnam",
@@ -2235,18 +2252,19 @@ window.PORTFOLIO_CREDENTIALS = {
     },
     {
       "id": "vlu-english-proficiency",
-      "title": "English Certificate of Proficiency",
+      "title": "VSTEP English Proficiency",
       "provider": "Van Lang University",
       "group": "language",
       "kind": "Language certificate",
       "issued": "12 Jan 2026",
       "issuedISO": "2026-01-12",
       "result": "Level 4/6 · Overall score 8.0/10",
+      "detail": "Listening 9.0 · Reading 7.5 · Writing 7.5 · Speaking 7.5",
       "media": [],
-      "evidence": "original_certificate_reviewed",
+      "evidence": "original_certificate_and_issuer_result_email_reviewed",
       "sources": [
         {
-          "label": "Original certificate reviewed privately"
+          "label": "Original certificate and issuer result email reviewed privately"
         },
         {
           "label": "Issuer examination centre",
@@ -2634,36 +2652,53 @@ window.PORTFOLIO_CREDENTIALS = {
     },
     {
       "id": "atoha-project-management",
-      "title": "Practical Project Management",
+      "title": "Project Management Professional® Training",
       "provider": "Atoha",
       "group": "business",
-      "kind": "Professional training",
+      "kind": "Completed training",
       "year": "2023",
       "logo": "assets/logos/atoha.png",
-      "media": [],
-      "evidence": "cv",
+      "media": [
+        {
+          "src": "assets/credentials/atoha-project-management-training.png",
+          "alt": "Atoha Certificate of Achievement awarded to Pham Nguyen Thanh Khoa for completing Project Management Professional Training",
+          "caption": "Atoha Project Management Professional® Training, 24 contact hours, September 2023."
+        }
+      ],
+      "evidence": "user_supplied_certificate_image",
       "sources": [
         {
-          "label": "CV",
-          "url": "https://drive.google.com/file/d/1PY5ls8EuaHZU_FrpLj4eJLD5JIq4PRa9/view"
+          "label": "Original certificate photograph supplied by the owner"
         }
-      ]
+      ],
+      "issued": "Sept 2023",
+      "issuedISO": "2023-09",
+      "result": "24 contact hours",
+      "courseId": "IPMP"
     },
     {
       "id": "mda-business-intelligence",
       "title": "Business Intelligence Program",
       "provider": "Mastering Data Analytics",
       "group": "business",
-      "kind": "Learning program",
+      "kind": "Completed course",
       "year": "2021",
-      "media": [],
-      "evidence": "cv",
+      "media": [
+        {
+          "src": "assets/credentials/mda-business-intelligence-program.png",
+          "alt": "Mastering Data Analytics Certificate of Achievement awarded to Khoa Pham for the Business Intelligence Program",
+          "caption": "Mastering Data Analytics Business Intelligence Program, six advanced modules over 2.5 months, November 2021."
+        }
+      ],
+      "evidence": "user_supplied_certificate_image",
       "sources": [
         {
-          "label": "CV",
-          "url": "https://drive.google.com/file/d/1PY5ls8EuaHZU_FrpLj4eJLD5JIq4PRa9/view"
+          "label": "Original certificate image supplied by the owner"
         }
-      ]
+      ],
+      "issued": "Nov 2021",
+      "issuedISO": "2021-11",
+      "result": "6 advanced modules · 2.5 months"
     }
   ]
 };

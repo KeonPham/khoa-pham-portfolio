@@ -164,7 +164,7 @@ input{font:inherit}.panel{scroll-margin-top:76px}.panel:focus,.case-heading h2:f
 #credentials .learning-links a,#credentials .learning-links button{padding:4px 0;background:none;font-size:10px;font-weight:400;line-height:1.5;color:var(--accent);text-decoration:underline;text-underline-offset:3px;border:0}
 #credentials .learning-links a:hover,#credentials .learning-links button:hover{color:#1b3927}
 #credentials .learning-preview{grid-column:1/-1;justify-self:end;margin:0;width:80px;height:50px;border:1px solid #e0e7d8;border-radius:5px;background:#f7f9f3;overflow:hidden}
-#credentials .learning-preview img{display:block;width:80px;height:50px;object-fit:cover}
+#credentials .learning-preview img{display:block;width:80px;height:50px;object-fit:contain}
 #credentials .learning-card:has(.learning-preview){grid-template-columns:40px minmax(0,1fr) 80px}
 #credentials .learning-card:has(.learning-preview) .learning-preview{grid-column:3;grid-row:1;align-self:start}
 #credentials .learning-card:has(.learning-preview) .learning-links{grid-column:2/-1}
