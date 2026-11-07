@@ -489,6 +489,28 @@
     if (medseg) researchButton.dataset.project = medseg.id;
     else { researchButton.removeAttribute('data-project'); researchButton.dataset.go = 'projects'; }
   }
+  const contactDialog = $('#contact-dialog');
+  $$('[data-contact-open]').forEach(button => button.addEventListener('click', () => {
+    $('.contact-status', contactDialog).textContent = '';
+    document.body.classList.add('modal-open');
+    contactDialog.showModal();
+  }));
+  $('[data-contact-close]').addEventListener('click', () => contactDialog.close());
+  contactDialog.addEventListener('close', () => document.body.classList.remove('modal-open'));
+  contactDialog.addEventListener('click', event => {
+    if (event.target !== contactDialog) return;
+    const box = contactDialog.getBoundingClientRect();
+    if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) contactDialog.close();
+  });
+  $('[data-copy-phone]').addEventListener('click', async () => {
+    const status = $('.contact-status', contactDialog);
+    try {
+      await navigator.clipboard.writeText('+84 93 8766 345');
+      status.textContent = 'Phone number copied.';
+    } catch {
+      status.textContent = 'Please select and copy the number above.';
+    }
+  });
   renderCredentials();
   // Let the browser finish its native fragment jump before positioning a main view.
   function restoreMainViewTop() {

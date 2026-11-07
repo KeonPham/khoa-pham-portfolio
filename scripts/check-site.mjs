@@ -26,7 +26,7 @@ check(html.includes('id="story-reader"'), 'Inline story reader');
 check(html.includes('id="print-cv"'), 'CV print control');
 check(html.indexOf('src="content.js"') < html.indexOf('src="app.js"') && html.includes('src="content.js" defer'), 'Catalog precedes renderer');
 for (const [, attr, url] of html.matchAll(/\b(src|href)="([^"]+)"/g)) {
-  if (/^(https?:|mailto:|data:|#)/.test(url)) continue;
+  if (/^(https?:|mailto:|tel:|data:|#)/.test(url)) continue;
   const path = resolve(root, url);
   check(path.startsWith(resolve(root) + sep), 'Asset stays within public root: ' + url);
   try { await access(path); } catch { failures.push('Missing ' + attr + ' asset: ' + url); }

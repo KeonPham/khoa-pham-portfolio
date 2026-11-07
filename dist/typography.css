@@ -181,3 +181,35 @@ header .brand .brand-details{font-size:14px;font-weight:400;color:#687582;margin
 @media(max-width:600px){
  .case-gallery:has(img[src*="projects/finance-brain/"]){grid-template-columns:minmax(0,1fr)}
 }
+/* Shared contact entry point, available from every portfolio tab. */
+.shell>header{gap:24px}
+.header-connect{display:flex;flex-direction:column;align-items:flex-end;gap:14px;flex-shrink:0}
+.contact-trigger{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid #c5d5c9;border-radius:999px;padding:11px 17px;background:#edf3ed;color:#285b44;font:700 15px/1.3 Lato,Arial,sans-serif;white-space:nowrap;transition:background .18s,transform .18s}
+.contact-trigger svg{width:20px;height:20px}.contact-trigger:hover{background:#dfece0;transform:translateY(-1px)}
+#contact-dialog{inset:0;margin:auto;width:min(520px,calc(100vw - 32px));height:fit-content;max-height:calc(100dvh - 32px);border:1px solid var(--line);border-radius:22px;background:var(--paper);padding:0;box-shadow:0 28px 90px #12251c40;overflow:auto}
+#contact-dialog[open]{animation:appear .2s ease}
+#contact-dialog::backdrop{background:#13281f75;backdrop-filter:blur(6px)}
+.contact-top{display:flex;align-items:center;justify-content:space-between;padding:20px 28px 0;gap:16px}
+.contact-top>span{font:700 11px/1.5 Lato,Arial,sans-serif;letter-spacing:1.8px;color:var(--accent)}
+.contact-close{display:grid;place-items:center;min-width:40px;min-height:40px;border-radius:50%;background:#e9eee8;color:var(--ink);font-size:26px}
+.contact-body{padding:14px 28px 20px}
+#contact-title{font:700 clamp(28px,4vw,36px)/1.16 Lato,Arial,sans-serif;letter-spacing:-1px;margin:0 0 16px}
+#contact-description{font-size:16px;line-height:1.65;color:var(--muted);margin:0 0 22px}
+.contact-number{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:20px 0 16px;flex-wrap:wrap}
+.contact-number>a{font-size:24px;font-weight:700;letter-spacing:.2px}.contact-number button{font-size:13px;min-height:40px}
+.contact-call{display:flex;align-items:center;justify-content:space-between;padding:15px 19px;border-radius:10px;background:var(--ink);color:white;font-size:16px;font-weight:700}
+.contact-call:hover{background:var(--accent)}
+.contact-channel-label{font-size:14px;color:var(--muted);margin:22px 0 12px}
+.contact-channels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.contact-channels>a{display:flex;flex-direction:column;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px 5px;font-size:14px;font-weight:700;transition:background .18s,border-color .18s}
+.contact-channels>a>span:last-child{display:none}.contact-channels>a:hover{background:#f0f5ef;border-color:#9eb8a5}
+.channel-icon{width:28px;height:28px;display:grid;place-items:center;font-size:19px;font-weight:800;line-height:1}.whatsapp{color:#15854c}.zalo{color:#0068ff}.telegram{color:#168ec2;padding:3px}
+.contact-status{font-size:13px;color:var(--accent);min-height:20px;margin:14px 0 0}
+@media(max-width:600px){
+ .shell>header .brand-name{padding-right:0}
+ .header-connect{flex-direction:row-reverse;justify-content:space-between;align-items:center;margin-top:18px;gap:12px}
+ .shell>header .header-connect .socials{position:static}
+ .contact-trigger{font-size:14px;padding:10px 14px;min-height:44px}
+ .contact-top{padding:16px 20px 0}.contact-body{padding:12px 20px 18px}.contact-number>a{font-size:22px}
+}
+@media print{#contact-dialog{display:none!important}}
